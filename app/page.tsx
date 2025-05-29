@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import React from 'react'
+import { Button } from '@/components/ui/button';
+import React from 'react';
 
 const Page = () => {
   return (
@@ -7,7 +7,7 @@ const Page = () => {
       <h1>Gamepocket</h1>
       <Button>Button</Button>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
