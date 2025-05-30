@@ -131,15 +131,49 @@ body {
     @apply bg-background text-foreground;
   }
   main {
-    @apply mx-auto px-14 flex flex-col gap-8 bg-background h-full max-w-[1400px] pt-10 max-sm:px-2;
+    @apply mx-auto flex flex-col gap-8 bg-background h-full;
   }
   h1 {
     @apply text-3xl font-bold;
   }
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 @layer components {
-  .home-section {
+  .navbar {
+    @apply flex items-center justify-between mx-auto w-full px-8 py-4 bg-black max-sm:px-4;
+  }
+
+  .navbar-logo {
+    @apply flex items-center gap-2.5 cursor-pointer hover:opacity-80 hover:scale-110 transition-all duration-200;
+  }
+
+  .search {
+    @apply relative flex items-center w-full max-w-md h-12 bg-zinc-900 rounded-full px-4 transition-colors duration-200 hover:bg-zinc-800 focus-within:bg-zinc-800;
+  }
+
+  .search-input {
+    @apply w-full h-full bg-transparent dark:bg-transparent text-zinc-200 placeholder:text-zinc-400 border-0 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-transparent pr-10 text-sm outline-none;
+  }
+
+  .search-icon {
+    @apply absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-zinc-400 pointer-events-none;
+  }
+
+  .search-clear-icon {
+    @apply absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-zinc-400 cursor-pointer hover:text-zinc-200 transition-colors;
+  }
+
+  /* .home-section {
     @apply flex gap-4 justify-between items-start w-full max-lg:flex-col-reverse max-lg:items-center;
   }
   .companions-grid {
@@ -169,9 +203,7 @@ body {
   .btn-primary {
     @apply bg-primary text-white rounded-xl cursor-pointer px-4 py-2 flex items-center gap-2;
   }
-  .navbar {
-    @apply flex items-center justify-between mx-auto w-full px-14 py-4 bg-white max-sm:px-4;
-  }
+
   .btn-signin {
     @apply border border-black rounded-4xl px-4 py-2.5 text-sm font-semibold flex items-center gap-2 cursor-pointer;
   }
@@ -212,15 +244,5 @@ body {
   }
   .transcript-fade {
     @apply pointer-events-none absolute bottom-0 left-0 right-0 h-40 max-sm:h-20 bg-gradient-to-t from-background via-background/90 to-transparent z-10;
-  }
-}
-
-@layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  } */
 }
