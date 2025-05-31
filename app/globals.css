@@ -158,91 +158,34 @@ body {
   }
 
   .search {
-    @apply relative flex items-center w-full max-w-md h-12 bg-zinc-900 rounded-full px-4 transition-colors duration-200 hover:bg-zinc-800 focus-within:bg-zinc-800;
+    @apply flex items-center justify-center gap-8 w-1/2;
   }
 
-  .search-input {
-    @apply w-full h-full bg-transparent dark:bg-transparent text-zinc-200 placeholder:text-zinc-400 border-0 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-transparent pr-10 text-sm outline-none;
+  .search-input-wrapper {
+    @apply relative flex-grow flex items-center h-10 bg-zinc-700 rounded-md border border-transparent hover:border-zinc-500 transition-colors duration-200;
   }
 
   .search-icon {
-    @apply absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-zinc-400 pointer-events-none;
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400 group-hover:text-zinc-300 pointer-events-none z-10;
   }
 
   .search-clear-icon {
-    @apply absolute right-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-zinc-400 cursor-pointer hover:text-zinc-200 transition-colors;
+    @apply absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400 cursor-pointer hover:text-zinc-200 z-10;
   }
 
-  /* .home-section {
-    @apply flex gap-4 justify-between items-start w-full max-lg:flex-col-reverse max-lg:items-center;
-  }
-  .companions-grid {
-    @apply flex flex-wrap gap-4 w-full max-md:justify-center;
-  }
-  .companion-card {
-    @apply flex flex-col rounded-4xl border border-black px-4 py-4 gap-5 w-full min-lg:max-w-[410px] justify-between;
-  }
-  .subject-badge {
-    @apply bg-black text-white rounded-4xl text-sm px-2 py-1 capitalize;
-  }
-  .companion-bookmark {
-    @apply px-2 bg-black rounded-4xl flex items-center h-full aspect-square cursor-pointer;
-  }
-  .input {
-    @apply !border-black !bg-white focus-visible:!ring-0 focus-visible:!border-black !w-full;
-  }
-  .rounded-border {
-    @apply rounded-4xl border border-black;
-  }
-  .cta-section {
-    @apply bg-cta text-white rounded-4xl px-7 py-10 flex flex-col items-center text-center gap-5 w-1/3 max-lg:w-1/2 max-md:w-full;
-  }
-  .cta-badge {
-    @apply bg-cta-gold rounded-4xl px-3 py-1.5 text-black;
-  }
-  .btn-primary {
-    @apply bg-primary text-white rounded-xl cursor-pointer px-4 py-2 flex items-center gap-2;
+  .search-dropdown {
+    @apply absolute top-full left-0 right-0 mt-1.5 z-50 bg-zinc-800 rounded-md shadow-lg max-h-[calc(100vh-10rem)] overflow-y-auto;
   }
 
-  .btn-signin {
-    @apply border border-black rounded-4xl px-4 py-2.5 text-sm font-semibold flex items-center gap-2 cursor-pointer;
-  }
-  .companion-list {
-    @apply rounded-4xl border border-black px-7 pt-7 pb-10 max-lg:w-full bg-white;
-  }
-  .companion-limit {
-    @apply items-center justify-center flex flex-col gap-4 w-full min-2xl:w-1/2 pt-20 text-center;
+  .search-inactive {
+    @apply w-auto transition-all duration-300 ease-in-out;
   }
 
-  .companion-section {
-    @apply border-2 border-orange-500 w-2/3 max-sm:w-full flex flex-col gap-4 justify-center items-center rounded-lg;
+  .search-active {
+    @apply w-full transition-all duration-300 ease-in-out;
   }
 
-  .companion-avatar {
-    @apply size-[300px] flex items-center justify-center rounded-lg max-sm:size-[100px] mt-4;
+  .login {
+    @apply flex justify-end items-center gap-4;
   }
-  .companion-lottie {
-    @apply size-[300px] max-sm:size-[100px];
-  }
-
-  .user-section {
-    @apply flex flex-col gap-4 w-1/3 max-sm:w-full max-sm:flex-row;
-  }
-  .user-avatar {
-    @apply border-2 border-black flex flex-col gap-4 items-center rounded-lg py-8 max-sm:hidden;
-  }
-
-  .btn-mic {
-    @apply border-2 border-black rounded-lg flex flex-col gap-2 items-center py-8 max-sm:py-2 cursor-pointer w-full;
-  }
-
-  .transcript {
-    @apply relative flex flex-col gap-4 w-full items-center pt-10 flex-grow overflow-hidden;
-  }
-  .transcript-message {
-    @apply overflow-y-auto w-full flex flex-col gap-4 max-sm:gap-2 pr-2 h-full text-2xl;
-  }
-  .transcript-fade {
-    @apply pointer-events-none absolute bottom-0 left-0 right-0 h-40 max-sm:h-20 bg-gradient-to-t from-background via-background/90 to-transparent z-10;
-  } */
 }

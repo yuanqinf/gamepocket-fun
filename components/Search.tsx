@@ -1,7 +1,13 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Gamepad2, Search as SearchIconLucide, X as XIcon } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import {
+  FilterIcon,
+  Gamepad2,
+  Search as SearchIconLucide,
+  X as XIcon,
+} from 'lucide-react';
 import {
   Command,
   CommandInput,
@@ -12,10 +18,8 @@ import {
   CommandSeparator,
 } from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
-
-interface SearchProps {
-  onSearch?: (query: string) => void;
-}
+import { RECENT_ITEMS, TRENDING_ITEMS } from '@/constants/mockSearchResult';
+import type { SuggestionItem } from '@/constants/mockSearchResult';
 
 // Common types for search components
 type InputRef = React.RefObject<HTMLInputElement | null>;
@@ -40,8 +44,8 @@ const SearchInputField = ({
   isActive,
 }: InputProps & { isActive: boolean }) => {
   return (
-    <div className="relative flex-grow flex items-center h-10 bg-zinc-700 rounded-md border border-transparent hover:border-zinc-500 transition-colors duration-200">
-      <SearchIconLucide className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400 group-hover:text-zinc-300 pointer-events-none z-10" />
+    <div className="search-input-wrapper">
+      <SearchIconLucide className="search-icon" />
       <CommandInput
         ref={inputRef}
         value={value}
@@ -50,21 +54,16 @@ const SearchInputField = ({
         onKeyDown={onKeyDown}
         placeholder="Search"
         hideDefaultIcon={true}
-        wrapperClassName={`${isActive ? 'w-full' : ''} border-0 p-0 h-full w-full`}
-        className={`${isActive ? '' : 'cursor-pointer'} h-full bg-transparent text-zinc-100 placeholder:text-zinc-400 border-0 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 pl-9 pr-9 text-sm outline-none rounded-md`}
+        wrapperClassName={`${isActive ? 'w-full' : ''} border-0 p-0 h-full`}
+        className={`${isActive ? '' : 'cursor-pointer'} h-full bg-transparent text-zinc-100 placeholder:text-zinc-400 border-0 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 pl-9 pr-9 text-sm rounded-md`}
       />
-      {value && (
-        <XIcon
-          className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400 cursor-pointer hover:text-zinc-200 z-10"
-          onClick={onClear}
-        />
-      )}
+      {value && <XIcon className="search-clear-icon" onClick={onClear} />}
     </div>
   );
 };
 
 // Trigger view (inactive state)
-const SearchTrigger = ({
+const SearchSectionInactive = ({
   inputRef,
   value,
   onChange,
@@ -73,13 +72,17 @@ const SearchTrigger = ({
   onClear,
   onActivate,
 }: InputProps & { onActivate: () => void }) => {
+  const pathname = usePathname();
+  const isExplorePage = pathname === '/explore';
+  const linkHref = isExplorePage ? '' : '/explore';
+
   return (
-    <Command
-      shouldFilter={false}
-      className="overflow-visible cursor-pointer"
-      onClick={onActivate}
-    >
-      <div className="flex items-center space-x-2">
+    <div className="flex items-center gap-2">
+      <Command
+        shouldFilter={false}
+        className="overflow-visible cursor-pointer"
+        onClick={onActivate}
+      >
         <SearchInputField
           inputRef={inputRef}
           value={value}
@@ -89,30 +92,16 @@ const SearchTrigger = ({
           onClear={onClear}
           isActive={false}
         />
-        <Link href="/explore">
-          <Button>
-            <Gamepad2 />
-            <p>Explore</p>
-          </Button>
-        </Link>
-      </div>
-    </Command>
+      </Command>
+      <Link href={linkHref}>
+        <Button>
+          {isExplorePage ? <FilterIcon /> : <Gamepad2 />}
+          <p>{isExplorePage ? 'Filter' : 'Explore'}</p>
+        </Button>
+      </Link>
+    </div>
   );
 };
-
-// Suggestion item types
-type SuggestionItem = {
-  text: string;
-  tag?: string;
-};
-
-// Hard coded suggestions
-const RECENT_ITEMS: SuggestionItem[] = [{ text: 'Roblox', tag: 'Global' }];
-const TRENDING_ITEMS: SuggestionItem[] = [
-  { text: 'Fortnite' },
-  { text: 'Call of Duty: Warzone Mobile' },
-  { text: 'Remnant 2' },
-];
 
 // Render a suggestion item
 const SuggestionItem = ({
@@ -146,64 +135,62 @@ const SearchSuggestions = ({
   onSelectSuggestion: (value: string) => void;
 }) => {
   return (
-    <div className="absolute top-full left-0 right-0 mt-1.5 z-50">
-      <div className="bg-zinc-800 rounded-md shadow-lg max-h-[calc(100vh-10rem)] overflow-y-auto">
-        <CommandList>
-          <CommandEmpty>
-            {inputValue.trim() ? 'No results found.' : 'Type to search...'}
-          </CommandEmpty>
+    <div className="search-dropdown">
+      <CommandList>
+        <CommandEmpty>
+          {inputValue.trim() ? 'No results found.' : 'Type to search...'}
+        </CommandEmpty>
 
-          <CommandGroup
-            heading={
-              <div className="flex justify-between items-center">
-                <span>Recent</span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    alert('Clear recent clicked');
-                  }}
-                  className="text-xs text-zinc-400 hover:text-zinc-200 px-2 py-1 rounded"
-                >
-                  Clear all
-                </button>
-              </div>
-            }
-          >
-            {RECENT_ITEMS.map((item, index) => (
-              <SuggestionItem
-                key={`recent-${index}`}
-                item={item}
-                onSelect={onSelectSuggestion}
-              />
-            ))}
-          </CommandGroup>
+        <CommandGroup
+          heading={
+            <div className="flex justify-between items-center">
+              <span>Recent</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  alert('Clear recent clicked');
+                }}
+                className="text-xs text-zinc-400 hover:text-zinc-200 px-2 py-1 rounded"
+              >
+                Clear all
+              </button>
+            </div>
+          }
+        >
+          {RECENT_ITEMS.map((item, index) => (
+            <SuggestionItem
+              key={`recent-${index}`}
+              item={item}
+              onSelect={onSelectSuggestion}
+            />
+          ))}
+        </CommandGroup>
 
-          <CommandSeparator />
+        <CommandSeparator />
 
-          <CommandGroup heading="Trending">
-            {TRENDING_ITEMS.map((item, index) => (
-              <SuggestionItem
-                key={`trending-${index}`}
-                item={item}
-                onSelect={onSelectSuggestion}
-              />
-            ))}
-          </CommandGroup>
-        </CommandList>
-      </div>
+        <CommandGroup heading="Trending">
+          {TRENDING_ITEMS.map((item, index) => (
+            <SuggestionItem
+              key={`trending-${index}`}
+              item={item}
+              onSelect={onSelectSuggestion}
+            />
+          ))}
+        </CommandGroup>
+      </CommandList>
     </div>
   );
 };
 
 // Active search view
-const ActiveSearch = ({
+const SearchSectionActivated = ({
   inputRef,
   value,
   onChange,
   onFocus,
   onKeyDown,
   onClear,
-  onSearch,
+  onSearch, //TODO: implement search function
   showSuggestions,
   onSelectSuggestion,
 }: InputProps & {
@@ -213,7 +200,7 @@ const ActiveSearch = ({
 }) => {
   return (
     <Command shouldFilter={false} className="overflow-visible">
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center gap-2">
         <SearchInputField
           inputRef={inputRef}
           value={value}
@@ -223,15 +210,7 @@ const ActiveSearch = ({
           onClear={onClear}
           isActive={true}
         />
-        <Button
-          onClick={onSearch}
-          className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-md px-6.5 text-sm shrink-0"
-          disabled={!value.trim()}
-        >
-          Search
-        </Button>
       </div>
-
       {showSuggestions && (
         <SearchSuggestions
           inputValue={value}
@@ -243,7 +222,11 @@ const ActiveSearch = ({
 };
 
 // Main Search component
-export const Search = ({ onSearch }: SearchProps) => {
+export const Search = ({
+  onSearch,
+}: {
+  onSearch?: (query: string) => void;
+}) => {
   const [inputValue, setInputValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isInputActive, setIsInputActive] = useState(false);
@@ -324,7 +307,7 @@ export const Search = ({ onSearch }: SearchProps) => {
   return (
     <div ref={wrapperRef} className="relative w-full max-w-xl mx-auto">
       {!isInputActive ? (
-        <SearchTrigger
+        <SearchSectionInactive
           inputRef={inputRef}
           value={inputValue}
           onChange={setInputValue}
@@ -334,7 +317,7 @@ export const Search = ({ onSearch }: SearchProps) => {
           onActivate={() => setIsInputActive(true)}
         />
       ) : (
-        <ActiveSearch
+        <SearchSectionActivated
           inputRef={inputRef}
           value={inputValue}
           onChange={setInputValue}

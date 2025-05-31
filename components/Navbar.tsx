@@ -10,18 +10,15 @@ const Navbar = () => {
   };
   return (
     <nav className="navbar">
-      {/* left logo */}
       <Link href="/">
         <div className="navbar-logo">
           <Image src="/images/logo.png" alt="Logo" width={56} height={56} />
         </div>
       </Link>
-      {/* middle search bar */}
-      <div className="flex items-center justify-center gap-8 w-1/2">
+      <div className="search">
         <Search onSearch={handleSearch} />
       </div>
-      {/* Right login */}
-      <div className="flex justify-end items-center gap-4">
+      <div className="login">
         <Button>
           <p>Login</p>
         </Button>
