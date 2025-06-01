@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Search } from '@/components/Search';
+import Search from '@/components/Search';
 
 const Navbar = () => {
   const handleSearch = (query: string) => {

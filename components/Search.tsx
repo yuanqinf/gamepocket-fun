@@ -222,11 +222,7 @@ const SearchSectionActivated = ({
 };
 
 // Main Search component
-export const Search = ({
-  onSearch,
-}: {
-  onSearch?: (query: string) => void;
-}) => {
+const Search = ({ onSearch }: { onSearch?: (query: string) => void }) => {
   const [inputValue, setInputValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isInputActive, setIsInputActive] = useState(false);
@@ -332,3 +328,5 @@ export const Search = ({
     </div>
   );
 };
+
+export default Search;
