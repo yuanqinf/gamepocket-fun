@@ -17,7 +17,7 @@ const PaginationDots = ({
   className = '',
 }: PaginationDotsProps) => {
   return (
-    <div className={`flex justify-center gap-2 mt-4 ${className}`}>
+    <div className={`mt-4 flex justify-center gap-2 ${className}`}>
       {Array.from({ length: totalItems }).map((_, index) => (
         <button
           key={`dot-${index}`}

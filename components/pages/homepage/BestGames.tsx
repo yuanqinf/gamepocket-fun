@@ -31,11 +31,11 @@ const BestGames = () => {
 
   return (
     <section className="relative mb-12">
-      <h2 className="text-2xl font-bold mb-6">Games of the Month</h2>
+      <h2 className="mb-6 text-2xl font-bold">Games of the Month</h2>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
         {/* Main Carousel - Takes 3/4 of the width on large screens */}
-        <div className="lg:col-span-3 relative">
+        <div className="relative lg:col-span-3">
           <Carousel
             opts={{
               loop: true,
@@ -56,11 +56,11 @@ const BestGames = () => {
           >
             <div className="hidden md:block">
               <CarouselPrevious
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 border-none text-white w-10 h-10"
+                className="absolute top-1/2 left-2 z-10 h-10 w-10 -translate-y-1/2 border-none bg-black/50 text-white hover:bg-black/70"
                 variant="outline"
               />
               <CarouselNext
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 border-none text-white w-10 h-10"
+                className="absolute top-1/2 right-2 z-10 h-10 w-10 -translate-y-1/2 border-none bg-black/50 text-white hover:bg-black/70"
                 variant="outline"
               />
             </div>
@@ -78,7 +78,7 @@ const BestGames = () => {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="flex-center w-full h-full">
+                        <div className="flex-center h-full w-full">
                           <Gamepad2 size={60} className="text-zinc-500" />
                         </div>
                       )}
@@ -99,7 +99,7 @@ const BestGames = () => {
         </div>
 
         {/* Right Sidebar - Takes 1/4 of the width on large screens */}
-        <div className="hidden lg:block bg-zinc-800 rounded-lg p-4 h-full">
+        <div className="hidden h-full rounded-lg bg-zinc-800 p-4 lg:block">
           <div
             className="grid h-full gap-3"
             style={{
@@ -112,13 +112,13 @@ const BestGames = () => {
                 ref={(el) => {
                   thumbnailRefs.current[index] = el;
                 }}
-                className={`flex items-center gap-3 p-2 rounded-md cursor-pointer transition-all ${activeIndex === index ? 'bg-zinc-700' : 'hover:bg-zinc-700/50'}`}
+                className={`flex cursor-pointer items-center gap-3 rounded-md p-2 transition-all ${activeIndex === index ? 'bg-zinc-700' : 'hover:bg-zinc-700/50'}`}
                 onClick={() => {
                   setActiveIndex(index);
                   carouselApi?.scrollTo(index);
                 }}
               >
-                <div className="rounded-md overflow-hidden flex-shrink-0 w-12 h-12">
+                <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-md">
                   <Image
                     src={'https://placehold.co/600x600/png'}
                     alt={game.title}
@@ -128,9 +128,9 @@ const BestGames = () => {
                   />
                 </div>
 
-                <div className="flex-grow min-w-0">
-                  <h4 className="font-medium text-sm truncate">{game.title}</h4>
-                  <p className="text-xs text-zinc-400 truncate">
+                <div className="min-w-0 flex-grow">
+                  <h4 className="truncate text-sm font-medium">{game.title}</h4>
+                  <p className="truncate text-xs text-zinc-400">
                     {game.developer}
                   </p>
                   <div className="flex items-center gap-1 text-yellow-400">

@@ -3,29 +3,29 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="w-full py-8 mt-12">
+    <footer className="mt-12 w-full py-8">
       <div className="container mx-auto px-4">
         {/* Divider */}
-        <div className="h-px bg-zinc-700 w-full my-6" />
+        <div className="my-6 h-px w-full bg-zinc-700" />
         {/* Copyright and Legal */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-sm text-zinc-400">
+        <div className="flex flex-col items-center justify-between text-sm text-zinc-400 md:flex-row">
           <p>© 2025 Gamepocket. All rights reserved.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
+          <div className="mt-4 flex gap-6 md:mt-0">
             <Link
               href="/privacy"
-              className="hover:text-zinc-300 transition-colors"
+              className="transition-colors hover:text-zinc-300"
             >
               Privacy Policy
             </Link>
             <Link
               href="/terms"
-              className="hover:text-zinc-300 transition-colors"
+              className="transition-colors hover:text-zinc-300"
             >
               Terms of Use
             </Link>
             <Link
               href="/cookies"
-              className="hover:text-zinc-300 transition-colors"
+              className="transition-colors hover:text-zinc-300"
             >
               Cookie Preferences
             </Link>

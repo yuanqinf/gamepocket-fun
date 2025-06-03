@@ -17,9 +17,9 @@ const WorstGames = () => {
 
   return (
     <section className="mb-12">
-      <h2 className="text-2xl font-bold mb-6">Shame of the Month</h2>
+      <h2 className="mb-6 text-2xl font-bold">Shame of the Month</h2>
       {/* Desktop Grid View */}
-      <div className="hidden md:grid md:grid-cols-3 gap-4">
+      <div className="hidden gap-4 md:grid md:grid-cols-3">
         {WORST_GAMES.map((game, index) => (
           <MediumGameCard
             key={game.id}
@@ -55,7 +55,7 @@ const WorstGames = () => {
             {WORST_GAMES.map((game, index) => (
               <CarouselItem
                 key={game.id}
-                className="md:basis-1/2 lg:basis-1/3 pl-4 pr-4"
+                className="pr-4 pl-4 md:basis-1/2 lg:basis-1/3"
               >
                 <MediumGameCard
                   game={game}

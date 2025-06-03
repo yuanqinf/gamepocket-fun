@@ -131,7 +131,7 @@ body {
     @apply bg-background text-foreground;
   }
   main {
-    @apply mx-auto flex flex-col gap-8 bg-background h-full;
+    @apply bg-background mx-auto flex h-full flex-col gap-8;
   }
   h1 {
     @apply text-3xl font-bold;
@@ -151,32 +151,32 @@ body {
 @layer components {
   /* Navbar Components */
   .navbar {
-    @apply flex items-center justify-between mx-auto w-full px-8 py-4 bg-black max-sm:px-4;
+    @apply mx-auto flex w-full items-center justify-between bg-black px-8 py-4 max-sm:px-4;
   }
 
   .navbar-logo {
-    @apply flex items-center gap-2.5 cursor-pointer hover:opacity-80 hover:scale-110 transition-all duration-200;
+    @apply flex cursor-pointer items-center gap-2.5 transition-all duration-200 hover:scale-110 hover:opacity-80;
   }
 
   /* Search Components */
   .search {
-    @apply flex items-center justify-center gap-8 w-1/2;
+    @apply flex w-1/2 items-center justify-center gap-8;
   }
 
   .search-input-wrapper {
-    @apply relative flex-grow flex items-center h-10 bg-zinc-700 rounded-md border border-transparent hover:border-zinc-500 transition-colors duration-200;
+    @apply relative flex h-10 flex-grow items-center rounded-md border border-transparent bg-zinc-700 transition-colors duration-200 hover:border-zinc-500;
   }
 
   .search-icon {
-    @apply absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400 group-hover:text-zinc-300 pointer-events-none z-10;
+    @apply pointer-events-none absolute top-1/2 left-3 z-10 h-4 w-4 -translate-y-1/2 transform text-zinc-400 group-hover:text-zinc-300;
   }
 
   .search-clear-icon {
-    @apply absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-zinc-400 cursor-pointer hover:text-zinc-200 z-10;
+    @apply absolute top-1/2 right-3 z-10 h-4 w-4 -translate-y-1/2 transform cursor-pointer text-zinc-400 hover:text-zinc-200;
   }
 
   .search-dropdown {
-    @apply absolute top-full left-0 right-0 mt-1.5 z-50 bg-zinc-800 rounded-md shadow-lg max-h-[calc(100vh-10rem)] overflow-y-auto;
+    @apply absolute top-full right-0 left-0 z-50 mt-1.5 max-h-[calc(100vh-10rem)] overflow-y-auto rounded-md bg-zinc-800 shadow-lg;
   }
 
   .search-inactive {
@@ -188,21 +188,21 @@ body {
   }
 
   .login {
-    @apply flex justify-end items-center gap-4;
+    @apply flex items-center justify-end gap-4;
   }
 
   /* TrendingGames Components */
   .game-card {
-    @apply bg-zinc-800 rounded-lg overflow-hidden transition-all duration-300 hover:bg-zinc-700 hover:shadow-lg relative w-full h-full flex items-center justify-center;
+    @apply relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg bg-zinc-800 transition-all duration-300 hover:bg-zinc-700 hover:shadow-lg;
   }
 
   /* Carousel Components */
   .pagination-dot {
-    @apply w-2 h-2 rounded-full transition-all;
+    @apply h-2 w-2 rounded-full transition-all;
   }
 
   .pagination-dot-active {
-    @apply bg-white scale-125;
+    @apply scale-125 bg-white;
   }
 
   .pagination-dot-inactive {
@@ -215,6 +215,6 @@ body {
   }
 
   .game-card-base {
-    @apply bg-zinc-800 border-zinc-700 overflow-hidden;
+    @apply overflow-hidden border-zinc-700 bg-zinc-800;
   }
 }

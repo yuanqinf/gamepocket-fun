@@ -50,7 +50,7 @@ const MediumGameCard = <T extends BaseGame>({
         <div className="flex items-center gap-3">
           {showRanking && (
             <div
-              className={`${rankingColor} h-12 w-12 rounded-full flex-center flex-shrink-0`}
+              className={`${rankingColor} flex-center h-12 w-12 flex-shrink-0 rounded-full`}
             >
               <span className="font-bold">{index + 1}</span>
             </div>
@@ -58,7 +58,7 @@ const MediumGameCard = <T extends BaseGame>({
           <div
             className={`overflow-hidden ${showRanking ? 'max-w-[calc(100%-60px)]' : 'w-full'}`}
           >
-            <CardTitle className="text-base truncate block">
+            <CardTitle className="block truncate text-base">
               {game.title}
             </CardTitle>
             {ratingValue && (
@@ -71,7 +71,7 @@ const MediumGameCard = <T extends BaseGame>({
         </div>
       </CardHeader>
       <CardContent className="pt-4">
-        <div className="bg-zinc-700 rounded-lg mb-3 overflow-hidden relative aspect-video">
+        <div className="relative mb-3 aspect-video overflow-hidden rounded-lg bg-zinc-700">
           {game.imageUrl ? (
             <Image
               src={game.imageUrl}
@@ -81,12 +81,12 @@ const MediumGameCard = <T extends BaseGame>({
               className="object-cover object-center"
             />
           ) : (
-            <div className="flex-center w-full h-full">{fallbackIcon}</div>
+            <div className="flex-center h-full w-full">{fallbackIcon}</div>
           )}
         </div>
       </CardContent>
       {issuesValue && (
-        <CardFooter className="text-sm text-zinc-400 border-t border-zinc-700 pt-4">
+        <CardFooter className="border-t border-zinc-700 pt-4 text-sm text-zinc-400">
           <p>
             {issuesLabel}: {issuesValue}
           </p>

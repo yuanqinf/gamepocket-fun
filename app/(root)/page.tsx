@@ -7,7 +7,7 @@ import HighestGrossingGames from '@/components/pages/homepage/HighestGrossingGam
 
 const Page = () => {
   return (
-    <div className="container mx-auto px-4 py-8 space-y-12">
+    <div className="container mx-auto space-y-12 px-4 py-8">
       <BestGames />
 
       <WorstGames />

@@ -55,7 +55,7 @@ const SearchInputField = ({
         placeholder="Search"
         hideDefaultIcon={true}
         wrapperClassName={`${isActive ? 'w-full' : ''} border-0 p-0 h-full`}
-        className={`${isActive ? '' : 'cursor-pointer'} h-full bg-transparent text-zinc-100 placeholder:text-zinc-400 border-0 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 pl-9 pr-9 text-sm rounded-md`}
+        className={`${isActive ? '' : 'cursor-pointer'} h-full rounded-md border-0 bg-transparent pr-9 pl-9 text-sm text-zinc-100 shadow-none placeholder:text-zinc-400 focus-visible:ring-0 focus-visible:ring-offset-0`}
       />
       {value && <XIcon className="search-clear-icon" onClick={onClear} />}
     </div>
@@ -80,7 +80,7 @@ const SearchSectionInactive = ({
     <div className="flex items-center gap-2">
       <Command
         shouldFilter={false}
-        className="overflow-visible cursor-pointer"
+        className="cursor-pointer overflow-visible"
         onClick={onActivate}
       >
         <SearchInputField
@@ -113,12 +113,12 @@ const SuggestionItem = ({
 }) => {
   return (
     <CommandItem
-      className="hover:bg-zinc-700 transition-colors duration-200 cursor-pointer"
+      className="cursor-pointer transition-colors duration-200 hover:bg-zinc-700"
       onSelect={() => onSelect(item.text)}
     >
       {item.text}
       {item.tag && (
-        <span className="ml-2 px-1.5 py-0.5 text-xs bg-zinc-600 text-zinc-300 rounded-sm">
+        <span className="ml-2 rounded-sm bg-zinc-600 px-1.5 py-0.5 text-xs text-zinc-300">
           {item.tag}
         </span>
       )}
@@ -143,14 +143,14 @@ const SearchSuggestions = ({
 
         <CommandGroup
           heading={
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <span>Recent</span>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   alert('Clear recent clicked');
                 }}
-                className="text-xs text-zinc-400 hover:text-zinc-200 px-2 py-1 rounded"
+                className="rounded px-2 py-1 text-xs text-zinc-400 hover:text-zinc-200"
               >
                 Clear all
               </button>
@@ -301,7 +301,7 @@ const Search = ({ onSearch }: { onSearch?: (query: string) => void }) => {
   };
 
   return (
-    <div ref={wrapperRef} className="relative w-full max-w-xl mx-auto">
+    <div ref={wrapperRef} className="relative mx-auto w-full max-w-xl">
       {!isInputActive ? (
         <SearchSectionInactive
           inputRef={inputRef}

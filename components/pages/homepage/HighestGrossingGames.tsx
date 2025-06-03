@@ -1,18 +1,18 @@
 const HighestGrossingGames = () => {
   return (
     <section>
-      <h2 className="text-2xl font-bold mb-6">Highest Grossing This Month</h2>
-      <div className="bg-zinc-800 rounded-lg p-4 overflow-x-auto">
-        <div className="flex gap-4 min-w-max">
+      <h2 className="mb-6 text-2xl font-bold">Highest Grossing This Month</h2>
+      <div className="overflow-x-auto rounded-lg bg-zinc-800 p-4">
+        <div className="flex min-w-max gap-4">
           {Array(10)
             .fill(0)
             .map((_, i) => (
               <div
                 key={`paid-${i}`}
-                className="bg-zinc-700 rounded-lg p-4 w-64 flex-shrink-0"
+                className="w-64 flex-shrink-0 rounded-lg bg-zinc-700 p-4"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="bg-zinc-600 h-12 w-12 rounded-full flex items-center justify-center">
+                <div className="mb-3 flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-600">
                     <span className="font-bold">{i + 1}</span>
                   </div>
                   <div>
@@ -22,7 +22,7 @@ const HighestGrossingGames = () => {
                     </p>
                   </div>
                 </div>
-                <div className="bg-zinc-600 h-32 rounded flex items-center justify-center">
+                <div className="flex h-32 items-center justify-center rounded bg-zinc-600">
                   <span className="text-zinc-400">Game Cover</span>
                 </div>
               </div>
