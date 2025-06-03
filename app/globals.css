@@ -195,4 +195,26 @@ body {
   .game-card {
     @apply bg-zinc-800 rounded-lg overflow-hidden transition-all duration-300 hover:bg-zinc-700 hover:shadow-lg relative w-full h-full flex items-center justify-center;
   }
+
+  /* Carousel Components */
+  .pagination-dot {
+    @apply w-2 h-2 rounded-full transition-all;
+  }
+
+  .pagination-dot-active {
+    @apply bg-white scale-125;
+  }
+
+  .pagination-dot-inactive {
+    @apply bg-zinc-500;
+  }
+
+  /* Common Utility Classes */
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .game-card-base {
+    @apply bg-zinc-800 border-zinc-700 overflow-hidden;
+  }
 }

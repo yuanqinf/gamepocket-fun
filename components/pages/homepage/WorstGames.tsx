@@ -1,31 +1,79 @@
+'use client';
+
+import { useState } from 'react';
+import { WORST_GAMES } from '@/constants/mockWorstGames';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselApi,
+} from '@/components/ui/carousel';
+import PaginationDots from '@/components/shared/PaginationDots';
+import MediumGameCard from '@/components/shared/MediumGameCard';
+
 const WorstGames = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
+
   return (
     <section className="mb-12">
-      <h2 className="text-2xl font-bold mb-6">{'Shame of the Month :('}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {Array(3)
-          .fill(0)
-          .map((_, i) => (
-            <div key={`worst-${i}`} className="bg-zinc-800 rounded-lg p-4">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="bg-red-900 h-12 w-12 rounded-full flex items-center justify-center">
-                  <span className="font-bold">{i + 1}</span>
-                </div>
-                <div>
-                  <h3 className="font-medium">Disappointing Game</h3>
-                  <p className="text-xs text-red-400">
-                    Rating: {1.5 - i * 0.5}/10
-                  </p>
-                </div>
-              </div>
-              <div className="bg-zinc-700 h-48 rounded mb-3 flex items-center justify-center">
-                <span className="text-zinc-400">Game Cover</span>
-              </div>
-              <p className="text-sm text-zinc-400">
-                Issues: Performance problems, bugs, poor gameplay
-              </p>
-            </div>
-          ))}
+      <h2 className="text-2xl font-bold mb-6">Shame of the Month</h2>
+      {/* Desktop Grid View */}
+      <div className="hidden md:grid md:grid-cols-3 gap-4">
+        {WORST_GAMES.map((game, index) => (
+          <MediumGameCard
+            key={game.id}
+            game={game}
+            index={index}
+            ratingValue={game.rating}
+            issuesValue={game.issues}
+          />
+        ))}
+      </div>
+
+      {/* Mobile Carousel View */}
+      <div className="md:hidden">
+        <Carousel
+          opts={{
+            loop: true,
+            align: 'start',
+          }}
+          className="w-full"
+          setApi={(api) => {
+            setCarouselApi(api);
+            if (api) {
+              api.on('select', () => {
+                if (api) {
+                  const selectedIndex = api.selectedScrollSnap();
+                  setActiveIndex(selectedIndex);
+                }
+              });
+            }
+          }}
+        >
+          <CarouselContent>
+            {WORST_GAMES.map((game, index) => (
+              <CarouselItem
+                key={game.id}
+                className="md:basis-1/2 lg:basis-1/3 pl-4 pr-4"
+              >
+                <MediumGameCard
+                  game={game}
+                  index={index}
+                  ratingValue={game.rating}
+                  issuesValue={game.issues}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+
+        {/* Mobile pagination dots */}
+        <PaginationDots
+          totalItems={WORST_GAMES.length}
+          activeIndex={activeIndex}
+          carouselApi={carouselApi}
+        />
       </div>
     </section>
   );

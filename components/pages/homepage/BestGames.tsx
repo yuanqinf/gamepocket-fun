@@ -12,6 +12,7 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from '@/components/ui/carousel';
+import PaginationDots from '@/components/shared/PaginationDots';
 
 const BestGames = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -53,19 +54,21 @@ const BestGames = () => {
               }
             }}
           >
-            <CarouselPrevious
-              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 border-none text-white w-10 h-10"
-              variant="outline"
-            />
-            <CarouselNext
-              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 border-none text-white w-10 h-10"
-              variant="outline"
-            />
+            <div className="hidden md:block">
+              <CarouselPrevious
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 border-none text-white w-10 h-10"
+                variant="outline"
+              />
+              <CarouselNext
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 border-none text-white w-10 h-10"
+                variant="outline"
+              />
+            </div>
             <CarouselContent>
               {TRENDING_GAMES.map((game) => (
                 <CarouselItem key={game.id}>
                   <Link href={`/games/${game.id}`} className="block">
-                    <div className="bg-zinc-800 rounded-lg overflow-hidden transition-all duration-300 hover:bg-zinc-700 hover:shadow-lg relative w-full h-full flex items-center justify-center aspect-video">
+                    <div className="game-card aspect-video">
                       {game.imageUrl ? (
                         <Image
                           src={game.imageUrl}
@@ -75,7 +78,9 @@ const BestGames = () => {
                           className="object-cover"
                         />
                       ) : (
-                        <Gamepad2 size={60} className="text-zinc-500" />
+                        <div className="flex-center w-full h-full">
+                          <Gamepad2 size={60} className="text-zinc-500" />
+                        </div>
                       )}
                     </div>
                   </Link>
@@ -85,19 +90,12 @@ const BestGames = () => {
           </Carousel>
 
           {/* Mobile pagination dots */}
-          <div className="flex justify-center gap-2 mt-4 lg:hidden">
-            {TRENDING_GAMES.map((_, index) => (
-              <button
-                key={`dot-${index}`}
-                className={`w-2 h-2 rounded-full transition-all ${activeIndex === index ? 'bg-white scale-125' : 'bg-zinc-500'}`}
-                onClick={() => {
-                  setActiveIndex(index);
-                  carouselApi?.scrollTo(index);
-                }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
+          <PaginationDots
+            totalItems={TRENDING_GAMES.length}
+            activeIndex={activeIndex}
+            carouselApi={carouselApi}
+            className="lg:hidden"
+          />
         </div>
 
         {/* Right Sidebar - Takes 1/4 of the width on large screens */}
