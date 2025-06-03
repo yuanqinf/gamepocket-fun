@@ -9,6 +9,8 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselApi,
+  CarouselPrevious,
+  CarouselNext,
 } from '@/components/ui/carousel';
 
 const BestGames = () => {
@@ -51,6 +53,14 @@ const BestGames = () => {
               }
             }}
           >
+            <CarouselPrevious
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 border-none text-white w-10 h-10"
+              variant="outline"
+            />
+            <CarouselNext
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 border-none text-white w-10 h-10"
+              variant="outline"
+            />
             <CarouselContent>
               {TRENDING_GAMES.map((game) => (
                 <CarouselItem key={game.id}>
@@ -73,6 +83,21 @@ const BestGames = () => {
               ))}
             </CarouselContent>
           </Carousel>
+
+          {/* Mobile pagination dots */}
+          <div className="flex justify-center gap-2 mt-4 lg:hidden">
+            {TRENDING_GAMES.map((_, index) => (
+              <button
+                key={`dot-${index}`}
+                className={`w-2 h-2 rounded-full transition-all ${activeIndex === index ? 'bg-white scale-125' : 'bg-zinc-500'}`}
+                onClick={() => {
+                  setActiveIndex(index);
+                  carouselApi?.scrollTo(index);
+                }}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Right Sidebar - Takes 1/4 of the width on large screens */}
