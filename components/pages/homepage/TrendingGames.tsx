@@ -55,7 +55,7 @@ const TrendingGames = () => {
               {TRENDING_GAMES.map((game) => (
                 <CarouselItem key={game.id}>
                   <Link href={`/games/${game.id}`} className="block">
-                    <div className="game-card aspect-video">
+                    <div className="bg-zinc-800 rounded-lg overflow-hidden transition-all duration-300 hover:bg-zinc-700 hover:shadow-lg relative w-full h-full flex items-center justify-center aspect-video">
                       {game.imageUrl ? (
                         <Image
                           src={game.imageUrl}
@@ -73,69 +73,50 @@ const TrendingGames = () => {
               ))}
             </CarouselContent>
           </Carousel>
+        </div>
 
-          {/* Pagination Dots */}
-          <div className="pagination-dots-container">
-            {TRENDING_GAMES.map((_, index) => (
-              <button
-                key={`dot-${index}`}
-                className={`pagination-dot ${activeIndex === index ? 'pagination-dot-active' : 'pagination-dot-inactive'}`}
+        {/* Right Sidebar - Takes 1/4 of the width on large screens */}
+        <div className="hidden lg:block bg-zinc-800 rounded-lg p-4 h-full">
+          <div
+            className="grid h-full gap-3"
+            style={{
+              gridTemplateRows: `repeat(${TRENDING_GAMES.length}, 1fr)`,
+            }}
+          >
+            {TRENDING_GAMES.map((game, index) => (
+              <div
+                key={`thumb-${game.id}`}
+                ref={(el) => {
+                  thumbnailRefs.current[index] = el;
+                }}
+                className={`flex items-center gap-3 p-2 rounded-md cursor-pointer transition-all ${activeIndex === index ? 'bg-zinc-700' : 'hover:bg-zinc-700/50'}`}
                 onClick={() => {
                   setActiveIndex(index);
                   carouselApi?.scrollTo(index);
                 }}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+              >
+                <div className="rounded-md overflow-hidden flex-shrink-0 w-12 h-12">
+                  <Image
+                    src={'https://placehold.co/600x600/png'}
+                    alt={game.title}
+                    width={48}
+                    height={48}
+                    className="object-cover"
+                  />
+                </div>
 
-        {/* Right Sidebar - Takes 1/4 of the width on large screens */}
-        <div className="hidden lg:block">
-          <div className="bg-zinc-800 rounded-lg p-4 h-full">
-            <div
-              className="grid h-full gap-3"
-              style={{
-                gridTemplateRows: `repeat(${TRENDING_GAMES.length}, 1fr)`,
-              }}
-            >
-              {TRENDING_GAMES.map((game, index) => (
-                <div
-                  key={`thumb-${game.id}`}
-                  ref={(el) => {
-                    thumbnailRefs.current[index] = el;
-                  }}
-                  className={`thumbnail-item ${activeIndex === index ? 'thumbnail-item-active' : 'thumbnail-item-inactive'}`}
-                  onClick={() => {
-                    setActiveIndex(index);
-                    carouselApi?.scrollTo(index);
-                  }}
-                >
-                  <div className="thumbnail-image-container w-12 h-12">
-                    <Image
-                      src={'https://placehold.co/600x600/png'}
-                      alt={game.title}
-                      width={48}
-                      height={48}
-                      className="object-cover"
-                    />
-                  </div>
-
-                  <div className="flex-grow min-w-0">
-                    <h4 className="font-medium text-sm truncate">
-                      {game.title}
-                    </h4>
-                    <p className="text-xs text-zinc-400 truncate">
-                      {game.developer}
-                    </p>
-                    <div className="flex items-center gap-1 text-yellow-400">
-                      <Star size={12} fill="currentColor" />
-                      <span className="text-xs">{game.rating}</span>
-                    </div>
+                <div className="flex-grow min-w-0">
+                  <h4 className="font-medium text-sm truncate">{game.title}</h4>
+                  <p className="text-xs text-zinc-400 truncate">
+                    {game.developer}
+                  </p>
+                  <div className="flex items-center gap-1 text-yellow-400">
+                    <Star size={12} fill="currentColor" />
+                    <span className="text-xs">{game.rating}</span>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

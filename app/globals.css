@@ -195,36 +195,4 @@ body {
   .game-card {
     @apply bg-zinc-800 rounded-lg overflow-hidden transition-all duration-300 hover:bg-zinc-700 hover:shadow-lg relative w-full h-full flex items-center justify-center;
   }
-
-  .thumbnail-item {
-    @apply flex items-center gap-3 p-2 rounded-md cursor-pointer transition-all;
-  }
-
-  .thumbnail-item-active {
-    @apply bg-zinc-700;
-  }
-
-  .thumbnail-item-inactive {
-    @apply hover:bg-zinc-700/50;
-  }
-
-  .thumbnail-image-container {
-    @apply shrink-0 overflow-hidden rounded-md;
-  }
-
-  .pagination-dots-container {
-    @apply absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10;
-  }
-
-  .pagination-dot {
-    @apply w-2.5 h-2.5 rounded-full transition-all;
-  }
-
-  .pagination-dot-active {
-    @apply bg-white scale-110;
-  }
-
-  .pagination-dot-inactive {
-    @apply bg-white/50 hover:bg-white/70;
-  }
 }
