@@ -11,7 +11,7 @@ import {
   CarouselApi,
 } from '@/components/ui/carousel';
 
-const TrendingGames = () => {
+const BestGames = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -28,7 +28,7 @@ const TrendingGames = () => {
 
   return (
     <section className="relative mb-12">
-      <h2 className="text-2xl font-bold mb-6">Trending Games</h2>
+      <h2 className="text-2xl font-bold mb-6">Games of the Month</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Main Carousel - Takes 3/4 of the width on large screens */}
@@ -124,4 +124,4 @@ const TrendingGames = () => {
   );
 };
 
-export default TrendingGames;
+export default BestGames;
