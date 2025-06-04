@@ -1,7 +1,7 @@
-const HighestGrossingGames = () => {
+const TopRevenueGames = () => {
   return (
     <section>
-      <h2 className="mb-6 text-2xl font-bold">Highest Grossing This Month</h2>
+      <h2 className="mb-6 text-2xl font-bold">Top Revenue Games</h2>
       <div className="overflow-x-auto rounded-lg bg-zinc-800 p-4">
         <div className="flex min-w-max gap-4">
           {Array(10)
@@ -33,4 +33,4 @@ const HighestGrossingGames = () => {
   );
 };
 
-export default HighestGrossingGames;
+export default TopRevenueGames;

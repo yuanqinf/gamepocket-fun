@@ -217,4 +217,8 @@ body {
   .game-card-base {
     @apply overflow-hidden border-zinc-700 bg-zinc-800;
   }
+
+  .carousel-nav-button-base {
+    @apply absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 text-white sm:flex;
+  }
 }

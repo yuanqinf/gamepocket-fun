@@ -1,7 +1,7 @@
-const MostPlayedGames = () => {
+const TopActiveGames = () => {
   return (
     <section>
-      <h2 className="mb-6 text-2xl font-bold">Most Played This Month</h2>
+      <h2 className="mb-6 text-2xl font-bold">Top Active Games</h2>
       <div className="overflow-x-auto rounded-lg bg-zinc-800 p-4">
         <div className="flex min-w-max gap-4">
           {Array(10)
@@ -33,4 +33,4 @@ const MostPlayedGames = () => {
   );
 };
 
-export default MostPlayedGames;
+export default TopActiveGames;

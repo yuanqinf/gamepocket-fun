@@ -2,8 +2,9 @@
 import BestGames from '@/components/pages/homepage/BestGames';
 import WorstGames from '@/components/pages/homepage/WorstGames';
 import UpcomingGames from '@/components/pages/homepage/UpcomingGames';
-import MostPlayedGames from '@/components/pages/homepage/MostPlayedGames';
-import HighestGrossingGames from '@/components/pages/homepage/HighestGrossingGames';
+import TopRatedGames from '@/components/pages/homepage/TopRatedGames';
+import TopActiveGames from '@/components/pages/homepage/TopActiveGames';
+import TopRevenueGames from '@/components/pages/homepage/TopRevenueGames';
 
 const Page = () => {
   return (
@@ -16,9 +17,11 @@ const Page = () => {
 
       <hr className="border-zinc-700" />
 
-      <MostPlayedGames />
+      <TopActiveGames />
 
-      <HighestGrossingGames />
+      <TopRatedGames />
+
+      <TopRevenueGames />
     </div>
   );
 };

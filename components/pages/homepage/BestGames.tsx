@@ -9,8 +9,6 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselApi,
-  CarouselPrevious,
-  CarouselNext,
 } from '@/components/ui/carousel';
 import PaginationDots from '@/components/shared/PaginationDots';
 
@@ -54,16 +52,6 @@ const BestGames = () => {
               }
             }}
           >
-            <div className="hidden md:block">
-              <CarouselPrevious
-                className="absolute top-1/2 left-2 z-10 h-10 w-10 -translate-y-1/2 border-none bg-black/50 text-white hover:bg-black/70"
-                variant="outline"
-              />
-              <CarouselNext
-                className="absolute top-1/2 right-2 z-10 h-10 w-10 -translate-y-1/2 border-none bg-black/50 text-white hover:bg-black/70"
-                variant="outline"
-              />
-            </div>
             <CarouselContent>
               {TRENDING_GAMES.map((game) => (
                 <CarouselItem key={game.id}>

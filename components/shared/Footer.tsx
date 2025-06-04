@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="mt-12 w-full py-8">
+    <footer className="w-full py-8">
       <div className="container mx-auto px-4">
         {/* Divider */}
         <div className="my-6 h-px w-full bg-zinc-700" />

@@ -35,7 +35,6 @@ const WorstGames = () => {
       <div className="md:hidden">
         <Carousel
           opts={{
-            loop: true,
             align: 'start',
           }}
           className="w-full"
