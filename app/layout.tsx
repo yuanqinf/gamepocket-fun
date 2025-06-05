@@ -8,9 +8,9 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: 'Game Pocket | Discover, Collect & Compare Video Games',
+  title: 'Discover, Track & Compare Video Games | Catalog.Games',
   description:
-    'Explore The Game Pocket — a collectible card-style video game encyclopedia. Search trending games, view hex stat charts, AI-generated summaries, and build your personal collection.',
+    'Explore Catalog.Games — your personalized video game hub. Discover trending titles, accurate ratings, and a fair ranking system.',
 };
 
 export default function RootLayout({
