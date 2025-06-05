@@ -2,15 +2,14 @@ export interface Game {
   id: string;
   rank: number;
   title: string;
-  isGlobal?: boolean;
   categories: string[];
   platforms: ('pc' | 'ps5' | 'xbox' | 'switch')[];
   bannerUrl: string;
   statLabel: string;
   statValue: string;
+  statChangePercent: number;
   rankChange?: number; // Positive for up, negative for down, 0 or undefined for no change
   featuredComment?: string;
-  statChangePercent?: number; // New field: Positive for higher, negative for lower
 }
 
 export const topActiveGamesData: Game[] = [
