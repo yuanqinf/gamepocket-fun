@@ -1,4 +1,4 @@
-import Navbar from '@/components/shared/Navbar';
+import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 
 export default function RootLayout({
@@ -6,7 +6,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <main>
-      <Navbar />
+      <Header />
       {children}
       <Footer />
     </main>

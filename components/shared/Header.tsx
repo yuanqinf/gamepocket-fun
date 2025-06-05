@@ -4,15 +4,28 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Search from '@/components/shared/Search';
 
-const Navbar = () => {
+const Header = () => {
   const handleSearch = (query: string) => {
     console.log(query);
   };
   return (
-    <nav className="navbar">
+    <nav className="header">
       <Link href="/">
-        <div className="navbar-logo">
-          <Image src="/images/logo.png" alt="Logo" width={56} height={56} />
+        <div className="header-logo">
+          <Image
+            src="/images/logo.png"
+            alt="Logo"
+            width={56}
+            height={56}
+            className="block md:hidden"
+          />
+          <Image
+            src="/images/logo_with_title.png"
+            alt="Catalog.Games Logo"
+            width={64}
+            height={64}
+            className="hidden md:block"
+          />
         </div>
       </Link>
       <div className="search">
@@ -27,4 +40,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;

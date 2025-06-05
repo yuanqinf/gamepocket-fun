@@ -149,12 +149,12 @@ body {
 }
 
 @layer components {
-  /* Navbar Components */
-  .navbar {
-    @apply mx-auto flex w-full items-center justify-between bg-black px-8 py-4 max-sm:px-4;
+  /* Header Components */
+  .header {
+    @apply mx-auto flex w-full items-center justify-between bg-black px-12 py-4 max-sm:px-4;
   }
 
-  .navbar-logo {
+  .header-logo {
     @apply flex cursor-pointer items-center gap-2.5 transition-all duration-200 hover:scale-110 hover:opacity-80;
   }
 
