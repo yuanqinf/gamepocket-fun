@@ -221,4 +221,9 @@ body {
   .carousel-nav-button-base {
     @apply absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 text-white sm:flex;
   }
+
+  /* RankGameCard specific utilities */
+  .rank-card-comment-container {
+    @apply ml-auto hidden max-w-[200px] min-w-[150px] flex-shrink-0 items-start gap-2 pr-2 pl-4 text-sm text-zinc-400 italic md:flex;
+  }
 }
