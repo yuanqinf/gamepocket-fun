@@ -1,49 +1,95 @@
+/* Imports */
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+/* Custom variants */
 @custom-variant dark (&:is(.dark *));
 
+/* Root variables */
 :root {
+  /* Colors */
   --cta: #2c2c2c;
   --cta-gold: #fccc41;
-  --radius: 0.625rem;
   --empty-color: #1e1f22;
   --center-layer-color: #b83737;
   --second-layer-color: #ba7232;
   --third-layer-color: #bc9c36;
   --fourth-layer-color: #31bd7c;
+
+  /* Border radius */
+  --radius: 0.625rem;
 }
 
+/* Dark theme */
 .dark {
+  /* Base colors */
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
+
+  /* Component colors */
   --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+
+  /* Border and input */
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
 }
 
+/* Theme variables */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-cta: var(--cta);
-  --color-cta-gold: var(--cta-gold);
+  /* Font families */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-bricolage: 'Bricolage Grotesque', sans-serif;
-  --color-ring: var(--ring);
+
+  /* Color mappings */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
   --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-cta: var(--cta);
+  --color-cta-gold: var(--cta-gold);
+
+  /* Border radius variants */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Base styles */
 body {
   font-family: var(--font-bricolage);
 }
 
+/* Tailwind layers */
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -60,12 +106,18 @@ body {
 }
 
 @layer utilities {
+  /* Hide scrollbar utilities */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Common utility classes */
+  .flex-center {
+    @apply flex items-center justify-center;
   }
 }
 
@@ -77,6 +129,11 @@ body {
 
   .header-logo {
     @apply flex cursor-pointer items-center gap-2.5 transition-all duration-200 hover:scale-110 hover:opacity-80;
+  }
+
+  /* Login Components */
+  .login {
+    @apply flex items-center justify-end gap-4;
   }
 
   /* Search Components */
@@ -108,16 +165,25 @@ body {
     @apply w-full transition-all duration-300 ease-in-out;
   }
 
-  .login {
-    @apply flex items-center justify-end gap-4;
-  }
-
-  /* TrendingGames Components */
+  /* Game Card Components */
   .game-card {
     @apply relative flex h-full w-full items-center justify-center overflow-hidden rounded-lg bg-zinc-800 transition-all duration-300 hover:bg-zinc-700 hover:shadow-lg;
   }
 
+  .game-card-base {
+    @apply overflow-hidden border-zinc-700 bg-zinc-800;
+  }
+
+  /* Rank Game Card Components */
+  .rank-card-comment-container {
+    @apply ml-auto hidden max-w-[200px] min-w-[150px] flex-shrink-0 items-start gap-2 pr-2 pl-4 text-sm text-zinc-400 italic md:flex;
+  }
+
   /* Carousel Components */
+  .carousel-nav-button-base {
+    @apply absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 text-white sm:flex;
+  }
+
   .pagination-dot {
     @apply h-2 w-2 rounded-full transition-all;
   }
@@ -128,23 +194,5 @@ body {
 
   .pagination-dot-inactive {
     @apply bg-zinc-500;
-  }
-
-  /* Common Utility Classes */
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
-
-  .game-card-base {
-    @apply overflow-hidden border-zinc-700 bg-zinc-800;
-  }
-
-  .carousel-nav-button-base {
-    @apply absolute top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 text-white sm:flex;
-  }
-
-  /* RankGameCard specific utilities */
-  .rank-card-comment-container {
-    @apply ml-auto hidden max-w-[200px] min-w-[150px] flex-shrink-0 items-start gap-2 pr-2 pl-4 text-sm text-zinc-400 italic md:flex;
   }
 }
