@@ -11,7 +11,7 @@ import {
 import PaginationDots from '@/components/shared/PaginationDots';
 import MediumGameCard from '@/components/shared/MediumGameCard';
 
-const WorstGames = () => {
+const MonthlyWorstGames = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
 
@@ -78,4 +78,4 @@ const WorstGames = () => {
   );
 };
 
-export default WorstGames;
+export default MonthlyWorstGames;

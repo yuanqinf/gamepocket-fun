@@ -1,0 +1,169 @@
+type CatalogRating = {
+  story: 1 | 2 | 3 | 4;
+  music: 1 | 2 | 3 | 4;
+  graphics: 1 | 2 | 3 | 4;
+  gameplay: 1 | 2 | 3 | 4;
+  longevity: 1 | 2 | 3 | 4;
+  innovation: 1 | 2 | 3 | 4;
+}
+
+export interface GameData {
+  id: string;
+  name: string;
+  description: string;
+  genre: string;
+  tags: string[];
+  price: number;
+  website: string;
+  platforms: ('pc' | 'ps5' | 'xbox' | 'switch')[];
+  developer: string;
+  images: {
+    banner: string;
+    gameplay: string;
+    thumbnail: string;
+  };
+  videos: string[];
+  release_date: string;
+  rating: {
+    steamRating: number;
+    metacriticRating: number;
+    catalogRating: CatalogRating;
+  }
+  featuredComments: string[];
+  monthlyActivePlayers: number;
+  estimatedTotalUnitSold: number;
+}
+
+export const mockMonthlyBestGamesData: GameData[] = [
+  {
+    id: 'elden-ring',
+    name: "ELDEN RING",
+    description: "An Epic Drama Born from a Myth Created by George R.R. Martin",
+    genre: "Action RPG",
+    tags: ["Souls-like", "Open World", "Fantasy"],
+    price: 59.99,
+    website: "https://en.bandainamcoent.eu/elden-ring/elden-ring",
+    platforms: ['pc', 'ps5', 'xbox'],
+    developer: "FromSoftware",
+    images: {
+      banner: "https://preview.redd.it/znxzjlws0i471.jpg?width=1920&format=pjpg&auto=webp&s=2514f6dd7c16a0ed3aa0c93cd80b134cd8853178",
+      thumbnail: "https://egy4gamers.com/storage/2024/07/Elden-Ring.jpg",
+      gameplay: "https://www.godisageek.com/wp-content/uploads/Elden-Ring-combat.jpg"
+    },
+    videos: ["https://www.youtube.com/watch?v=E3Huy2cdih0"],
+    release_date: "2022-02-25",
+    rating: {
+      steamRating: 93, 
+      metacriticRating: 95, 
+      catalogRating: { story: 4, music: 4, graphics: 4, gameplay: 4, longevity: 4, innovation: 3 },
+    },
+    featuredComments: ["Best Souls-like", "Best Open World", "Best Fantasy"],
+    monthlyActivePlayers: 1050000, 
+    estimatedTotalUnitSold: 50000000,
+  },
+  {
+    id: 'black-myth-wukong',
+    name: "Black Myth: Wukong",
+    description: "An action RPG rooted in Chinese mythology",
+    genre: "Action RPG",
+    tags: ["Chinese Mythology", "Souls-like", "Open World"],
+    price: 59.99,
+    website: "https://blackmythwukong.com/",
+    platforms: ['pc', 'ps5', 'xbox'],
+    developer: "Game Science",
+    images: {
+      banner: "https://cdn1.epicgames.com/spt-assets/ca9ef1bcf2f54043baac351366aec677/black-myth-wukong-jz9yr.jpg",
+      thumbnail: "https://sm.ign.com/t/ign_ap/cover/b/black-myth/black-myth-wukong_fmws.600.jpg",
+      gameplay: "https://www.gematsu.com/wp-content/uploads/2022/08/Black-Myth_08-19-22.jpg"
+    },
+    videos: ["https://www.youtube.com/watch?v=7gYaZgn2pW8"],
+    release_date: "2024-08-20",
+    rating: {
+      steamRating: 91, 
+      metacriticRating: 93, 
+      catalogRating: { story: 4, music: 4, graphics: 4, gameplay: 3, longevity: 3, innovation: 3 },
+    },
+    featuredComments: ["Most Anticipated", "Stunning Visuals", "Next-Gen Souls-like"],
+    monthlyActivePlayers: 550000, 
+    estimatedTotalUnitSold: 25000000,
+  },
+  {
+    id: 'baldurs-gate-3',
+    name: "BALDUR'S GATE 3",
+    description: "A story-rich, party-based RPG set in the universe of Dungeons & Dragons,",
+    genre: "RPG",
+    tags: ["D&D", "Turn-based", "Story-Rich"],
+    price: 59.99,
+    website: "https://baldursgate3.game/",
+    platforms: ['pc', 'ps5', 'xbox'],
+    developer: "Larian Studios",
+    images: {
+      banner: "https://cdn.wccftech.com/wp-content/uploads/2023/08/Baldurs-Gate-3-header-1920x1080.jpg",
+      thumbnail: "https://sm.ign.com/t/ign_ap/cover/b/baldurs-ga/baldurs-gate-iii_9c7e.600.jpg",
+      gameplay: "https://cdn.mos.cms.futurecdn.net/oavWjqPpN87uaYrcASSgti.jpg"
+    },
+    videos: ["https://www.youtube.com/watch?v=zg0_ulgtRqA"],
+    release_date: "2023-08-03",
+    rating: {
+      steamRating: 96, 
+      metacriticRating: 96, 
+      catalogRating: { story: 4, music: 3, graphics: 4, gameplay: 4, longevity: 4, innovation: 3 },
+    },
+    featuredComments: ["Best RPG", "Masterclass in Storytelling", "Top Turn-Based Combat"],
+    monthlyActivePlayers: 800000, 
+    estimatedTotalUnitSold: 20000000,
+  },
+  {
+    id: 'cyberpunk-2077',
+    name: "CYBERPUNK 2077",
+    description: "A storydriven, open world RPG of the dark future from CD PROJEKT RED",
+    genre: "Action RPG",
+    tags: ["Sci-Fi", "Open World", "Narrative"],
+    price: 59.99,
+    website: "https://www.cyberpunk.net/",
+    platforms: ['pc', 'ps5', 'xbox'],
+    developer: "CD Projekt Red",
+    images: {
+      banner: "https://wallpapercat.com/w/full/1/7/f/2618-1920x1080-desktop-1080p-cyberpunk-2077-background.jpg",
+      thumbnail: "https://sm.ign.com/t/ign_ap/cover/c/cyberpunk-/cyberpunk-2077-ultimate-edition_t3xe.600.jpg",
+      gameplay: "https://i0.wp.com/waytoomany.games/wp-content/uploads/2022/02/Cyberpunk-2077_20220216225610.jpg?ssl=1"
+    },
+    videos: ["https://www.youtube.com/watch?v=qIcTM8WXFjk"],
+    release_date: "2020-12-10",
+    rating: {
+      steamRating: 85, 
+      metacriticRating: 86, 
+      catalogRating: { story: 4, music: 4, graphics: 4, gameplay: 3, longevity: 4, innovation: 3 },
+    },
+    featuredComments: ["Best Comeback", "Immersive Sci-Fi", "Narrative Powerhouse"],
+    monthlyActivePlayers: 350000, 
+    estimatedTotalUnitSold: 32000000,
+  },
+  {
+    id: 'the-legend-of-zelda-breath-of-the-wild',
+    name: "The Legend of Zelda: Breath of the Wild",
+    description: "A 2017 action-adventure game developed and published by Nintendo",
+    genre: "Adventure",
+    tags: ["Open World", "Exploration", "Fantasy"],
+    price: 59.99,
+    website: "https://www.zelda.com/breath-of-the-wild/",
+    platforms: ['switch'],
+    developer: "Nintendo",
+    images: {
+      banner: "https://zelda.nintendo.com/breath-of-the-wild/assets/media/wallpapers/desktop-1.jpg",
+      thumbnail: "https://sm.ign.com/t/ign_pk/cover/t/the-legend/the-legend-of-zelda-breath-of-the-wild-nintendo-switch-2-edi_bf37.600.png",
+      gameplay: "https://staticg.sportskeeda.com/editor/2023/05/34684-16838975002342-1920.jpg"
+    },
+    videos: ["https://www.youtube.com/watch?v=zw47_q9wbBE"],
+    release_date: "2017-03-03",
+    rating: {
+      steamRating: 97, 
+      metacriticRating: 97, 
+      catalogRating: { story: 4, music: 4, graphics: 4, gameplay: 4, longevity: 4, innovation: 4 },
+    },
+    featuredComments: ["Game of the Decade", "Best Exploration", "Revolutionary Open World"],
+    monthlyActivePlayers: 200000, 
+    estimatedTotalUnitSold: 40000000,
+  },
+];
+

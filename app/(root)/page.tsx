@@ -1,15 +1,15 @@
 'use client';
-import BestGames from '@/components/pages/homepage/BestGames';
-import WorstGames from '@/components/pages/homepage/WorstGames';
+import MonthlyBestGames from '@/components/pages/homepage/MonthlyBestGames';
+import MonthlyWorstGames from '@/components/pages/homepage/MonthlyWorstGames';
 import UpcomingGames from '@/components/pages/homepage/UpcomingGames';
 import GameRanks from '@/components/pages/homepage/GameRanks';
 
 const Page = () => {
   return (
     <div className="container mx-auto space-y-12 px-4 py-8">
-      <BestGames />
+      <MonthlyBestGames />
 
-      <WorstGames />
+      <MonthlyWorstGames />
 
       <UpcomingGames />
 
