@@ -32,7 +32,7 @@ interface GameCardProps<T extends BaseGame> {
   fallbackIcon?: React.ReactNode;
 }
 
-const MediumGameCard = <T extends BaseGame>({
+const HighlightGameCard = <T extends BaseGame>({
   game,
   index = 0,
   showRanking = true,
@@ -96,4 +96,4 @@ const MediumGameCard = <T extends BaseGame>({
   );
 };
 
-export default MediumGameCard;
+export default HighlightGameCard;

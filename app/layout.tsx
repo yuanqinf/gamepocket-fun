@@ -8,9 +8,9 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: 'Discover, Track & Compare Video Games | Catalog.Games',
+  title: 'Catalog.Games | Discover, Track & Compare Video Games',
   description:
-    'Explore Catalog.Games — your personalized video game hub. Discover trending titles, accurate ratings, and a fair ranking system.',
+    'Catalog.Games is your trusted hub for video game discovery and comparison. Explore trending titles, get accurate insights, and see 100% authentic ratings from real players.',
 };
 
 export default function RootLayout({

@@ -1,11 +1,21 @@
 type CatalogRating = {
-  story: 1 | 2 | 3 | 4;
-  music: 1 | 2 | 3 | 4;
-  graphics: 1 | 2 | 3 | 4;
-  gameplay: 1 | 2 | 3 | 4;
-  longevity: 1 | 2 | 3 | 4;
-  innovation: 1 | 2 | 3 | 4;
+  story: 1 | 2 | 3 | 4 | 5;
+  music: 1 | 2 | 3 | 4 | 5;
+  graphics: 1 | 2 | 3 | 4 | 5;
+  gameplay: 1 | 2 | 3 | 4 | 5;
+  longevity: 1 | 2 | 3 | 4 | 5;
+  innovation: 1 | 2 | 3 | 4 | 5;
 }
+
+type SteamReview =
+  | "overwhelmingly positive"
+  | "very positive"
+  | "mostly positive"
+  | "positive"
+  | "mixed"
+  | "mostly negative"
+  | "very negative"
+  | "overwhelmingly negative";
 
 export interface GameData {
   id: string;
@@ -25,13 +35,14 @@ export interface GameData {
   videos: string[];
   release_date: string;
   rating: {
-    steamRating: number;
-    metacriticRating: number;
+    steamRecentReview?: SteamReview
+    steamAllReview?: SteamReview
+    metacriticUserScore?: number;
     catalogRating: CatalogRating;
   }
-  featuredComments: string[];
-  monthlyActivePlayers: number;
-  estimatedTotalUnitSold: number;
+  featuredCommentTags: string[];
+  monthlyActivePlayers?: number;
+  estimatedTotalUnitSold?: number;
 }
 
 export const mockMonthlyBestGamesData: GameData[] = [
@@ -53,11 +64,12 @@ export const mockMonthlyBestGamesData: GameData[] = [
     videos: ["https://www.youtube.com/watch?v=E3Huy2cdih0"],
     release_date: "2022-02-25",
     rating: {
-      steamRating: 93, 
-      metacriticRating: 95, 
-      catalogRating: { story: 4, music: 4, graphics: 4, gameplay: 4, longevity: 4, innovation: 3 },
+      steamRecentReview: "very positive",
+      steamAllReview: "very positive",
+      metacriticUserScore: 8.3, 
+      catalogRating: { story: 5, music: 5, graphics: 5, gameplay: 4, longevity: 3, innovation: 5 },
     },
-    featuredComments: ["Best Souls-like", "Best Open World", "Best Fantasy"],
+    featuredCommentTags: ["Best Souls-like", "Best Open World", "Best Fantasy"],
     monthlyActivePlayers: 1050000, 
     estimatedTotalUnitSold: 50000000,
   },
@@ -79,11 +91,12 @@ export const mockMonthlyBestGamesData: GameData[] = [
     videos: ["https://www.youtube.com/watch?v=7gYaZgn2pW8"],
     release_date: "2024-08-20",
     rating: {
-      steamRating: 91, 
-      metacriticRating: 93, 
-      catalogRating: { story: 4, music: 4, graphics: 4, gameplay: 3, longevity: 3, innovation: 3 },
+      steamRecentReview: "very positive",
+      steamAllReview: "overwhelmingly positive",
+      metacriticUserScore: 8.2, 
+      catalogRating: { story: 5, music: 5, graphics: 5, gameplay: 4, longevity: 2, innovation: 3 },
     },
-    featuredComments: ["Most Anticipated", "Stunning Visuals", "Next-Gen Souls-like"],
+    featuredCommentTags: ["Most Anticipated", "Stunning Visuals", "Next-Gen Souls-like"],
     monthlyActivePlayers: 550000, 
     estimatedTotalUnitSold: 25000000,
   },
@@ -105,11 +118,12 @@ export const mockMonthlyBestGamesData: GameData[] = [
     videos: ["https://www.youtube.com/watch?v=zg0_ulgtRqA"],
     release_date: "2023-08-03",
     rating: {
-      steamRating: 96, 
-      metacriticRating: 96, 
-      catalogRating: { story: 4, music: 3, graphics: 4, gameplay: 4, longevity: 4, innovation: 3 },
+      steamRecentReview: "overwhelmingly positive",
+      steamAllReview: "overwhelmingly positive",
+      metacriticUserScore: 9.2, 
+      catalogRating: { story: 5, music: 3, graphics: 4, gameplay: 4, longevity: 4, innovation: 5 },
     },
-    featuredComments: ["Best RPG", "Masterclass in Storytelling", "Top Turn-Based Combat"],
+    featuredCommentTags: ["Best RPG", "Masterclass in Storytelling", "Top Turn-Based Combat"],
     monthlyActivePlayers: 800000, 
     estimatedTotalUnitSold: 20000000,
   },
@@ -131,11 +145,12 @@ export const mockMonthlyBestGamesData: GameData[] = [
     videos: ["https://www.youtube.com/watch?v=qIcTM8WXFjk"],
     release_date: "2020-12-10",
     rating: {
-      steamRating: 85, 
-      metacriticRating: 86, 
-      catalogRating: { story: 4, music: 4, graphics: 4, gameplay: 3, longevity: 4, innovation: 3 },
+      steamRecentReview: "very positive",
+      steamAllReview: "very positive",
+      metacriticUserScore: 7.9, 
+      catalogRating: { story: 5, music: 4, graphics: 5, gameplay: 4, longevity: 4, innovation: 3 },
     },
-    featuredComments: ["Best Comeback", "Immersive Sci-Fi", "Narrative Powerhouse"],
+    featuredCommentTags: ["Best Comeback", "Immersive Sci-Fi", "Narrative Powerhouse"],
     monthlyActivePlayers: 350000, 
     estimatedTotalUnitSold: 32000000,
   },
@@ -157,13 +172,130 @@ export const mockMonthlyBestGamesData: GameData[] = [
     videos: ["https://www.youtube.com/watch?v=zw47_q9wbBE"],
     release_date: "2017-03-03",
     rating: {
-      steamRating: 97, 
-      metacriticRating: 97, 
-      catalogRating: { story: 4, music: 4, graphics: 4, gameplay: 4, longevity: 4, innovation: 4 },
+      metacriticUserScore: 8.9, 
+      catalogRating: { story: 5, music: 5, graphics: 5, gameplay: 5, longevity: 5, innovation: 5 },
     },
-    featuredComments: ["Game of the Decade", "Best Exploration", "Revolutionary Open World"],
+    featuredCommentTags: ["Game of the Decade", "Best Exploration", "Revolutionary Open World"],
     monthlyActivePlayers: 200000, 
     estimatedTotalUnitSold: 40000000,
   },
 ];
 
+export const mockMonthlyWorstGamesData: GameData[] = [
+  {
+    id: 'concord',
+    name: 'Concord',
+    description: 'A PvP sci-fi shooter with vibrant characters and team-based gameplay.',
+    genre: 'Multiplayer Shooter',
+    tags: ['Sci-Fi', 'PvP', 'Team-Based'],
+    price: 59.99,
+    website: 'https://www.playstation.com/en-us/games/concord/',
+    platforms: ['pc', 'ps5'],
+    developer: 'Firewalk Studios',
+    images: {
+      banner: 'https://blog.playstation.com/tachyon/2024/05/b06a8cc47aebcaeaff8cf93d58435221e8b1b616.jpg',
+      gameplay: 'https://images.alphacoders.com/137/thumb-1920-1370133.jpeg',
+      thumbnail: 'https://sm.ign.com/t/ign_nordic/cover/f/firewalk-s/firewalk-studios-probablymonsters-project_q9ua.600.jpg',
+    },
+    videos: ['https://www.youtube.com/watch?v=UroOs1dAq3k'],
+    release_date: '2024-08-23',
+    rating: {
+      metacriticUserScore: 1.7, 
+      catalogRating: { story: 1, music: 2, graphics: 2, gameplay: 1, longevity: 1, innovation: 1 },
+    },
+    featuredCommentTags: [
+      'Overwatch Clone', 'Overpriced', 'Woke Criticism', 'Outdated Gameplay'
+    ],
+    monthlyActivePlayers: 0,
+    estimatedTotalUnitSold: 0,
+  },
+  {
+    id: 'dragon-age-the-veilguard',
+    name: 'Dragon Age: The Veilguard',
+    description: 'The next chapter in the Dragon Age franchise with new heroes and darker threats.',
+    genre: 'Action RPG',
+    tags: ['Fantasy', 'Story Rich', 'Choices Matter'],
+    price: 69.99,
+    website: 'https://www.ea.com/games/dragon-age/dragon-age-the-veilguard',
+    platforms: ['pc', 'ps5', 'xbox'],
+    developer: 'BioWare',
+    images: {
+      banner: 'https://4kwallpapers.com/images/wallpapers/dragon-age-the-2560x1440-18445.jpg',
+      gameplay: 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/10/dragon-age-veilguard-combat.jpg',
+      thumbnail: 'https://sm.ign.com/t/ign_mear/cover/d/dragon-age/dragon-age-the-veilguard_yngr.600.jpg',
+    },
+    videos: ['https://www.youtube.com/watch?v=dZq1B3z1t2Y'],
+    release_date: '2024-12-10',
+    rating: {
+      steamRecentReview: 'mixed',
+      steamAllReview: 'mixed',
+      metacriticUserScore: 3.9, 
+      catalogRating: {
+        story: 1,
+        music: 2,
+        graphics: 3,
+        gameplay: 1,
+        longevity: 2,
+        innovation: 1,
+      },
+    },
+    featuredCommentTags: [
+      'Corporate/Soulless Design',
+      'Shallow Gameplay',
+      'Button-Mashing Combat',
+      'Forced Political Correctness',
+    ],
+    monthlyActivePlayers: 1000,
+    estimatedTotalUnitSold: 2000000,
+  },
+  {
+    id: "overwatch-2",
+    name: "Overwatch 2",
+    description: "A free-to-play, team-based action game set in the optimistic future, where every match is the ultimate 5v5 battlefield brawl.",
+    genre: "FPS",
+    tags: [
+      "Team-Based",
+      "Hero Shooter",
+      "Multiplayer"
+    ],
+    price: 0.0,
+    website: "https://overwatch.blizzard.com/",
+    platforms: [
+      "pc",
+      "ps5",
+      "xbox",
+      "switch"
+    ],
+    developer: "Blizzard Entertainment",
+    images: {
+      banner: "https://images7.alphacoders.com/124/1249649.png",
+      gameplay: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL71Iq7E9Ic8EWxi06imbS-KS6fD7f241-Ag&s",
+      thumbnail: "https://images.nintendolife.com/1558f6cd6d6fe/overwatch-2-cover.cover_large.jpg"
+    },
+    videos: [
+      "https://www.youtube.com/watch?v=dqPB3cJpA9k"
+    ],
+    release_date: "2022-10-04",
+    rating: {
+      steamRecentReview:"mixed",
+      steamAllReview: "overwhelmingly negative",
+      metacriticUserScore: 1.8,
+      catalogRating: {
+        story: 1,
+        music: 2,
+        graphics: 2,
+        gameplay: 1,
+        longevity: 3,
+        innovation: 1
+      }
+    },
+    featuredCommentTags: [
+      "Overpromised and Underdelivered",
+      "Poor Sequel Execution",
+      "Cash Grab",
+      "Embarrassing Reputation Damage"
+    ],
+    monthlyActivePlayers: 20000,
+    estimatedTotalUnitSold: 25000000
+  },
+];

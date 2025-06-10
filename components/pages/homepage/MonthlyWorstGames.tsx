@@ -9,7 +9,7 @@ import {
   CarouselApi,
 } from '@/components/ui/carousel';
 import PaginationDots from '@/components/shared/PaginationDots';
-import MediumGameCard from '@/components/shared/MediumGameCard';
+import HighlightGameCard from '@/components/shared/HighlightGameCard';
 
 const MonthlyWorstGames = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,7 +21,7 @@ const MonthlyWorstGames = () => {
       {/* Desktop Grid View */}
       <div className="hidden gap-4 md:grid md:grid-cols-3">
         {WORST_GAMES.map((game, index) => (
-          <MediumGameCard
+          <HighlightGameCard
             key={game.id}
             game={game}
             index={index}
@@ -56,7 +56,7 @@ const MonthlyWorstGames = () => {
                 key={game.id}
                 className="pr-4 pl-4 md:basis-1/2 lg:basis-1/3"
               >
-                <MediumGameCard
+                <HighlightGameCard
                   game={game}
                   index={index}
                   ratingValue={game.rating}
