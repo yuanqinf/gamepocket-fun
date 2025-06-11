@@ -195,4 +195,21 @@ body {
   .pagination-dot-inactive {
     @apply bg-zinc-500;
   }
+
+  /* Highlight Game Card Components */
+  .highlight-card {
+    @apply bg-neutral-900 text-white p-4 rounded-lg shadow-xl w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto font-sans;
+  }
+
+  .highlight-card-section {
+    @apply bg-neutral-800 p-3 rounded-md;
+  }
+
+  .highlight-card-comment-tag {
+    @apply bg-neutral-700 text-neutral-300 text-xs px-2.5 py-1 rounded-full truncate max-w-full sm:max-w-[calc(50%-0.375rem)];
+  }
+
+  .highlight-card-footer {
+    @apply flex justify-around items-center text-xs text-neutral-400 pt-3 border-t border-neutral-700/50;
+  }
 }

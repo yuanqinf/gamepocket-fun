@@ -204,7 +204,7 @@ export const mockMonthlyWorstGamesData: GameData[] = [
       catalogRating: { story: 1, music: 2, graphics: 2, gameplay: 1, longevity: 1, innovation: 1 },
     },
     featuredCommentTags: [
-      'Overwatch Clone', 'Overpriced', 'Woke Criticism', 'Outdated Gameplay'
+      'Overwatch Clone', 'Overpriced', 'Woke Criticism', 'Outdated Gameplay', 'Bad Story'
     ],
     monthlyActivePlayers: 0,
     estimatedTotalUnitSold: 0,
@@ -220,7 +220,7 @@ export const mockMonthlyWorstGamesData: GameData[] = [
     platforms: ['pc', 'ps5', 'xbox'],
     developer: 'BioWare',
     images: {
-      banner: 'https://4kwallpapers.com/images/wallpapers/dragon-age-the-2560x1440-18445.jpg',
+      banner: 'https://cdn1.epicgames.com/offer/4583306dbdc34076ac7ac2bf19bf7096/EGS_DragonAgeTheVeilguard_Bioware_S1_2560x1440-0c5844de6318595b22d3dece8fff0fb6_2560x1440-0c5844de6318595b22d3dece8fff0fb6',
       gameplay: 'https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/10/dragon-age-veilguard-combat.jpg',
       thumbnail: 'https://sm.ign.com/t/ign_mear/cover/d/dragon-age/dragon-age-the-veilguard_yngr.600.jpg',
     },
@@ -293,7 +293,7 @@ export const mockMonthlyWorstGamesData: GameData[] = [
       "Overpromised and Underdelivered",
       "Poor Sequel Execution",
       "Cash Grab",
-      "Embarrassing Reputation Damage"
+      "Embarrassing Reputation Damage",
     ],
     monthlyActivePlayers: 20000,
     estimatedTotalUnitSold: 25000000
