@@ -82,7 +82,7 @@ const MonthlyBestGames = () => {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="flex-center h-full w-full">
+                        <div className="flex items-center justify-center h-full w-full">
                           <Gamepad2 size={60} className="text-zinc-500" />
                         </div>
                       )}

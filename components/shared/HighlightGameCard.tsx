@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { GameData } from '../../constants/mockGameData';
-import { Star, Calendar, Gamepad2, ThumbsUp, ThumbsDown, Meh } from 'lucide-react';
+import { Star, Ghost, Gamepad2, ThumbsUp, ThumbsDown, Meh } from 'lucide-react';
 
 type SteamReviewPresentation = {
   IconComponent: React.ElementType;
@@ -91,7 +91,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
       {/* Subtext Row */}
       <div className="flex items-center text-neutral-400 text-xs mb-3 space-x-2 truncate">
         <div className="flex items-center min-w-0">
-          <Calendar size={12} className="mr-1 flex-shrink-0" />
+          <Ghost size={12} className="mr-1 flex-shrink-0" />
           <span className="truncate" title={game.developer}>{game.developer}</span>
         </div>
         <span className="text-neutral-500">•</span>

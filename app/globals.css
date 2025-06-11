@@ -114,11 +114,6 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  /* Common utility classes */
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
 }
 
 @layer components {

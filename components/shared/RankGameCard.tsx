@@ -19,7 +19,7 @@ const RankGameCard: React.FC<RankGameCardProps> = ({ game }) => {
   return (
     <Card className="game-card-base transition-colors hover:bg-zinc-700/70">
       <CardContent className="flex items-center gap-4 p-3">
-        <div className="flex-center min-w-[50px] flex-col pr-2 text-center">
+        <div className="flex items-center justify-center min-w-[50px] flex-col pr-2 text-center">
           <span className="text-3xl font-bold text-zinc-400">{game.rank}</span>
           {game.rankChange !== undefined && game.rankChange !== 0 && (
             <div
@@ -65,7 +65,7 @@ const RankGameCard: React.FC<RankGameCardProps> = ({ game }) => {
           </div>
         </div>
 
-        <div className="flex-center hidden flex-grow flex-row gap-3 text-zinc-400 sm:flex">
+        <div className="items-center justify-center hidden flex-grow flex-row gap-3 text-zinc-400 sm:flex">
           <div>
             <span className="text-base font-medium text-zinc-300">
               {game.statLabel}:{' '}

@@ -1,10 +1,10 @@
 type CatalogRating = {
-  story: 1 | 2 | 3 | 4 | 5;
-  music: 1 | 2 | 3 | 4 | 5;
-  graphics: 1 | 2 | 3 | 4 | 5;
-  gameplay: 1 | 2 | 3 | 4 | 5;
-  longevity: 1 | 2 | 3 | 4 | 5;
-  innovation: 1 | 2 | 3 | 4 | 5;
+  story: 0 | 1 | 2 | 3 | 4 | 5;
+  music: 0 | 1 | 2 | 3 | 4 | 5;
+  graphics: 0 | 1 | 2 | 3 | 4 | 5;
+  gameplay: 0 | 1 | 2 | 3 | 4 | 5;
+  longevity: 0 | 1 | 2 | 3 | 4 | 5;
+  innovation: 0 |1 | 2 | 3 | 4 | 5;
 }
 
 type SteamReview =
@@ -15,15 +15,17 @@ type SteamReview =
   | "mixed"
   | "mostly negative"
   | "very negative"
-  | "overwhelmingly negative";
+  | "overwhelmingly negative"
+  | "no user reviews";
 
 export interface GameData {
+  isUpcoming?: boolean;
   id: string;
   name: string;
   description: string;
   genre: string;
   tags: string[];
-  price: number;
+  price: number | null;
   website: string;
   platforms: ('pc' | 'ps5' | 'xbox' | 'switch')[];
   developer: string;
@@ -32,8 +34,8 @@ export interface GameData {
     gameplay: string;
     thumbnail: string;
   };
-  videos: string[];
-  release_date: string;
+  videos?: string[];
+  release_date?: string;
   rating: {
     steamRecentReview?: SteamReview
     steamAllReview?: SteamReview
@@ -299,3 +301,175 @@ export const mockMonthlyWorstGamesData: GameData[] = [
     estimatedTotalUnitSold: 25000000
   },
 ];
+
+export const mockUpcomingGamesData: GameData[] = [
+    {
+      isUpcoming: true,
+      id: "borderlands-4",
+      name: "Borderlands 4",
+      description: "The looter-shooter franchise returns with even more chaotic action, wild humor, and insane weapons.",
+      genre: "Action RPG",
+      tags: ["Looter Shooter", "Co-op", "Open World", "Comedy", "Action"],
+      price: null,
+      website: "https://borderlands.com",
+      platforms: ["pc", "ps5", "xbox"],
+      developer: "Gearbox Software",
+      images: {
+        banner: "https://cdn1.epicgames.com/spt-assets/20d989fc07a447b2af3c59e4fd5f49c7/borderlands-4-14saz.jpg",
+        gameplay: "https://images.alphacoders.com/138/thumb-1920-1385466.jpg",
+        thumbnail: "https://sm.ign.com/t/ign_pk/cover/b/borderland/borderlands-4_fchm.600.jpg"
+      },
+      videos: [
+        "https://www.youtube.com/watch?v=z4qeqPZJTaE"
+      ],
+      release_date: "2025-09-12",
+      rating: {
+        steamAllReview: "no user reviews",
+        catalogRating: {
+          story: 0,
+          music: 0,
+          graphics: 0,
+          gameplay: 0,
+          longevity: 0,
+          innovation: 0
+        }
+      },
+      featuredCommentTags: ["Not enough user reviews"]
+    },
+    {
+      isUpcoming: true,
+      id: "metal-gear-solid-delta",
+      name: "Metal Gear Solid Delta: Snake Eater",
+      description: "The legendary stealth-action classic returns fully rebuilt for a new generation.",
+      genre: "Stealth Action",
+      tags: ["Stealth", "Action", "Remake", "Cinematic", "Story-Rich"],
+      price: null,
+      website: "https://www.konami.com/mg/delta/",
+      platforms: ["pc", "ps5", "xbox"],
+      developer: "Konami",
+      images: {
+        banner: "https://cdn.wccftech.com/wp-content/uploads/2023/10/Metal-Gear-Solid-Delta-Snake-Eater.jpg",
+        gameplay: "https://static1.thegamerimages.com/wordpress/wp-content/uploads/2024/08/knm_mgs_delta_gameplay_03.png",
+        thumbnail: "https://sm.ign.com/t/ign_za/cover/m/metal-gear/metal-gear-solid-delta-snake-eater_hdn4.600.jpg"
+      },
+      videos: [
+        "https://www.youtube.com/watch?v=sKMayCD1u3w"
+      ],
+      release_date: "2025-08-28",
+      rating: {
+        steamAllReview: "no user reviews",
+        catalogRating: {
+          story: 0,
+          music: 0,
+          graphics: 0,
+          gameplay: 0,
+          longevity: 0,
+          innovation: 0
+        }
+      },
+      featuredCommentTags: ["Not enough user reviews"]
+    },
+    {
+      isUpcoming: true,
+      id: "donkey-kong-bananza",
+      name: "Donkey Kong Bananza",
+      description: "The Kong family embarks on a new adventure filled with jungle platforming, bananas, and boss battles.",
+      genre: "Platformer",
+      tags: ["Platformer", "Family Friendly", "Adventure", "Nintendo", "Colorful"],
+      price: 59.99,
+      website: "https://www.nintendo.com",
+      platforms: ["switch"],
+      developer: "Nintendo",
+      images: {
+        banner: "https://cdn.wccftech.com/wp-content/uploads/2025/04/WCCFdonkeykongbananza1.jpg",
+        gameplay: "https://gamingbolt.com/wp-content/uploads/2025/04/donkey-kong-bananza-image-5-scaled.jpg",
+        thumbnail: "https://i.pinimg.com/736x/e7/22/45/e72245d795703573503a861c14de9c34.jpg"
+      },
+      videos: [
+        "https://www.youtube.com/watch?v=mIddsPkdX9U"
+      ],
+      release_date: "2025-07-17",
+      rating: {
+        steamAllReview: "no user reviews",
+        catalogRating: {
+          story: 0,
+          music: 0,
+          graphics: 0,
+          gameplay: 0,
+          longevity: 0,
+          innovation: 0
+        }
+      },
+      featuredCommentTags: ["Not enough user reviews"]
+    },
+    {
+      id: "wuchang-fallen-feathers",
+      name: "WUCHANG: Fallen Feathers",
+      description: "A dark soulslike action RPG set in ancient China filled with mystical creatures and deadly combat.",
+      genre: "Action RPG",
+      tags: ["Soulslike", "Dark Fantasy", "Historical", "Challenging", "Chinese Mythology"],
+      price: 59.99,
+      website: "https://www.wuchanggame.com",
+      platforms: ["pc", "ps5", "xbox"],
+      developer: "Leenzee Games",
+      images: {
+        banner: "https://cdn1.epicgames.com/spt-assets/61237a4bad9f482a9ad1a1ac74520bba/wuchang-fallen-feathers-199kj.jpg",
+        gameplay: "https://505games.com/wp-content/uploads/2024/10/7.jpg",
+        thumbnail: "https://image.api.playstation.com/vulcan/ap/rnd/202503/2515/7a30e03231f8ea811a225b4b4e21ffdc8bf260e41145f196.png"
+      },
+      videos: [
+        "https://www.youtube.com/watch?v=tZ_JjhLdlwk"
+      ],
+      release_date: "2025-07-12",
+      rating: {
+        steamAllReview: "no user reviews",
+        catalogRating: {
+          story: 0,
+          music: 0,
+          graphics: 0,
+          gameplay: 0,
+          longevity: 0,
+          innovation: 0
+        }
+      },
+      featuredCommentTags: ["Beautiful Visuals", "Hardcore Combat", "Atmospheric"],
+      monthlyActivePlayers: 0,
+      estimatedTotalUnitSold: 0
+    },
+    {
+      isUpcoming: true,
+      id: "slay-the-spire-2",
+      name: "Slay the Spire 2",
+      description: "The deckbuilding roguelike returns with new cards, new classes, and deeper strategic gameplay.",
+      genre: "Roguelike Deckbuilder",
+      tags: ["Roguelike", "Deckbuilder", "Strategy", "Indie", "Turn-based"],
+      price: 29.99,
+      website: "https://www.megacrit.com",
+      platforms: ["pc", "ps5", "xbox", "switch"],
+      developer: "MegaCrit",
+      images: {
+        banner: "https://www.megacrit.com/images/sts2_key_art_16x9-scaled.jpg",
+        gameplay: "https://i.redd.it/slay-the-spire-ii-gameplay-screenshots-from-steam-page-v0-82xi38esrotc1.jpg?width=1920&format=pjpg&auto=webp&s=ba4b50d4301d638e9a6bff73f0fd033c08584ad8",
+        thumbnail: "https://sm.ign.com/t/ign_nordic/cover/s/slay-the-s/slay-the-spire-2_8ypg.600.jpg"
+      },
+      videos: [
+        "https://www.youtube.com/watch?v=ttVtllHkb4E"
+      ],
+      release_date: "2025-08-10",
+      rating: {
+        steamAllReview: "no user reviews",
+        catalogRating: {
+          story: 0,
+          music: 0,
+          graphics: 0,
+          gameplay: 0,
+          longevity: 0,
+          innovation: 0
+        }
+      },
+      featuredCommentTags: ["Highly Addictive", "Deep Strategy", "Endless Replayability"],
+      monthlyActivePlayers: 0,
+      estimatedTotalUnitSold: 0
+    }
+  ];
+  

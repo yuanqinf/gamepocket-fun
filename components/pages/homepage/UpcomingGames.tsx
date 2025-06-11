@@ -1,4 +1,3 @@
-import { Gamepad2 } from 'lucide-react';
 import React, { useState } from 'react';
 import {
   Carousel,
@@ -9,9 +8,10 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import PaginationDots from '@/components/shared/PaginationDots';
+import MiniGameCard from '@/components/shared/MiniGameCard';
+import { mockUpcomingGamesData } from '@/constants/mockGameData';
 
 const UpcomingGames = () => {
-  const upcomingGamesData = Array(8).fill(0);
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -37,34 +37,22 @@ const UpcomingGames = () => {
         className="w-full"
       >
         <CarouselContent className="-ml-4">
-          {upcomingGamesData.map((_, i) => (
+          {mockUpcomingGamesData.map((game, i) => (
             <CarouselItem
               key={`upcoming-${i}`}
               className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
             >
-              <div className="p-1">
-                <div className="flex h-64 flex-col rounded-lg bg-zinc-800 p-4">
-                  <div className="flex-center mb-2 flex h-40 flex-grow rounded bg-zinc-700">
-                    <Gamepad2 size={40} className="text-zinc-500" />
-                  </div>
-                  <h3 className="mt-auto truncate font-medium">
-                    Upcoming Game {i + 1}
-                  </h3>
-                  <p className="text-sm text-zinc-400">
-                    Release: Q{(i % 4) + 1} 2025
-                  </p>
-                </div>
-              </div>
+              <MiniGameCard game={game} />
             </CarouselItem>
           ))}
         </CarouselContent>
         <CarouselPrevious className="carousel-nav-button-base left-4" />
         <CarouselNext className="carousel-nav-button-base right-4" />
       </Carousel>
-      <div className="flex-center mt-4 sm:hidden">
+      <div className="flex items-center justify-center mt-4 sm:hidden">
         <PaginationDots
-          totalItems={upcomingGamesData.length}
-          activeIndex={activeIndex} // Already 0-indexed
+          totalItems={mockUpcomingGamesData.length}
+          activeIndex={activeIndex}
           carouselApi={carouselApi}
         />
       </div>
