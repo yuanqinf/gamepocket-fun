@@ -1,6 +1,6 @@
 'use client';
-import React from 'react';
-import { GameData } from '../../constants/mockGameData';
+import Image from 'next/image';
+import { GameData } from '@/constants/mockGameData';
 import { Star, Ghost, Gamepad2, ThumbsUp, ThumbsDown, Meh } from 'lucide-react';
 
 type SteamReviewPresentation = {
@@ -57,27 +57,87 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
     avatarBorderColorClass = steamPresentation.colorClass.replace('text-', 'border-');
   }
 
-  const calculateAverageRating = (ratings: Record<string, number>) =>
-    (Object.values(ratings).reduce((sum, rating) => sum + rating, 0) / Object.values(ratings).length).toFixed(1);
+  /**
+   * Calculates the average rating from a record of category ratings
+   * @param ratings - Object containing rating categories and their values
+   * @returns The average rating as a string with one decimal place
+   */
+  const calculateAverageRating = (ratings: Record<string, number>) => {
+    const values = Object.values(ratings);
+    if (values.length === 0) return '0.0';
 
-  const ratingBlockColors = [
-    'bg-red-500',
-    'bg-orange-400',
-    'bg-yellow-400',
-    'bg-lime-500',
-    'bg-green-500',
+    const sum = values.reduce((total, rating) => total + rating, 0);
+    const average = sum / values.length;
+    return average.toFixed(1);
+  };
+
+  // Define the color scale for rating blocks (1-5) using hex values directly
+  const ratingColors = [
+    '#ef4444', // Rating level 1 (red-500)
+    '#fb923c', // Rating level 2 (orange-400)
+    '#facc15', // Rating level 3 (yellow-400)
+    '#84cc16', // Rating level 4 (lime-500)
+    '#22c55e'  // Rating level 5 (green-500)
   ];
+
+  // Background color for empty rating blocks
+  const emptyBlockColor = '#404040'; // neutral-700
+
+  /**
+   * Generates the appropriate style object for a rating block based on the rating value
+   * @param blockIndex - The index of the block (0-4, representing rating levels 1-5)
+   * @param categoryRating - The actual rating value (can be a float like 3.5)
+   * @returns A React inline style object with the appropriate background color or gradient
+   */
+  const getBlockFillStyle = (blockIndex: number, categoryRating: number) => {
+    const fullValue = Math.floor(categoryRating);
+    const fractionalPart = categoryRating - fullValue;
+
+    // Get the appropriate colors for this block
+    const fillColor = ratingColors[blockIndex] || emptyBlockColor;
+    const bgColor = emptyBlockColor; // Empty/unfilled portion color
+
+    // Calculate how much of this block should be filled (0-100%)
+    let fillPercent = 0;
+    if (blockIndex < fullValue) {
+      // Blocks before the current rating level are completely filled
+      fillPercent = 100;
+    } else if (blockIndex === fullValue) {
+      // The current level block is partially filled based on the decimal part
+      fillPercent = Math.round(fractionalPart * 100);
+    }
+    // Blocks after the current level remain at 0% fill
+
+    // Return the appropriate style based on fill percentage
+    if (fillPercent === 100) {
+      // Fully filled block
+      return { backgroundColor: fillColor };
+    } else if (fillPercent === 0) {
+      // Empty block
+      return { backgroundColor: bgColor };
+    } else {
+      // Partially filled block - use a gradient
+      return {
+        background: `linear-gradient(to right, ${fillColor} ${fillPercent}%, ${bgColor} ${fillPercent}%)`
+      };
+    }
+  };
 
   return (
     <div className="highlight-card">
       {/* Top Row */}
       <div className="flex items-center mb-3">
         <div className={`p-0.5 rounded-full mr-3 flex-shrink-0 border-2 ${avatarBorderColorClass}`}>
-          <img
-            src={game.images.thumbnail}
-            alt={`${game.name} avatar`}
-            className="w-10 h-10 rounded-full object-cover"
-          />
+          <div className="relative w-10 h-10 rounded-full overflow-hidden">
+            <Image
+              src={game.images.thumbnail}
+              alt={`${game.name} avatar`}
+              fill
+              sizes="40px"
+              style={{ objectFit: 'cover' }}
+              className="rounded-full"
+            />
+          </div>
         </div>
         <div className="flex-grow min-w-0">
           <h2 className="text-lg font-semibold truncate" title={game.name}>{game.name}</h2>
@@ -104,11 +164,15 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
       {/* Media: Banner Image */}
       {game.images?.banner && (
         <div className="mb-3 aspect-[16/9] overflow-hidden rounded-md bg-neutral-800">
-          <img
-            src={game.images.banner}
-            alt={`${game.name} banner`}
-            className="w-full h-full object-cover"
-          />
+          <div className="relative w-full h-full">
+            <Image
+              src={game.images.banner}
+              alt={`${game.name} banner`}
+              fill
+              sizes="(max-width: 768px) 100vw, 800px"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
         </div>
       )}
       {/* Featured Comments */}
@@ -139,7 +203,8 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
                   {[...Array(5)].map((_, i) => (
                     <div
                       key={i}
-                      className={`h-3 flex-1 rounded-sm ${i < rating ? ratingBlockColors[i] : 'bg-neutral-700'}`}
+                      className="h-3 flex-1 rounded-sm"
+                      style={getBlockFillStyle(i, rating)}
                     />
                   ))}
                 </div>

@@ -6,6 +6,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   safelist: [
+    // Border classes for dynamic styling
     'border-green-400',
     'border-green-500',
     'border-green-600',

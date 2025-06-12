@@ -1,6 +1,6 @@
+import Image from 'next/image';
 import { GameData } from '@/constants/mockGameData';
 import { Gamepad2, Bookmark, Calendar, Star } from 'lucide-react';
-import Image from 'next/image';
 
 const MiniGameCard = ({ game }: { game: GameData }) => {
   const calculateAverageRating = (ratings: Record<string, number>) => {
@@ -22,8 +22,9 @@ const MiniGameCard = ({ game }: { game: GameData }) => {
               <Image
                 src={game.images.thumbnail}
                 alt={game.name}
-                layout="fill"
-                objectFit="contain"
+                fill
+                sizes="(max-width: 768px) 100vw, 300px"
+                style={{ objectFit: 'contain' }}
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center">

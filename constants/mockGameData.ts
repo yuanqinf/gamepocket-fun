@@ -1,10 +1,10 @@
 type CatalogRating = {
-  story: 0 | 1 | 2 | 3 | 4 | 5;
-  music: 0 | 1 | 2 | 3 | 4 | 5;
-  graphics: 0 | 1 | 2 | 3 | 4 | 5;
-  gameplay: 0 | 1 | 2 | 3 | 4 | 5;
-  longevity: 0 | 1 | 2 | 3 | 4 | 5;
-  innovation: 0 |1 | 2 | 3 | 4 | 5;
+  story: number;
+  music: number;
+  graphics: number;
+  gameplay: number;
+  longevity: number;
+  innovation: number;
 }
 
 type SteamReview =
@@ -203,7 +203,7 @@ export const mockMonthlyWorstGamesData: GameData[] = [
     release_date: '2024-08-23',
     rating: {
       metacriticUserScore: 1.7, 
-      catalogRating: { story: 1, music: 2, graphics: 2, gameplay: 1, longevity: 1, innovation: 1 },
+      catalogRating: { story: 1.2, music: 1.4, graphics: 1.6, gameplay: 0.7, longevity: 1.3, innovation: 0.8 },
     },
     featuredCommentTags: [
       'Overwatch Clone', 'Overpriced', 'Woke Criticism', 'Outdated Gameplay', 'Bad Story'
