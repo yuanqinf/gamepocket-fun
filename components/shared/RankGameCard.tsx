@@ -9,17 +9,17 @@ import {
   Minus,
   MessageCircle,
 } from 'lucide-react';
-import { Game } from '@/constants/games';
+import { RankedGame } from '@/constants/mockRankingData';
 
 interface RankGameCardProps {
-  game: Game;
+  game: RankedGame;
 }
 
 const RankGameCard: React.FC<RankGameCardProps> = ({ game }) => {
   return (
     <Card className="game-card-base transition-colors hover:bg-zinc-700/70">
       <CardContent className="flex items-center gap-4 p-3">
-        <div className="flex items-center justify-center min-w-[50px] flex-col pr-2 text-center">
+        <div className="flex min-w-[50px] flex-col items-center justify-center pr-2 text-center">
           <span className="text-3xl font-bold text-zinc-400">{game.rank}</span>
           {game.rankChange !== undefined && game.rankChange !== 0 && (
             <div
@@ -43,7 +43,7 @@ const RankGameCard: React.FC<RankGameCardProps> = ({ game }) => {
         </div>
         <Image
           src={game.bannerUrl}
-          alt={`${game.title} banner`}
+          alt={`${game.gameName} banner`}
           width={128} // w-32
           height={72} // aspect-video like, roughly half of width
           className="ml-auto flex-shrink-0 rounded-md object-cover"
@@ -51,30 +51,35 @@ const RankGameCard: React.FC<RankGameCardProps> = ({ game }) => {
         <div className="flex w-48 flex-col gap-0.5">
           <div className="flex items-center gap-2">
             <h3 className="truncate text-base font-semibold text-white">
-              {game.title}
+              {game.gameName}
             </h3>
           </div>
-          <p className="truncate text-xs text-zinc-400">
-            {game.categories.join(' • ')}
-          </p>
           <div className="mt-0.5 flex items-center gap-1.5 text-zinc-400">
-            {game.platforms.includes('pc') && <Monitor size={14} />}
-            {game.platforms.includes('ps5') && <Gamepad2 size={14} />}
-            {game.platforms.includes('xbox') && <Gamepad2 size={14} />}
-            {game.platforms.includes('switch') && <Gamepad2 size={14} />}
+            {game.developer}
           </div>
+          <p className="truncate text-xs text-zinc-400">{game.genre}</p>
         </div>
 
-        <div className="items-center justify-center hidden flex-grow flex-row gap-3 text-zinc-400 sm:flex">
+        <div className="hidden flex-grow flex-row items-center justify-center gap-3 text-zinc-400 sm:flex">
           <div>
             <span className="text-base font-medium text-zinc-300">
-              {game.statLabel}:{' '}
+              {(() => {
+                const labelMap: Record<RankedGame['rankingType'], string> = {
+                  overall: 'Score',
+                  story: 'Story',
+                  graphics: 'Graphics',
+                  gameplay: 'Gameplay',
+                  longevity: 'Longevity',
+                  music: 'Music',
+                  innovation: 'Innovation',
+                };
+                return labelMap[game.rankingType];
+              })()}
+              {': '}
             </span>
-            <span className="text-base font-bold text-white">
-              {game.statValue}
-            </span>
+            <span className="text-base font-bold text-white">{game.score}</span>
           </div>
-          {game.statChangePercent === 0 ? (
+          {game.scoreChange === 0 ? (
             <div className="flex items-center">
               {' '}
               {/* Stat change percentage container */}
@@ -85,28 +90,33 @@ const RankGameCard: React.FC<RankGameCardProps> = ({ game }) => {
             </div>
           ) : (
             <div
-              className={`flex items-center ${game.statChangePercent > 0 ? 'text-green-500' : 'text-red-500'}`}
+              className={`flex items-center ${game.scoreChange > 0 ? 'text-green-500' : 'text-red-500'}`}
             >
-              {game.statChangePercent > 0 ? (
+              {game.scoreChange > 0 ? (
                 <ArrowUp size={20} />
               ) : (
                 <ArrowDown size={20} />
               )}
               <span className="ml-0.5 text-lg font-semibold">
-                {Math.abs(game.statChangePercent)}%
+                {Math.abs(game.scoreChange)}
               </span>
             </div>
           )}
         </div>
-        {game.featuredComment && (
-          <div className="rank-card-comment-container">
-            <MessageCircle
-              size={16}
-              className="mt-0.5 flex-shrink-0 text-zinc-500"
-            />
-            <p className="line-clamp-3">{game.featuredComment}</p>
+        <div className="rank-card-comment-container">
+          <div className="flex flex-col gap-1">
+            <p className="line-clamp-1">
+              {game.monthlyActivePlayers
+                ? `${game.monthlyActivePlayers.toLocaleString()} played`
+                : 'N/A'}
+            </p>
+            <p className="line-clamp-1">
+              {game.totalRatings
+                ? `${game.totalRatings.toLocaleString()} rated`
+                : 'N/A'}
+            </p>
           </div>
-        )}
+        </div>
       </CardContent>
     </Card>
   );

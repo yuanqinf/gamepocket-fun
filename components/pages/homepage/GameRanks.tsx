@@ -1,44 +1,115 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
-  topActiveGamesData,
-  topRatedGamesData,
-  topSellingGamesData,
-} from '@/constants/games';
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel';
+import { mockRankingData } from '@/constants/mockRankingData';
 import RankGameCard from '@/components/shared/RankGameCard';
 
 const GameRanks = () => {
   return (
     <section>
       <h2 className="mb-6 text-2xl font-bold">Top Games</h2>
-      <Tabs defaultValue="active" className="w-full">
-        <TabsList className="mb-4 grid w-full grid-cols-3">
-          <TabsTrigger value="active">Active</TabsTrigger>
-          <TabsTrigger value="rated">Rated</TabsTrigger>
-          <TabsTrigger value="selling">Selling</TabsTrigger>
-        </TabsList>
-        <TabsContent value="active">
-          <div className="space-y-3">
-            {topActiveGamesData.map((game) => (
-              <RankGameCard key={`top-active-${game.id}`} game={game} />
-            ))}
-          </div>
-        </TabsContent>
-        <TabsContent value="rated">
-          <div className="space-y-3">
-            {topRatedGamesData.map((game) => (
-              <RankGameCard key={`top-rated-${game.id}`} game={game} />
-            ))}
-          </div>
-        </TabsContent>
-        <TabsContent value="selling">
-          <div className="space-y-3">
-            {topSellingGamesData.map((game) => (
-              <RankGameCard key={`top-selling-${game.id}`} game={game} />
-            ))}
-          </div>
-        </TabsContent>
+      {/* Tabs for ≥sm screens */}
+      <Tabs defaultValue="overall" className="hidden w-full sm:block">
+        {(() => {
+          const rankingTypes: {
+            value: (typeof mockRankingData)[number]['rankingType'];
+            label: string;
+          }[] = [
+            { value: 'overall', label: 'Overall' },
+            { value: 'story', label: 'Story' },
+            { value: 'graphics', label: 'Graphics' },
+            { value: 'gameplay', label: 'Gameplay' },
+            { value: 'longevity', label: 'Longevity' },
+            { value: 'music', label: 'Music' },
+            { value: 'innovation', label: 'Innovation' },
+          ];
+          return (
+            <>
+              <TabsList
+                className="scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent mb-4 flex w-full gap-2 overflow-x-auto sm:grid sm:grid-cols-7"
+                style={{ WebkitOverflowScrolling: 'touch' }}
+              >
+                {rankingTypes.map((t) => (
+                  <TabsTrigger
+                    key={t.value}
+                    value={t.value}
+                    className="min-w-[90px] flex-shrink-0 truncate sm:min-w-0"
+                  >
+                    {t.label}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              {rankingTypes.map((t) => {
+                const games = mockRankingData
+                  .filter((g) => g.rankingType === t.value)
+                  .sort((a, b) => a.rank - b.rank)
+                  .slice(0, 5);
+                return (
+                  <TabsContent key={t.value} value={t.value}>
+                    <div className="space-y-3">
+                      {games.map((game) => (
+                        <RankGameCard
+                          key={`${t.value}-${game.gameId}`}
+                          game={game}
+                        />
+                      ))}
+                    </div>
+                  </TabsContent>
+                );
+              })}
+            </>
+          );
+        })()}
       </Tabs>
+
+      {/* Carousel for small screens */}
+      <div className="block w-full sm:hidden">
+        {(() => {
+          const rankingTypes: {
+            value: (typeof mockRankingData)[number]['rankingType'];
+            label: string;
+          }[] = [
+            { value: 'overall', label: 'Overall' },
+            { value: 'story', label: 'Story' },
+            { value: 'graphics', label: 'Graphics' },
+            { value: 'gameplay', label: 'Gameplay' },
+            { value: 'longevity', label: 'Longevity' },
+            { value: 'music', label: 'Music' },
+            { value: 'innovation', label: 'Innovation' },
+          ];
+          return (
+            <Carousel opts={{ align: 'start' }} className="w-full">
+              <CarouselContent>
+                {rankingTypes.map((t) => {
+                  const games = mockRankingData
+                    .filter((g) => g.rankingType === t.value)
+                    .sort((a, b) => a.rank - b.rank)
+                    .slice(0, 5);
+                  return (
+                    <CarouselItem key={t.value} className="basis-full pl-2">
+                      <div className="mb-2 px-2 text-lg font-semibold">
+                        {t.label}
+                      </div>
+                      <div className="space-y-3 px-2">
+                        {games.map((game) => (
+                          <RankGameCard
+                            key={`mobile-${t.value}-${game.gameId}`}
+                            game={game}
+                          />
+                        ))}
+                      </div>
+                    </CarouselItem>
+                  );
+                })}
+              </CarouselContent>
+            </Carousel>
+          );
+        })()}
+      </div>
     </section>
   );
 };

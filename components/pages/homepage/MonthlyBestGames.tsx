@@ -17,7 +17,10 @@ const MonthlyBestGames = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
   const calculateAverageRating = (ratings: Record<string, number>) =>
-    (Object.values(ratings).reduce((sum, rating) => sum + rating, 0) / Object.values(ratings).length).toFixed(1);
+    (
+      Object.values(ratings).reduce((sum, rating) => sum + rating, 0) /
+      Object.values(ratings).length
+    ).toFixed(1);
 
   // Scroll the active thumbnail into view when activeIndex changes
   useEffect(() => {
@@ -58,19 +61,26 @@ const MonthlyBestGames = () => {
               {mockMonthlyBestGamesData.map((game) => (
                 <CarouselItem key={game.id}>
                   <Link href={`/games/${game.id}`} className="block">
-                    <div className="game-card aspect-video relative">
-                      <div className="absolute top-0 right-0 p-6 z-10">
-                        <Bookmark size={24} className="text-white hover:text-yellow-400 cursor-pointer" fill="rgba(0,0,0,0.5)" />
+                    <div className="game-card relative aspect-video">
+                      <div className="absolute top-0 right-0 z-10 p-6">
+                        <Bookmark
+                          size={24}
+                          className="cursor-pointer text-white hover:text-yellow-400"
+                          fill="rgba(0,0,0,0.5)"
+                        />
                       </div>
-                      <div className="absolute bottom-0 left-0 p-3 z-10">
-                        <div className="flex items-center bg-black bg-opacity-50 px-2 py-1 text-white rounded">
+                      <div className="absolute bottom-0 left-0 z-10 p-3">
+                        <div className="bg-opacity-50 flex items-center rounded bg-black px-2 py-1 text-white">
                           <Image
                             src="/images/logo.png"
                             alt="Logo"
                             width={36}
                             height={36}
                           />
-                          <span>Catalog Rating: {calculateAverageRating(game.rating.catalogRating)}</span>
+                          <span>
+                            Catalog Rating:{' '}
+                            {calculateAverageRating(game.rating.catalogRating)}
+                          </span>
                         </div>
                       </div>
                       {game.images && game.images.banner ? (
@@ -82,7 +92,7 @@ const MonthlyBestGames = () => {
                           className="object-cover"
                         />
                       ) : (
-                        <div className="flex items-center justify-center h-full w-full">
+                        <div className="flex h-full w-full items-center justify-center">
                           <Gamepad2 size={60} className="text-zinc-500" />
                         </div>
                       )}
@@ -133,13 +143,17 @@ const MonthlyBestGames = () => {
                 </div>
 
                 <div className="min-w-0">
-                  <h4 className="break-words text-sm font-medium hidden xl:block">{game.name}</h4>
+                  <h4 className="hidden text-sm font-medium break-words xl:block">
+                    {game.name}
+                  </h4>
                   <p className="truncate text-xs text-zinc-400">
                     {game.developer}
                   </p>
                   <div className="flex items-center gap-1 text-yellow-400">
                     <Star size={12} fill="currentColor" />
-                    <span className="text-xs">{calculateAverageRating(game.rating.catalogRating)}</span>
+                    <span className="text-xs">
+                      {calculateAverageRating(game.rating.catalogRating)}
+                    </span>
                   </div>
                 </div>
               </div>

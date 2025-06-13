@@ -49,7 +49,7 @@ const UpcomingGames = () => {
         <CarouselPrevious className="carousel-nav-button-base left-4" />
         <CarouselNext className="carousel-nav-button-base right-4" />
       </Carousel>
-      <div className="flex items-center justify-center mt-4 sm:hidden">
+      <div className="mt-4 flex items-center justify-center sm:hidden">
         <PaginationDots
           totalItems={mockUpcomingGamesData.length}
           activeIndex={activeIndex}

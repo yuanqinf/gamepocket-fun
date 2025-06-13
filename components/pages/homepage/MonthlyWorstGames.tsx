@@ -21,10 +21,7 @@ const MonthlyWorstGames = () => {
       {/* Desktop Grid View */}
       <div className="hidden gap-4 md:grid md:grid-cols-3">
         {mockMonthlyWorstGamesData.map((game: GameData) => (
-          <HighlightGameCard
-            key={game.id}
-            game={game}
-          />
+          <HighlightGameCard key={game.id} game={game} />
         ))}
       </div>
 
@@ -53,9 +50,7 @@ const MonthlyWorstGames = () => {
                 key={game.id}
                 className="pr-4 pl-4 md:basis-1/2 lg:basis-1/3"
               >
-                <HighlightGameCard
-                  game={game}
-                />
+                <HighlightGameCard game={game} />
               </CarouselItem>
             ))}
           </CarouselContent>

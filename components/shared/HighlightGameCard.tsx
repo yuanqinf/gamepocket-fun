@@ -10,7 +10,9 @@ type SteamReviewPresentation = {
 };
 
 export default function HighlightGameCard({ game }: { game: GameData }) {
-  const getSteamReviewPresentation = (review?: string): SteamReviewPresentation | null => {
+  const getSteamReviewPresentation = (
+    review?: string,
+  ): SteamReviewPresentation | null => {
     if (!review?.trim()) return null;
 
     const lowerReview = review.toLowerCase();
@@ -51,10 +53,15 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
     playerSalesInfo = `${formatNumberAbbreviated(monthlyActivePlayers)} active players`;
   }
 
-  const steamPresentation = getSteamReviewPresentation(game.rating?.steamAllReview);
+  const steamPresentation = getSteamReviewPresentation(
+    game.rating?.steamAllReview,
+  );
   let avatarBorderColorClass = 'border-neutral-700'; // Default border
   if (steamPresentation && steamPresentation.colorClass) {
-    avatarBorderColorClass = steamPresentation.colorClass.replace('text-', 'border-');
+    avatarBorderColorClass = steamPresentation.colorClass.replace(
+      'text-',
+      'border-',
+    );
   }
 
   /**
@@ -77,7 +84,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
     '#fb923c', // Rating level 2 (orange-400)
     '#facc15', // Rating level 3 (yellow-400)
     '#84cc16', // Rating level 4 (lime-500)
-    '#22c55e'  // Rating level 5 (green-500)
+    '#22c55e', // Rating level 5 (green-500)
   ];
 
   // Background color for empty rating blocks
@@ -118,7 +125,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
     } else {
       // Partially filled block - use a gradient
       return {
-        background: `linear-gradient(to right, ${fillColor} ${fillPercent}%, ${bgColor} ${fillPercent}%)`
+        background: `linear-gradient(to right, ${fillColor} ${fillPercent}%, ${bgColor} ${fillPercent}%)`,
       };
     }
   };
@@ -126,9 +133,11 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
   return (
     <div className="highlight-card">
       {/* Top Row */}
-      <div className="flex items-center mb-3">
-        <div className={`p-0.5 rounded-full mr-3 flex-shrink-0 border-2 ${avatarBorderColorClass}`}>
-          <div className="relative w-10 h-10 rounded-full overflow-hidden">
+      <div className="mb-3 flex items-center">
+        <div
+          className={`mr-3 flex-shrink-0 rounded-full border-2 p-0.5 ${avatarBorderColorClass}`}
+        >
+          <div className="relative h-10 w-10 overflow-hidden rounded-full">
             <Image
               src={game.images.thumbnail}
               alt={`${game.name} avatar`}
@@ -139,32 +148,40 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
             />
           </div>
         </div>
-        <div className="flex-grow min-w-0">
-          <h2 className="text-lg font-semibold truncate" title={game.name}>{game.name}</h2>
+        <div className="min-w-0 flex-grow">
+          <h2 className="truncate text-lg font-semibold" title={game.name}>
+            {game.name}
+          </h2>
         </div>
-        <div className="flex items-center text-yellow-400 ml-2 flex-shrink-0">
+        <div className="ml-2 flex flex-shrink-0 items-center text-yellow-400">
           <Star size={18} className="mr-1 fill-current" />
-          <span className="text-md font-bold">{calculateAverageRating(game.rating.catalogRating)}</span>
+          <span className="text-md font-bold">
+            {calculateAverageRating(game.rating.catalogRating)}
+          </span>
         </div>
       </div>
 
       {/* Subtext Row */}
-      <div className="flex items-center text-neutral-400 text-xs mb-3 space-x-2 truncate">
-        <div className="flex items-center min-w-0">
+      <div className="mb-3 flex items-center space-x-2 truncate text-xs text-neutral-400">
+        <div className="flex min-w-0 items-center">
           <Ghost size={12} className="mr-1 flex-shrink-0" />
-          <span className="truncate" title={game.developer}>{game.developer}</span>
+          <span className="truncate" title={game.developer}>
+            {game.developer}
+          </span>
         </div>
         <span className="text-neutral-500">•</span>
-        <div className="flex items-center min-w-0">
+        <div className="flex min-w-0 items-center">
           <Gamepad2 size={12} className="mr-1 flex-shrink-0" />
-          <span className="truncate" title={game.genre}>{game.genre}</span>
+          <span className="truncate" title={game.genre}>
+            {game.genre}
+          </span>
         </div>
       </div>
 
       {/* Media: Banner Image */}
       {game.images?.banner && (
         <div className="mb-3 aspect-[16/9] overflow-hidden rounded-md bg-neutral-800">
-          <div className="relative w-full h-full">
+          <div className="relative h-full w-full">
             <Image
               src={game.images.banner}
               alt={`${game.name} banner`}
@@ -178,7 +195,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
       {/* Featured Comments */}
       {game.featuredCommentTags.length > 0 && (
         <div className="highlight-card-section mb-4 h-20">
-          <div className="flex flex-wrap gap-1.5 h-full overflow-hidden">
+          <div className="flex h-full flex-wrap gap-1.5 overflow-hidden">
             {game.featuredCommentTags.map((comment: string, index: number) => (
               <span
                 key={index}
@@ -196,20 +213,24 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
       {game.rating.catalogRating && (
         <div className="highlight-card-section mb-4">
           <div className="space-y-2 text-sm">
-            {Object.entries(game.rating.catalogRating).map(([category, rating]) => (
-              <div key={category} className="flex items-center">
-                <span className="w-20 capitalize text-neutral-400 flex-shrink-0">{category}</span>
-                <div className="flex flex-grow gap-1.5">
-                  {[...Array(5)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="h-3 flex-1 rounded-sm"
-                      style={getBlockFillStyle(i, rating)}
-                    />
-                  ))}
+            {Object.entries(game.rating.catalogRating).map(
+              ([category, rating]) => (
+                <div key={category} className="flex items-center">
+                  <span className="w-20 flex-shrink-0 text-neutral-400 capitalize">
+                    {category}
+                  </span>
+                  <div className="flex flex-grow gap-1.5">
+                    {[...Array(5)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="h-3 flex-1 rounded-sm"
+                        style={getBlockFillStyle(i, rating)}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ),
+            )}
           </div>
         </div>
       )}
@@ -219,26 +240,39 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
         {/* Player/Sales Info */}
         {playerSalesInfo && (
           <div className="truncate" title={playerSalesInfo}>
-            <p className="font-medium text-neutral-300 truncate">{playerSalesInfo}</p>
+            <p className="truncate font-medium text-neutral-300">
+              {playerSalesInfo}
+            </p>
           </div>
         )}
 
         {/* Steam Review */}
         {steamPresentation && (
-          <div className="flex items-center" title={`Steam: ${steamPresentation.label}`}>
-            <steamPresentation.IconComponent className={`w-4 h-4 mr-1.5 flex-shrink-0 ${steamPresentation.colorClass}`} />
-            <span className={`hidden xl:inline-block font-semibold truncate ${steamPresentation.colorClass} capitalize`}>{steamPresentation.label}</span>
+          <div
+            className="flex items-center"
+            title={`Steam: ${steamPresentation.label}`}
+          >
+            <steamPresentation.IconComponent
+              className={`mr-1.5 h-4 w-4 flex-shrink-0 ${steamPresentation.colorClass}`}
+            />
+            <span
+              className={`hidden truncate font-semibold xl:inline-block ${steamPresentation.colorClass} capitalize`}
+            >
+              {steamPresentation.label}
+            </span>
           </div>
         )}
 
         {/* Metacritic Score */}
         {game.rating?.metacriticUserScore !== undefined && (
           <div title={`Metacritic Score: ${game.rating.metacriticUserScore}`}>
-            <span className="hidden sm:inline-block mr-1">Metacritic: </span>
-            <span className="font-semibold text-neutral-200">{game.rating.metacriticUserScore}</span>
+            <span className="mr-1 hidden sm:inline-block">Metacritic: </span>
+            <span className="font-semibold text-neutral-200">
+              {game.rating.metacriticUserScore}
+            </span>
           </div>
         )}
       </div>
     </div>
   );
-};
+}
