@@ -6,7 +6,8 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { mockRankingData } from '@/constants/mockRankingData';
-import RankGameCard from '@/components/shared/RankGameCard';
+import { rankingTypes } from '@/constants/rankingTypes';
+import RankGameCard from '@/components/shared/Card/RankGameCard';
 
 const GameRanks = () => {
   return (
@@ -15,18 +16,6 @@ const GameRanks = () => {
       {/* Tabs for ≥sm screens */}
       <Tabs defaultValue="overall" className="hidden w-full sm:block">
         {(() => {
-          const rankingTypes: {
-            value: (typeof mockRankingData)[number]['rankingType'];
-            label: string;
-          }[] = [
-            { value: 'overall', label: 'Overall' },
-            { value: 'story', label: 'Story' },
-            { value: 'graphics', label: 'Graphics' },
-            { value: 'gameplay', label: 'Gameplay' },
-            { value: 'longevity', label: 'Longevity' },
-            { value: 'music', label: 'Music' },
-            { value: 'innovation', label: 'Innovation' },
-          ];
           return (
             <>
               <TabsList
@@ -69,18 +58,6 @@ const GameRanks = () => {
       {/* Carousel for small screens */}
       <div className="block w-full sm:hidden">
         {(() => {
-          const rankingTypes: {
-            value: (typeof mockRankingData)[number]['rankingType'];
-            label: string;
-          }[] = [
-            { value: 'overall', label: 'Overall' },
-            { value: 'story', label: 'Story' },
-            { value: 'graphics', label: 'Graphics' },
-            { value: 'gameplay', label: 'Gameplay' },
-            { value: 'longevity', label: 'Longevity' },
-            { value: 'music', label: 'Music' },
-            { value: 'innovation', label: 'Innovation' },
-          ];
           return (
             <Carousel opts={{ align: 'start' }} className="w-full">
               <CarouselContent>

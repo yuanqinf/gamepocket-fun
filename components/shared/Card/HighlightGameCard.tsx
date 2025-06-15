@@ -2,6 +2,12 @@
 import Image from 'next/image';
 import { GameData } from '@/constants/mockGameData';
 import { Star, Ghost, Gamepad2, ThumbsUp, ThumbsDown, Meh } from 'lucide-react';
+import {
+  TAILWIND_TEXT_COLORS,
+  TAILWIND_BORDER_COLORS,
+  RATING_BLOCK_COLORS,
+  EMPTY_BLOCK_COLOR,
+} from '@/constants/colors';
 
 type SteamReviewPresentation = {
   IconComponent: React.ElementType;
@@ -17,15 +23,15 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
 
     const lowerReview = review.toLowerCase();
     let IconComponent: React.ElementType = ThumbsUp;
-    let colorClass = 'text-neutral-400';
+    let colorClass: string = TAILWIND_TEXT_COLORS.neutral;
 
     if (lowerReview.includes('positive')) {
-      colorClass = 'text-green-500';
+      colorClass = TAILWIND_TEXT_COLORS.positive;
     } else if (lowerReview.includes('negative')) {
-      colorClass = 'text-red-500';
+      colorClass = TAILWIND_TEXT_COLORS.negative;
       IconComponent = ThumbsDown;
     } else if (lowerReview.includes('mixed')) {
-      colorClass = 'text-yellow-400';
+      colorClass = TAILWIND_TEXT_COLORS.mixed;
       IconComponent = Meh;
     }
     return { IconComponent, colorClass, label: review };
@@ -56,7 +62,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
   const steamPresentation = getSteamReviewPresentation(
     game.rating?.steamAllReview,
   );
-  let avatarBorderColorClass = 'border-neutral-700'; // Default border
+  let avatarBorderColorClass: string = TAILWIND_BORDER_COLORS.neutral; // Default border
   if (steamPresentation && steamPresentation.colorClass) {
     avatarBorderColorClass = steamPresentation.colorClass.replace(
       'text-',
@@ -78,18 +84,6 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
     return average.toFixed(1);
   };
 
-  // Define the color scale for rating blocks (1-5) using hex values directly
-  const ratingColors = [
-    '#ef4444', // Rating level 1 (red-500)
-    '#fb923c', // Rating level 2 (orange-400)
-    '#facc15', // Rating level 3 (yellow-400)
-    '#84cc16', // Rating level 4 (lime-500)
-    '#22c55e', // Rating level 5 (green-500)
-  ];
-
-  // Background color for empty rating blocks
-  const emptyBlockColor = '#404040'; // neutral-700
-
   /**
    * Generates the appropriate style object for a rating block based on the rating value
    * @param blockIndex - The index of the block (0-4, representing rating levels 1-5)
@@ -101,8 +95,8 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
     const fractionalPart = categoryRating - fullValue;
 
     // Get the appropriate colors for this block
-    const fillColor = ratingColors[blockIndex] || emptyBlockColor;
-    const bgColor = emptyBlockColor; // Empty/unfilled portion color
+    const fillColor = RATING_BLOCK_COLORS[blockIndex] || EMPTY_BLOCK_COLOR;
+    const bgColor = EMPTY_BLOCK_COLOR; // Empty/unfilled portion color
 
     // Calculate how much of this block should be filled (0-100%)
     let fillPercent = 0;

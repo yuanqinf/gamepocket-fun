@@ -1,14 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  Monitor,
-  Gamepad2,
-  ArrowUp,
-  ArrowDown,
-  Minus,
-  MessageCircle,
-} from 'lucide-react';
+import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
 import { RankedGame } from '@/constants/mockRankingData';
 
 interface RankGameCardProps {
