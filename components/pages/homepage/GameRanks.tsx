@@ -18,10 +18,7 @@ const GameRanks = () => {
         {(() => {
           return (
             <>
-              <TabsList
-                className="scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent mb-4 flex w-full gap-2 overflow-x-auto sm:grid sm:grid-cols-7"
-                style={{ WebkitOverflowScrolling: 'touch' }}
-              >
+              <TabsList className="scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-transparent scroll-touch mb-4 flex w-full gap-2 overflow-x-auto sm:grid sm:grid-cols-7">
                 {rankingTypes.map((t) => (
                   <TabsTrigger
                     key={t.value}

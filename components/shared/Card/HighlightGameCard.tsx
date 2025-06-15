@@ -8,6 +8,23 @@ import {
   RATING_BLOCK_COLORS,
   EMPTY_BLOCK_COLOR,
 } from '@/constants/colors';
+import styled from 'styled-components';
+
+const RatingBlock = styled.div<{
+  $fillColor: string;
+  $bgColor: string;
+  $fillPercent: number;
+}>`
+  background: ${(props) =>
+    props.$fillPercent === 100
+      ? props.$fillColor
+      : props.$fillPercent === 0
+        ? props.$bgColor
+        : `linear-gradient(to right, ${props.$fillColor} ${props.$fillPercent}%, ${props.$bgColor} ${props.$fillPercent}%)`};
+  height: 0.75rem;
+  flex: 1;
+  border-radius: 0.125rem;
+`;
 
 type SteamReviewPresentation = {
   IconComponent: React.ElementType;
@@ -109,19 +126,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
     }
     // Blocks after the current level remain at 0% fill
 
-    // Return the appropriate style based on fill percentage
-    if (fillPercent === 100) {
-      // Fully filled block
-      return { backgroundColor: fillColor };
-    } else if (fillPercent === 0) {
-      // Empty block
-      return { backgroundColor: bgColor };
-    } else {
-      // Partially filled block - use a gradient
-      return {
-        background: `linear-gradient(to right, ${fillColor} ${fillPercent}%, ${bgColor} ${fillPercent}%)`,
-      };
-    }
+    return { fillColor, bgColor, fillPercent };
   };
 
   return (
@@ -137,8 +142,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
               alt={`${game.name} avatar`}
               fill
               sizes="40px"
-              style={{ objectFit: 'cover' }}
-              className="rounded-full"
+              className="rounded-full object-cover"
             />
           </div>
         </div>
@@ -181,7 +185,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
               alt={`${game.name} banner`}
               fill
               sizes="(max-width: 768px) 100vw, 800px"
-              style={{ objectFit: 'cover' }}
+              className="object-cover"
             />
           </div>
         </div>
@@ -214,13 +218,18 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
                     {category}
                   </span>
                   <div className="flex flex-grow gap-1.5">
-                    {[...Array(5)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="h-3 flex-1 rounded-sm"
-                        style={getBlockFillStyle(i, rating)}
-                      />
-                    ))}
+                    {[...Array(5)].map((_, i) => {
+                      const { fillColor, bgColor, fillPercent } =
+                        getBlockFillStyle(i, rating);
+                      return (
+                        <RatingBlock
+                          key={i}
+                          $fillColor={fillColor}
+                          $bgColor={bgColor}
+                          $fillPercent={fillPercent}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
               ),

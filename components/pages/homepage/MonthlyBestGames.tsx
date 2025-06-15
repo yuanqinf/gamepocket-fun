@@ -11,6 +11,14 @@ import {
   CarouselApi,
 } from '@/components/ui/carousel';
 import PaginationDots from '@/components/shared/PaginationDots';
+import styled from 'styled-components';
+
+const SidebarGrid = styled.div<{ rows: number }>`
+  display: grid;
+  height: 100%;
+  gap: 0.75rem; /* Tailwind's gap-3 */
+  grid-template-rows: repeat(${(props) => props.rows}, minmax(0, 1fr));
+`;
 
 const MonthlyBestGames = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -61,7 +69,7 @@ const MonthlyBestGames = () => {
               {mockMonthlyBestGamesData.map((game) => (
                 <CarouselItem key={game.id}>
                   <Link href={`/games/${game.id}`} className="block">
-                    <div className="game-card relative aspect-video">
+                    <div className="game-card relative aspect-[16/9]">
                       <div className="absolute top-0 right-0 z-10 p-6">
                         <Bookmark
                           size={24}
@@ -86,7 +94,7 @@ const MonthlyBestGames = () => {
                       {game.images && game.images.banner ? (
                         <Image
                           src={game.images.banner}
-                          alt={game.id}
+                          alt={`Banner image for ${game.name}`}
                           width={1920}
                           height={1080}
                           className="object-cover"
@@ -114,12 +122,7 @@ const MonthlyBestGames = () => {
 
         {/* Right Sidebar - Takes 1/4 of the width on large screens */}
         <div className="hidden h-full rounded-lg bg-zinc-800 p-4 lg:block">
-          <div
-            className="grid h-full gap-3"
-            style={{
-              gridTemplateRows: `repeat(${mockMonthlyBestGamesData.length}, 1fr)`,
-            }}
-          >
+          <SidebarGrid rows={mockMonthlyBestGamesData.length}>
             {mockMonthlyBestGamesData.map((game, index) => (
               <div
                 key={`thumb-${game.id}`}
@@ -135,7 +138,7 @@ const MonthlyBestGames = () => {
                 <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-md">
                   <Image
                     src={game.images.thumbnail}
-                    alt={game.id}
+                    alt={`Thumbnail image for ${game.name}`}
                     width={48}
                     height={48}
                     className="object-cover"
@@ -158,7 +161,7 @@ const MonthlyBestGames = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </SidebarGrid>
         </div>
       </div>
     </section>

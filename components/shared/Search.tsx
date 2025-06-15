@@ -222,6 +222,7 @@ const SearchSectionActivated = ({
 };
 
 // Main Search component
+// Consider splitting this component into smaller parts: SearchInput, SuggestionDropdown, SuggestionItem.
 const Search = ({ onSearch }: { onSearch?: (query: string) => void }) => {
   const [inputValue, setInputValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);

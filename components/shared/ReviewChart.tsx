@@ -62,6 +62,8 @@ function getPolygonVertex(
   return [cx + radius * Math.cos(angle), cy + radius * Math.sin(angle)];
 }
 
+// Consider moving pure SVG helpers like getPolygonVertex to a util file.
+
 const CenterSegments = ({
   cx,
   cy,
@@ -92,8 +94,7 @@ const CenterSegments = ({
   const effectiveRadius = Math.max(radius + gapRadius, 0);
   for (let i = 0; i < sides; i++) {
     const angleStart = -Math.PI / 2 + i * angleStep + gapAngle / 2;
-    const angleEnd =
-      -Math.PI / 2 + ((i + 1) % sides) * angleStep - gapAngle / 2;
+    const angleEnd = -Math.PI / 2 + (i + 1) * angleStep - gapAngle / 2;
     const v0 = getPolygonVertex(cx, cy, effectiveRadius, angleStart);
     const v1 = getPolygonVertex(cx, cy, effectiveRadius, angleEnd);
     const midAngle = (angleStart + angleEnd) / 2;

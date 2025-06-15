@@ -18,7 +18,19 @@ module.exports = {
     'border-neutral-700',
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        dynamic: 'repeat(var(--grid-rows), minmax(0, 1fr))',
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.scroll-touch': {
+          '-webkit-overflow-scrolling': 'touch',
+        },
+      });
+    },
+  ],
 };

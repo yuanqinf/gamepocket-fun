@@ -26,7 +26,7 @@ const MiniGameCard = ({ game }: { game: GameData }) => {
               alt={game.name}
               fill
               sizes="(max-width: 768px) 100vw, 300px"
-              style={{ objectFit: 'contain' }}
+              className="object-contain"
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center">
