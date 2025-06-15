@@ -126,16 +126,6 @@ body {
     @apply flex cursor-pointer items-center gap-2.5 transition-all duration-200 hover:scale-110 hover:opacity-80;
   }
 
-  /* Login Components */
-  .login {
-    @apply flex items-center justify-end gap-4;
-  }
-
-  /* Search Components */
-  .search {
-    @apply flex w-1/2 items-center justify-center gap-8;
-  }
-
   .search-input-wrapper {
     @apply relative flex h-10 flex-grow items-center rounded-md border border-transparent bg-zinc-700 transition-colors duration-200 hover:border-zinc-500;
   }

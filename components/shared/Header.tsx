@@ -1,8 +1,8 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import Search from '@/components/shared/Search';
+import Login from '@/components/shared/Login';
 
 const Header = () => {
   const handleSearch = (query: string) => {
@@ -28,13 +28,11 @@ const Header = () => {
           />
         </div>
       </Link>
-      <div className="search">
+      <div className="flex w-1/2 items-center justify-center gap-8">
         <Search onSearch={handleSearch} />
       </div>
-      <div className="login">
-        <Button>
-          <p>Login</p>
-        </Button>
+      <div className="flex items-center justify-end gap-4">
+        <Login />
       </div>
     </nav>
   );
