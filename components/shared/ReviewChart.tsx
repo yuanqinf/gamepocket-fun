@@ -118,9 +118,9 @@ const CenterSegments = ({
         whileHover={
           isActive
             ? {
-              scale: 1.11,
-              zIndex: 99,
-            }
+                scale: 1.11,
+                zIndex: 99,
+              }
             : { scale: 1 }
         }
         onMouseEnter={() => {
@@ -303,9 +303,9 @@ export const ReviewChart: React.FC<ReviewChartProps> = ({
             whileHover={
               isActive
                 ? {
-                  scale: isHover ? 1.07 : 1,
-                  zIndex: isHover ? 99 : 1,
-                }
+                    scale: isHover ? 1.07 : 1,
+                    zIndex: isHover ? 99 : 1,
+                  }
                 : { scale: 1 }
             }
             onMouseEnter={handleMouseEnter}
@@ -503,41 +503,41 @@ export const ReviewChart: React.FC<ReviewChartProps> = ({
         const calloutContent = getCalloutContent
           ? getCalloutContent(segmentInfo)
           : (() => {
-            const segLabel =
-              effectiveLabels[hovered.seg] || `Section ${hovered.seg + 1}`;
-            const segRating = ratingValues[hovered.seg];
-            const hasRating = ratings && segRating !== undefined;
+              const segLabel =
+                effectiveLabels[hovered.seg] || `Section ${hovered.seg + 1}`;
+              const segRating = ratingValues[hovered.seg];
+              const hasRating = ratings && segRating !== undefined;
 
-            if (hovered.layer === -1) {
-              return hasRating ? (
-                <>
-                  {segLabel}: {segRating}/{maxRating}
-                </>
-              ) : (
-                <>
-                  Center {segLabel}{' '}
-                  {centerFilled[hovered.seg] ? '(filled)' : '(empty)'};
-                </>
-              );
-            } else {
-              const layerValue = hovered.layer + 1;
-              const isFilled = hasRating
-                ? segRating >= layerValue
-                : hovered.layer < currentLevel;
+              if (hovered.layer === -1) {
+                return hasRating ? (
+                  <>
+                    {segLabel}: {segRating}/{maxRating}
+                  </>
+                ) : (
+                  <>
+                    Center {segLabel}{' '}
+                    {centerFilled[hovered.seg] ? '(filled)' : '(empty)'};
+                  </>
+                );
+              } else {
+                const layerValue = hovered.layer + 1;
+                const isFilled = hasRating
+                  ? segRating >= layerValue
+                  : hovered.layer < currentLevel;
 
-              return hasRating ? (
-                <>
-                  {segLabel}: {segRating}/{maxRating} {isFilled ? '✓' : '✗'}{' '}
-                  Level {layerValue}
-                </>
-              ) : (
-                <>
-                  Layer {layerValue}, {segLabel}{' '}
-                  {isFilled ? 'FILLED' : 'EMPTY'}
-                </>
-              );
-            }
-          })();
+                return hasRating ? (
+                  <>
+                    {segLabel}: {segRating}/{maxRating} {isFilled ? '✓' : '✗'}{' '}
+                    Level {layerValue}
+                  </>
+                ) : (
+                  <>
+                    Layer {layerValue}, {segLabel}{' '}
+                    {isFilled ? 'FILLED' : 'EMPTY'}
+                  </>
+                );
+              }
+            })();
 
         return (
           <div
