@@ -1,3 +1,5 @@
+'use client';
+import Link from 'next/link';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 
@@ -6,12 +8,15 @@ const ClerkAuth = () => {
     <>
       <SignedOut>
         <SignInButton>
-          <Button className="cursor-pointer">
-            <p>Login</p>
-          </Button>
+          <Button>Login</Button>
         </SignInButton>
       </SignedOut>
       <SignedIn>
+        <Link href={"/profile"}>
+          <Button>
+            Profile
+          </Button>
+        </Link>
         <UserButton
           appearance={{
             elements: {
@@ -25,8 +30,6 @@ const ClerkAuth = () => {
               },
             },
           }}
-          userProfileUrl="/profile"
-          userProfileMode="navigation"
         />
       </SignedIn>
     </>
