@@ -1,4 +1,3 @@
-'use client';
 import Image from 'next/image';
 import { GameData } from '@/constants/mockGameData';
 import { Star, Ghost, Gamepad2, ThumbsUp, ThumbsDown, Meh } from 'lucide-react';

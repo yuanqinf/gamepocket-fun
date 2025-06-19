@@ -1,4 +1,3 @@
-'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,14 +10,6 @@ import {
   CarouselApi,
 } from '@/components/ui/carousel';
 import PaginationDots from '@/components/shared/PaginationDots';
-import styled from 'styled-components';
-
-const SidebarGrid = styled.div<{ rows: number }>`
-  display: grid;
-  height: 100%;
-  gap: 0.75rem; /* Tailwind's gap-3 */
-  grid-template-rows: repeat(${(props) => props.rows}, minmax(0, 1fr));
-`;
 
 const MonthlyBestGames = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -122,7 +113,7 @@ const MonthlyBestGames = () => {
 
         {/* Right Sidebar - Takes 1/4 of the width on large screens */}
         <div className="hidden h-full rounded-lg bg-zinc-800 p-4 lg:block">
-          <SidebarGrid rows={mockMonthlyBestGamesData.length}>
+          <div className="grid h-full grid-rows-[repeat(auto-fill,minmax(100px,1fr))] gap-3">
             {mockMonthlyBestGamesData.map((game, index) => (
               <div
                 key={`thumb-${game.id}`}
@@ -161,7 +152,7 @@ const MonthlyBestGames = () => {
                 </div>
               </div>
             ))}
-          </SidebarGrid>
+          </div>
         </div>
       </div>
     </section>

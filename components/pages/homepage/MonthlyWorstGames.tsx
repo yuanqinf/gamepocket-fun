@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { mockMonthlyWorstGamesData, GameData } from '@/constants/mockGameData';
 import {
