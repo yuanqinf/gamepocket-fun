@@ -6,7 +6,7 @@ export const formSchema = z
     email: z.string().email({
       message: 'Please enter a valid email address.',
     }),
-    password: z.string().optional(),
+    password: z.string(),
     // Hidden field to track form mode
     _isSignUp: z.boolean().optional(),
   })
