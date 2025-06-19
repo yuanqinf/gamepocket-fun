@@ -12,13 +12,9 @@
   "dependencies": {
     "@clerk/nextjs": "^6.22.0",
     "@clerk/themes": "^2.2.50",
-    "@hookform/resolvers": "^5.1.1",
     "@radix-ui/react-dialog": "^1.1.14",
-    "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.12",
-    "@supabase/ssr": "^0.6.1",
-    "@supabase/supabase-js": "^2.50.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -28,10 +24,8 @@
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-hook-form": "^7.58.1",
     "styled-components": "^6.1.19",
-    "tailwind-merge": "^3.3.0",
-    "zod": "^3.25.67"
+    "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

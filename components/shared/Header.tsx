@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import Search from '@/components/shared/Search';
 import { Button } from '@/components/ui/button';
-import Login from '@/components/shared/Login/Login';
 
 const AuthenticationSection = () => {
   return (
@@ -66,8 +65,7 @@ const Header = () => {
         <Search onSearch={handleSearch} />
       </div>
       <div className="flex items-center justify-end gap-4">
-        {/* <AuthenticationSection /> */}
-        <Login />
+        <AuthenticationSection />
       </div>
     </nav>
   );

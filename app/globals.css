@@ -197,9 +197,4 @@ body {
   .highlight-card-footer {
     @apply flex items-center justify-around border-t border-neutral-700/50 pt-3 text-xs text-neutral-400;
   }
-
-  /* Auth Components */
-  .auth-input {
-    @apply w-full border-gray-700 bg-[#222] px-4 py-5 text-white placeholder-gray-500;
-  }
 }
