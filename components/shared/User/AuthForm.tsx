@@ -45,31 +45,50 @@ const AuthForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // State for success message (especially for signup confirmation)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
   // Handle form submission
   const onSubmit = async (data: FormSchema) => {
     try {
       setIsLoading(true);
       setError(null);
+      setSuccessMessage(null);
 
       // Create FormData object for server actions
       const formData = new FormData();
       formData.append('email', data.email);
       formData.append('password', data.password);
 
+      // Handle login or signup
       if (isLogin) {
-        // await login(formData);
-        await login(formData);
+        const result = await login(formData);
+        if (result?.error) {
+          setError(result.error as string);
+        } else if (result?.success) {
+          // Show success message for login
+          setSuccessMessage('Login successful! Redirecting...');
+
+          // Redirect after a short delay to show the success message
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 1500);
+        }
       } else {
-        await signup(formData);
+        const result = await signup(formData);
+        if (result?.error) {
+          setError(result.error as string);
+        } else if (result?.success && result?.message) {
+          // Show success message for email confirmation
+          setSuccessMessage(result.message);
+          // Reset form on successful signup
+          form.reset();
+        }
+        // If no result returned, the server action redirected
       }
-      // If successful, the server action will redirect
-      // This code will only run if the redirect fails
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Authentication failed. Please try again.',
-      );
+      // Handle any errors from server actions
+      setError(err instanceof Error ? err.message : 'Authentication failed');
     } finally {
       setIsLoading(false);
     }
@@ -84,6 +103,8 @@ const AuthForm = () => {
       _isSignUp: newIsSignUp,
     });
     setIsSignUp(newIsSignUp);
+    setError(null);
+    setShowPassword(false);
   };
 
   return (
@@ -113,9 +134,11 @@ const AuthForm = () => {
       <Button
         variant="outline"
         className="w-full gap-2 border-gray-700 bg-transparent py-6 hover:bg-gray-900"
+        onClick={() => console.log('Google Sign In')}
+        disabled={isLoading}
       >
         <Image src="/icons/google.png" alt="Google" width={20} height={20} />
-        <span>Continue with Google</span>
+        <span>{isLogin ? 'Continue with Google' : 'Sign up with Google'}</span>
       </Button>
 
       {/* Divider */}
@@ -127,10 +150,7 @@ const AuthForm = () => {
 
       {/* Form */}
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-full space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
           <FormField
             control={form.control}
             name="email"
@@ -219,6 +239,13 @@ const AuthForm = () => {
           {error && (
             <div className="mt-2 rounded-md bg-red-500/10 p-3 text-sm text-red-500">
               {error}
+            </div>
+          )}
+
+          {/* Success message */}
+          {successMessage && (
+            <div className="mt-2 rounded-md bg-green-500/10 p-3 text-sm text-green-500">
+              {successMessage}
             </div>
           )}
         </form>

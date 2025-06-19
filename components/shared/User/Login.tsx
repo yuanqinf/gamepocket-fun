@@ -5,6 +5,7 @@ import { getUser, logout } from '@/lib/actions/auth';
 
 const Login = async () => {
   const user = await getUser();
+  console.log('user: ', user);
   return user ? (
     <Button onClick={logout}>Logout</Button>
   ) : (
