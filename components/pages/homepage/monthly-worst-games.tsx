@@ -6,8 +6,8 @@ import {
   CarouselItem,
   CarouselApi,
 } from '@/components/ui/carousel';
-import PaginationDots from '@/components/shared/PaginationDots';
-import HighlightGameCard from '@/components/shared/Card/HighlightGameCard';
+import PaginationDots from '@/components/shared/pagination-dots';
+import HighlightGameCard from '@/components/shared/cards/highlight-game-card';
 
 const MonthlyWorstGames = () => {
   const [activeIndex, setActiveIndex] = useState(0);

@@ -9,7 +9,7 @@ import {
   CarouselItem,
   CarouselApi,
 } from '@/components/ui/carousel';
-import PaginationDots from '@/components/shared/PaginationDots';
+import PaginationDots from '@/components/shared/pagination-dots';
 
 const MonthlyBestGames = () => {
   const [activeIndex, setActiveIndex] = useState(0);

@@ -1,8 +1,8 @@
 'use client';
-import MonthlyBestGames from '@/components/pages/homepage/MonthlyBestGames';
-import MonthlyWorstGames from '@/components/pages/homepage/MonthlyWorstGames';
-import UpcomingGames from '@/components/pages/homepage/UpcomingGames';
-import GameRanks from '@/components/pages/homepage/GameRanks';
+import MonthlyBestGames from '@/components/pages/homepage/monthly-best-games';
+import MonthlyWorstGames from '@/components/pages/homepage/monthly-worst-games';
+import UpcomingGames from '@/components/pages/homepage/upcoming-games';
+import GameRanks from '@/components/pages/homepage/game-ranks';
 
 const Page = () => {
   return (

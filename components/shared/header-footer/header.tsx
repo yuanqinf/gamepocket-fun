@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import Search from '@/components/shared/Search';
-import ClerkAuth from '@/components/shared/ClerkAuth';
+import Search from '@/components/shared/search';
+import ClerkAuth from '@/components/shared/clerk-auth';
 
 const Header = () => {
   return (

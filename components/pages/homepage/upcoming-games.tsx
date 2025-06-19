@@ -7,8 +7,8 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import PaginationDots from '@/components/shared/PaginationDots';
-import MiniGameCard from '@/components/shared/Card/MiniGameCard';
+import PaginationDots from '@/components/shared/pagination-dots';
+import MiniGameCard from '@/components/shared/cards/mini-game-card';
 import { mockUpcomingGamesData } from '@/constants/mockGameData';
 
 const UpcomingGames = () => {

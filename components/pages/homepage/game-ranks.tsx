@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/carousel';
 import { mockRankingData } from '@/constants/mockRankingData';
 import { rankingTypes } from '@/constants/rankingTypes';
-import RankGameCard from '@/components/shared/Card/RankGameCard';
+import RankGameCard from '@/components/shared/cards/rank-game-card';
 
 const GameRanks = () => {
   return (
