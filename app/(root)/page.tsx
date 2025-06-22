@@ -4,7 +4,7 @@ import MonthlyWorstGames from '@/components/pages/homepage/monthly-worst-games';
 import UpcomingGames from '@/components/pages/homepage/upcoming-games';
 import GameRanks from '@/components/pages/homepage/game-ranks';
 
-const Page = () => {
+const HomePage = () => {
   return (
     <div className="container mx-auto space-y-12 px-4 py-8">
       <MonthlyBestGames />
@@ -20,4 +20,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default HomePage;
