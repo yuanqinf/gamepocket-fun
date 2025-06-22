@@ -1,5 +1,8 @@
+'use client';
+import React, { useEffect } from 'react';
+import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import React from 'react';
 import {
   Card,
   CardContent,
@@ -9,6 +12,17 @@ import {
 import { BookmarkCheck, MessageSquareDiff } from 'lucide-react';
 
 const UserProfilePage = () => {
+  const { isLoaded, isSignedIn, user } = useUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      router.push('/');
+    }
+  }, [isLoaded, isSignedIn]);
+
+  if (!isLoaded || !isSignedIn) return null;
+
   return (
     <div className="container mx-auto space-y-12 px-4 py-8">
       <Card className="w-full">
@@ -16,15 +30,17 @@ const UserProfilePage = () => {
           <div className="flex items-center space-x-6">
             <Image
               className="rounded-full"
-              src="https://placehold.co/600x600/png"
-              alt="profile"
+              src={user.imageUrl}
+              alt={user.fullName ?? 'User profile picture'}
               width={100}
               height={100}
             />
             <div>
-              <CardTitle className="text-3xl font-bold">FYQ</CardTitle>
+              <CardTitle className="text-3xl font-bold">
+                {user.fullName}
+              </CardTitle>
               <CardDescription className="text-muted-foreground">
-                test@email.com
+                {user.primaryEmailAddress?.emailAddress}
               </CardDescription>
             </div>
           </div>
@@ -39,15 +55,15 @@ const UserProfilePage = () => {
           <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-3">
               <BookmarkCheck className="text-primary hidden h-6 w-6 sm:block" />
-              <div>
-                <p className="text-center text-lg font-bold">6</p>
+              <div className="flex items-baseline space-x-2">
+                <p className="text-lg font-bold">6</p>
                 <p className="text-muted-foreground text-sm">Saved</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">
               <MessageSquareDiff className="text-primary hidden h-6 w-6 sm:block" />
-              <div>
-                <p className="text-center text-lg font-bold">6</p>
+              <div className="flex items-baseline space-x-2">
+                <p className="text-lg font-bold">6</p>
                 <p className="text-muted-foreground text-sm">Rated</p>
               </div>
             </div>
