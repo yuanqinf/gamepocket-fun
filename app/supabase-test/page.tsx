@@ -1,16 +1,16 @@
-'use client'
-import { useEffect, useState } from 'react'
-import { useSession, useUser } from '@clerk/nextjs'
-import { createClient } from '@supabase/supabase-js'
+'use client';
+import { useEffect, useState } from 'react';
+import { useSession, useUser } from '@clerk/nextjs';
+import { createClient } from '@supabase/supabase-js';
 
 export default function page() {
-  const [tasks, setTasks] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
-  const [name, setName] = useState('')
+  const [tasks, setTasks] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [name, setName] = useState('');
   // The `useUser()` hook will be used to ensure that Clerk has loaded data about the logged in user
-  const { user } = useUser()
+  const { user } = useUser();
   // The `useSession()` hook will be used to get the Clerk `session` object
-  const { session } = useSession()
+  const { session } = useSession();
 
   // Create a custom supabase client that injects the Clerk Supabase token into the request headers
   function createClerkSupabaseClient() {
@@ -23,48 +23,48 @@ export default function page() {
           fetch: async (url, options = {}) => {
             const clerkToken = await session?.getToken({
               template: 'supabase',
-            })
+            });
 
             // Insert the Clerk Supabase token into the headers
-            const headers = new Headers(options?.headers)
-            headers.set('Authorization', `Bearer ${clerkToken}`)
+            const headers = new Headers(options?.headers);
+            headers.set('Authorization', `Bearer ${clerkToken}`);
 
             // Call the default fetch
             return fetch(url, {
               ...options,
               headers,
-            })
+            });
           },
         },
       },
-    )
+    );
   }
 
   // Create a `client` object for accessing Supabase data using the Clerk token
-  const client = createClerkSupabaseClient()
+  const client = createClerkSupabaseClient();
 
   // This `useEffect` will wait for the `user` object to be loaded before requesting
   // the tasks for the logged in user
   useEffect(() => {
-    if (!user) return
+    if (!user) return;
 
     async function loadTasks() {
-      setLoading(true)
-      const { data, error } = await client.from('tasks').select()
-      if (!error) setTasks(data)
-      setLoading(false)
+      setLoading(true);
+      const { data, error } = await client.from('tasks').select();
+      if (!error) setTasks(data);
+      setLoading(false);
     }
 
-    loadTasks()
-  }, [user])
+    loadTasks();
+  }, [user]);
 
   async function createTask(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+    e.preventDefault();
     // Insert task into the "tasks" database
     await client.from('tasks').insert({
       name,
-    })
-    window.location.reload()
+    });
+    window.location.reload();
   }
 
   return (
@@ -73,7 +73,9 @@ export default function page() {
 
       {loading && <p>Loading...</p>}
 
-      {!loading && tasks.length > 0 && tasks.map((task: any) => <p>{task.name}</p>)}
+      {!loading &&
+        tasks.length > 0 &&
+        tasks.map((task: any) => <p>{task.name}</p>)}
 
       {!loading && tasks.length === 0 && <p>No tasks found</p>}
 
@@ -89,5 +91,5 @@ export default function page() {
         <button type="submit">Add</button>
       </form>
     </div>
-  )
+  );
 }

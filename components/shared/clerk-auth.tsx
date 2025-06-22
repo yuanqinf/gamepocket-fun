@@ -12,10 +12,8 @@ const ClerkAuth = () => {
         </SignInButton>
       </SignedOut>
       <SignedIn>
-        <Link href={"/profile"}>
-          <Button>
-            Profile
-          </Button>
+        <Link href={'/profile'}>
+          <Button>Profile</Button>
         </Link>
         <UserButton
           appearance={{
