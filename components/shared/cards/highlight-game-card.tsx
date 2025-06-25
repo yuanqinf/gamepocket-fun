@@ -186,7 +186,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
       )}
       {/* Featured Comments */}
       {game.featured_comment_tags.length > 0 && (
-        <div className="highlight-card-section mb-4 h-20">
+        <div className="highlight-card-section mb-4">
           <div className="flex h-full flex-wrap gap-1.5 overflow-hidden">
             {game.featured_comment_tags.map(
               (comment: string, index: number) => (

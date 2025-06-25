@@ -1,12 +1,45 @@
-// 'use client';
+'use client';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Search from '@/components/shared/search';
 import ClerkAuth from '@/components/shared/clerk-auth';
 
 const Header = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') {
+        // Show header on scroll up, hide on scroll down
+        if (window.scrollY > lastScrollY && window.scrollY > 80) {
+          // If scrolling down and past the header
+          setIsVisible(false);
+        } else {
+          // If scrolling up
+          setIsVisible(true);
+        }
+        setLastScrollY(window.scrollY);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', controlNavbar);
+
+      // Cleanup function
+      return () => {
+        window.removeEventListener('scroll', controlNavbar);
+      };
+    }
+  }, [lastScrollY]);
+
   return (
-    <nav className="header">
+    <nav
+      className={`header sticky top-0 z-50 transition-transform duration-300 ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
       <Link href="/">
         <div className="header-logo">
           <Image
