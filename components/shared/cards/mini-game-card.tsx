@@ -54,7 +54,7 @@ const MiniGameCard = ({ game }: { game: GameData }) => {
             </p>
             <p className="flex items-center text-sm text-zinc-400">
               <Star size={14} className="mr-1 flex-shrink-0 text-yellow-400" />
-              {calculateAverageRating(game.rating.catalogRating)}
+              {calculateAverageRating(game.catalog_rating)}
             </p>
           </div>
         </div>

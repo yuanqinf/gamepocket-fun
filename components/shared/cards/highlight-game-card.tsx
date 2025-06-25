@@ -65,19 +65,14 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
     }
   };
 
-  const monthlyActivePlayers = game.monthlyActivePlayers ?? 0;
-  const estimatedTotalUnitSold = game.estimatedTotalUnitSold ?? 0;
+  const player_count = game.player_count ?? 0;
 
   let playerSalesInfo = '';
-  if (estimatedTotalUnitSold > 0) {
-    playerSalesInfo = `~ ${formatNumberAbbreviated(estimatedTotalUnitSold)} units sold`;
-  } else if (monthlyActivePlayers > 0) {
-    playerSalesInfo = `${formatNumberAbbreviated(monthlyActivePlayers)} active players`;
+  if (player_count > 0) {
+    playerSalesInfo = `~ ${formatNumberAbbreviated(player_count)} units sold`;
   }
 
-  const steamPresentation = getSteamReviewPresentation(
-    game.rating?.steamAllReview,
-  );
+  const steamPresentation = getSteamReviewPresentation(game.steam_all_review);
   let avatarBorderColorClass: string = TAILWIND_BORDER_COLORS.neutral; // Default border
   if (steamPresentation && steamPresentation.colorClass) {
     avatarBorderColorClass = steamPresentation.colorClass.replace(
@@ -153,7 +148,7 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
         <div className="ml-2 flex flex-shrink-0 items-center text-yellow-400">
           <Star size={18} className="mr-1 fill-current" />
           <span className="text-md font-bold">
-            {calculateAverageRating(game.rating.catalogRating)}
+            {calculateAverageRating(game.catalog_rating)}
           </span>
         </div>
       </div>
@@ -190,49 +185,49 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
         </div>
       )}
       {/* Featured Comments */}
-      {game.featuredCommentTags.length > 0 && (
+      {game.featured_comment_tags.length > 0 && (
         <div className="highlight-card-section mb-4 h-20">
           <div className="flex h-full flex-wrap gap-1.5 overflow-hidden">
-            {game.featuredCommentTags.map((comment: string, index: number) => (
-              <span
-                key={index}
-                className="highlight-card-comment-tag"
-                title={comment}
-              >
-                {comment}
-              </span>
-            ))}
+            {game.featured_comment_tags.map(
+              (comment: string, index: number) => (
+                <span
+                  key={index}
+                  className="highlight-card-comment-tag"
+                  title={comment}
+                >
+                  {comment}
+                </span>
+              ),
+            )}
           </div>
         </div>
       )}
 
       {/* Catalog Rating Section */}
-      {game.rating.catalogRating && (
+      {game.catalog_rating && (
         <div className="highlight-card-section mb-4">
           <div className="space-y-2 text-sm">
-            {Object.entries(game.rating.catalogRating).map(
-              ([category, rating]) => (
-                <div key={category} className="flex items-center">
-                  <span className="w-20 flex-shrink-0 text-neutral-400 capitalize">
-                    {category}
-                  </span>
-                  <div className="flex flex-grow gap-1.5">
-                    {[...Array(5)].map((_, i) => {
-                      const { fillColor, bgColor, fillPercent } =
-                        getBlockFillStyle(i, rating);
-                      return (
-                        <RatingBlock
-                          key={i}
-                          $fillColor={fillColor}
-                          $bgColor={bgColor}
-                          $fillPercent={fillPercent}
-                        />
-                      );
-                    })}
-                  </div>
+            {Object.entries(game.catalog_rating).map(([category, rating]) => (
+              <div key={category} className="flex items-center">
+                <span className="w-20 flex-shrink-0 text-neutral-400 capitalize">
+                  {category}
+                </span>
+                <div className="flex flex-grow gap-1.5">
+                  {[...Array(5)].map((_, i) => {
+                    const { fillColor, bgColor, fillPercent } =
+                      getBlockFillStyle(i, rating);
+                    return (
+                      <RatingBlock
+                        key={i}
+                        $fillColor={fillColor}
+                        $bgColor={bgColor}
+                        $fillPercent={fillPercent}
+                      />
+                    );
+                  })}
                 </div>
-              ),
-            )}
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -266,11 +261,11 @@ export default function HighlightGameCard({ game }: { game: GameData }) {
         )}
 
         {/* Metacritic Score */}
-        {game.rating?.metacriticUserScore !== undefined && (
-          <div title={`Metacritic Score: ${game.rating.metacriticUserScore}`}>
+        {game?.metacritic_user_score !== undefined && (
+          <div title={`Metacritic Score: ${game.metacritic_user_score}`}>
             <span className="mr-1 hidden sm:inline-block">Metacritic: </span>
             <span className="font-semibold text-neutral-200">
-              {game.rating.metacriticUserScore}
+              {game.metacritic_user_score}
             </span>
           </div>
         )}

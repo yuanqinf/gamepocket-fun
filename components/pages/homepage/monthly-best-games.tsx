@@ -78,7 +78,7 @@ const MonthlyBestGames = () => {
                           />
                           <span>
                             Catalog Rating:{' '}
-                            {calculateAverageRating(game.rating.catalogRating)}
+                            {calculateAverageRating(game.catalog_rating)}
                           </span>
                         </div>
                       </div>
@@ -146,7 +146,7 @@ const MonthlyBestGames = () => {
                   <div className="flex items-center gap-1 text-yellow-400">
                     <Star size={12} fill="currentColor" />
                     <span className="text-xs">
-                      {calculateAverageRating(game.rating.catalogRating)}
+                      {calculateAverageRating(game.catalog_rating)}
                     </span>
                   </div>
                 </div>
