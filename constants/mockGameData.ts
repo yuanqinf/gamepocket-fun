@@ -4,7 +4,6 @@ type CatalogRating = {
   graphics: number;
   gameplay: number;
   longevity: number;
-  innovation: number;
 };
 
 type SteamReview =
@@ -77,7 +76,6 @@ export const mockMonthlyBestGamesData: GameData[] = [
         graphics: 5,
         gameplay: 4,
         longevity: 3,
-        innovation: 5,
       },
     },
     featuredCommentTags: ['Best Souls-like', 'Best Open World', 'Best Fantasy'],
@@ -114,7 +112,6 @@ export const mockMonthlyBestGamesData: GameData[] = [
         graphics: 5,
         gameplay: 4,
         longevity: 2,
-        innovation: 3,
       },
     },
     featuredCommentTags: [
@@ -155,7 +152,6 @@ export const mockMonthlyBestGamesData: GameData[] = [
         graphics: 4,
         gameplay: 4,
         longevity: 4,
-        innovation: 5,
       },
     },
     featuredCommentTags: [
@@ -197,7 +193,6 @@ export const mockMonthlyBestGamesData: GameData[] = [
         graphics: 5,
         gameplay: 4,
         longevity: 4,
-        innovation: 3,
       },
     },
     featuredCommentTags: [
@@ -237,7 +232,6 @@ export const mockMonthlyBestGamesData: GameData[] = [
         graphics: 5,
         gameplay: 5,
         longevity: 5,
-        innovation: 5,
       },
     },
     featuredCommentTags: [
@@ -279,7 +273,6 @@ export const mockMonthlyWorstGamesData: GameData[] = [
         graphics: 1.6,
         gameplay: 0.7,
         longevity: 1.3,
-        innovation: 0.8,
       },
     },
     featuredCommentTags: [
@@ -323,7 +316,6 @@ export const mockMonthlyWorstGamesData: GameData[] = [
         graphics: 3,
         gameplay: 1,
         longevity: 2,
-        innovation: 1,
       },
     },
     featuredCommentTags: [
@@ -365,7 +357,6 @@ export const mockMonthlyWorstGamesData: GameData[] = [
         graphics: 2,
         gameplay: 1,
         longevity: 3,
-        innovation: 1,
       },
     },
     featuredCommentTags: [
@@ -409,7 +400,6 @@ export const mockUpcomingGamesData: GameData[] = [
         graphics: 0,
         gameplay: 0,
         longevity: 0,
-        innovation: 0,
       },
     },
     featuredCommentTags: ['Not enough user reviews'],
@@ -444,7 +434,6 @@ export const mockUpcomingGamesData: GameData[] = [
         graphics: 0,
         gameplay: 0,
         longevity: 0,
-        innovation: 0,
       },
     },
     featuredCommentTags: ['Not enough user reviews'],
@@ -485,7 +474,6 @@ export const mockUpcomingGamesData: GameData[] = [
         graphics: 0,
         gameplay: 0,
         longevity: 0,
-        innovation: 0,
       },
     },
     featuredCommentTags: ['Not enough user reviews'],
@@ -524,7 +512,6 @@ export const mockUpcomingGamesData: GameData[] = [
         graphics: 0,
         gameplay: 0,
         longevity: 0,
-        innovation: 0,
       },
     },
     featuredCommentTags: [
@@ -564,7 +551,6 @@ export const mockUpcomingGamesData: GameData[] = [
         graphics: 0,
         gameplay: 0,
         longevity: 0,
-        innovation: 0,
       },
     },
     featuredCommentTags: [

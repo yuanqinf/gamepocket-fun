@@ -64,7 +64,6 @@ const RankGameCard: React.FC<RankGameCardProps> = ({ game }) => {
                   gameplay: 'Gameplay',
                   longevity: 'Longevity',
                   music: 'Music',
-                  innovation: 'Innovation',
                 };
                 return labelMap[game.rankingType];
               })()}

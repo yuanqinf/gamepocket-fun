@@ -9,5 +9,4 @@ export const rankingTypes: { value: RankingType; label: string }[] = [
   { value: 'gameplay', label: 'Gameplay' },
   { value: 'longevity', label: 'Longevity' },
   { value: 'music', label: 'Music' },
-  { value: 'innovation', label: 'Innovation' },
 ];

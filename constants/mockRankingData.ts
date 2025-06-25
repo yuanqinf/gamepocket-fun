@@ -7,8 +7,7 @@ export interface RankedGame {
     | 'graphics'
     | 'gameplay'
     | 'longevity'
-    | 'music'
-    | 'innovation';
+    | 'music';
 
   // ranking score (the actual rating number used to sort this leaderboard)
   score: number; // current rating score for this rankingType
@@ -607,101 +606,5 @@ export const mockRankingData: RankedGame[] = [
     platforms: ['pc', 'ps5', 'xbox', 'switch'],
     monthlyActivePlayers: 200000,
     totalRatings: 120000,
-  },
-
-  // Innovation Ranking
-  {
-    gameId: 'black-myth-wukong',
-    period: '2025-06',
-    rankingType: 'innovation',
-    score: 97,
-    previousScore: 96,
-    scoreChange: 1,
-    rank: 1,
-    previousRank: 1,
-    rankChange: 0,
-    gameName: 'Black Myth: Wukong',
-    bannerUrl:
-      'https://cdn1.epicgames.com/spt-assets/ca9ef1bcf2f54043baac351366aec677/black-myth-wukong-jz9yr.jpg',
-    developer: 'Game Science',
-    genre: 'Action RPG',
-    platforms: ['pc', 'ps5', 'xbox'],
-    monthlyActivePlayers: 550000,
-    totalRatings: 500000,
-  },
-  {
-    gameId: 'elden-ring',
-    period: '2025-06',
-    rankingType: 'innovation',
-    score: 95,
-    previousScore: 95,
-    scoreChange: 0,
-    rank: 2,
-    previousRank: 2,
-    rankChange: 0,
-    gameName: 'ELDEN RING',
-    bannerUrl:
-      'https://preview.redd.it/znxzjlws0i471.jpg?width=1920&format=pjpg&auto=webp&s=2514f6dd7c16a0ed3aa0c93cd80b134cd8853178',
-    developer: 'FromSoftware',
-    genre: 'Action RPG',
-    platforms: ['pc', 'ps5', 'xbox'],
-    monthlyActivePlayers: 1050000,
-    totalRatings: 850000,
-  },
-  {
-    gameId: 'slay-the-spire-2',
-    period: '2025-06',
-    rankingType: 'innovation',
-    score: 93,
-    previousScore: 0,
-    scoreChange: 93,
-    rank: 3,
-    previousRank: 0,
-    rankChange: -3,
-    gameName: 'Slay the Spire 2',
-    bannerUrl: 'https://www.megacrit.com/images/sts2_key_art_16x9-scaled.jpg',
-    developer: 'MegaCrit',
-    genre: 'Roguelike Deckbuilder',
-    platforms: ['pc', 'ps5', 'xbox', 'switch'],
-    monthlyActivePlayers: 200000,
-    totalRatings: 120000,
-  },
-  {
-    gameId: 'wuchang-fallen-feathers',
-    period: '2025-06',
-    rankingType: 'innovation',
-    score: 90,
-    previousScore: 0,
-    scoreChange: 90,
-    rank: 4,
-    previousRank: 0,
-    rankChange: -4,
-    gameName: 'WUCHANG: Fallen Feathers',
-    bannerUrl:
-      'https://cdn1.epicgames.com/spt-assets/61237a4bad9f482a9ad1a1ac74520bba/wuchang-fallen-feathers-199kj.jpg',
-    developer: 'Leenzee Games',
-    genre: 'Action RPG',
-    platforms: ['pc', 'ps5', 'xbox'],
-    monthlyActivePlayers: 180000,
-    totalRatings: 90000,
-  },
-  {
-    gameId: 'donkey-kong-bananza',
-    period: '2025-06',
-    rankingType: 'innovation',
-    score: 88,
-    previousScore: 0,
-    scoreChange: 88,
-    rank: 5,
-    previousRank: 0,
-    rankChange: -5,
-    gameName: 'Donkey Kong Bananza',
-    bannerUrl:
-      'https://cdn.wccftech.com/wp-content/uploads/2025/04/WCCFdonkeykongbananza1.jpg',
-    developer: 'Nintendo',
-    genre: 'Platformer',
-    platforms: ['switch'],
-    monthlyActivePlayers: 0,
-    totalRatings: 0,
   },
 ];
