@@ -1,4 +1,4 @@
-import type { RankedGame } from './mockRankingData';
+import type { RankedGame } from './mock-ranking-data';
 
 export type RankingType = RankedGame['rankingType'];
 

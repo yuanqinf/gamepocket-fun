@@ -18,8 +18,8 @@ import {
   CommandSeparator,
 } from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
-import { RECENT_ITEMS, TRENDING_ITEMS } from '@/constants/mockSearchResult';
-import type { SuggestionItem } from '@/constants/mockSearchResult';
+import { RECENT_ITEMS, TRENDING_ITEMS } from '@/constants/mock-search-result';
+import type { SuggestionItem } from '@/constants/mock-search-result';
 
 // Common types for search components
 type InputRef = React.RefObject<HTMLInputElement | null>;

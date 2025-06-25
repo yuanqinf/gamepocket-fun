@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { GameData } from '@/constants/mockGameData';
+import { GameData } from '@/constants/mock-game-data';
 import { Star, Ghost, Gamepad2, ThumbsUp, ThumbsDown, Meh } from 'lucide-react';
 import {
   TAILWIND_TEXT_COLORS,

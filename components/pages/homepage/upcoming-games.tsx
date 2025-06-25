@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/carousel';
 import PaginationDots from '@/components/shared/pagination-dots';
 import MiniGameCard from '@/components/shared/cards/mini-game-card';
-import { mockUpcomingGamesData } from '@/constants/mockGameData';
+import { mockUpcomingGamesData } from '@/constants/mock-game-data';
 
 const UpcomingGames = () => {
   const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { GameData } from '@/constants/mockGameData';
+import { GameData } from '@/constants/mock-game-data';
 import { Gamepad2, Bookmark, Calendar, Star } from 'lucide-react';
 
 const MiniGameCard = ({ game }: { game: GameData }) => {

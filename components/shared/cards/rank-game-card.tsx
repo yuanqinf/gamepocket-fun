@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowUp, ArrowDown, Minus } from 'lucide-react';
-import { RankedGame } from '@/constants/mockRankingData';
+import { RankedGame } from '@/constants/mock-ranking-data';
 
 interface RankGameCardProps {
   game: RankedGame;

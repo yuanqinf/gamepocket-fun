@@ -543,4 +543,8 @@ export const mockUpcomingGamesData: GameData[] = [
   },
 ];
 
-export const allGamesData: GameData[] = [...mockMonthlyBestGamesData, ...mockMonthlyWorstGamesData, ...mockUpcomingGamesData];
+export const allGamesData: GameData[] = [
+  ...mockMonthlyBestGamesData,
+  ...mockMonthlyWorstGamesData,
+  ...mockUpcomingGamesData,
+];

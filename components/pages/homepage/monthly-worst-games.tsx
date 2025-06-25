@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { mockMonthlyWorstGamesData, GameData } from '@/constants/mockGameData';
+import {
+  mockMonthlyWorstGamesData,
+  GameData,
+} from '@/constants/mock-game-data';
 import {
   Carousel,
   CarouselContent,

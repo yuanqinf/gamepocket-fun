@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Bookmark, Gamepad2, Star } from 'lucide-react';
-import { mockMonthlyBestGamesData } from '@/constants/mockGameData';
+import { mockMonthlyBestGamesData } from '@/constants/mock-game-data';
 import {
   Carousel,
   CarouselContent,
