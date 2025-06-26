@@ -20,9 +20,11 @@ type SteamReview =
 export interface GameData {
   id: string;
   name: string;
+  storyline?: string;
   description: string;
   genre: string;
   tags: string[];
+  keywords?: string[];
   price: number | null;
   platforms: ('pc' | 'ps5' | 'xbox' | 'switch')[];
   developer: string;
@@ -44,6 +46,9 @@ export interface GameData {
   metacritic_user_score?: number;
   player_count?: number;
   average_play_time?: number;
+  age_ratings?: string[];
+  similar_games?: string[];
+  official_links?: string[];
 }
 
 export const mockMonthlyBestGamesData: GameData[] = [
