@@ -59,7 +59,7 @@ const MonthlyBestGames = () => {
             <CarouselContent>
               {mockMonthlyBestGamesData.map((game) => (
                 <CarouselItem key={game.id}>
-                  <Link href={`/games/${game.id}`} className="block">
+                  <Link href={`/detail/${game.id}`} className="block">
                     <div className="game-card relative aspect-[16/9]">
                       <div className="absolute top-0 right-0 z-10 p-6">
                         <Bookmark
