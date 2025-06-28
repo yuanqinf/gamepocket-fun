@@ -10,6 +10,8 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { BookmarkCheck, MessageSquareDiff } from 'lucide-react';
+import { mockMonthlyBestGamesData, GameData } from '@/constants/mock-game-data';
+import HighlightGameCard from '@/components/shared/cards/highlight-game-card';
 
 const UserProfilePage = () => {
   const { isLoaded, isSignedIn, user } = useUser();
@@ -70,6 +72,16 @@ const UserProfilePage = () => {
           </div>
         </CardContent>
       </Card>
+      <hr className="my-8 border-zinc-700" />
+
+      <section>
+        <h2 className="mb-6 text-2xl font-bold">My Collection</h2>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {mockMonthlyBestGamesData.map((game: GameData) => (
+            <HighlightGameCard key={game.id} game={game} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
