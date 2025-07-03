@@ -145,15 +145,17 @@ const SearchSuggestions = ({
           heading={
             <div className="flex items-center justify-between">
               <span>Recent</span>
-              <button
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={(e) => {
                   e.stopPropagation();
                   alert('Clear recent clicked');
                 }}
-                className="rounded px-2 py-1 text-xs text-zinc-400 hover:text-zinc-200"
+                className="h-auto px-2 py-1 text-xs"
               >
                 Clear all
-              </button>
+              </Button>
             </div>
           }
         >
