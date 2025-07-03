@@ -134,6 +134,8 @@ const SearchSuggestions = ({
   inputValue: string;
   onSelectSuggestion: (value: string) => void;
 }) => {
+  const showDefaultSuggestions = !inputValue.trim();
+
   return (
     <div className="search-dropdown">
       <CommandList>
@@ -141,44 +143,48 @@ const SearchSuggestions = ({
           {inputValue.trim() ? 'No results found.' : 'Type to search...'}
         </CommandEmpty>
 
-        <CommandGroup
-          heading={
-            <div className="flex items-center justify-between">
-              <span>Recent</span>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  alert('Clear recent clicked');
-                }}
-                className="h-auto px-2 py-1 text-xs"
-              >
-                Clear all
-              </Button>
-            </div>
-          }
-        >
-          {RECENT_ITEMS.map((item, index) => (
-            <SuggestionItem
-              key={`recent-${index}`}
-              item={item}
-              onSelect={onSelectSuggestion}
-            />
-          ))}
-        </CommandGroup>
+        {showDefaultSuggestions && (
+          <>
+            <CommandGroup
+              heading={
+                <div className="flex items-center justify-between">
+                  <span>Recent</span>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      alert('Clear recent clicked');
+                    }}
+                    className="h-auto px-2 py-1 text-xs"
+                  >
+                    Clear all
+                  </Button>
+                </div>
+              }
+            >
+              {RECENT_ITEMS.map((item, index) => (
+                <SuggestionItem
+                  key={`recent-${index}`}
+                  item={item}
+                  onSelect={onSelectSuggestion}
+                />
+              ))}
+            </CommandGroup>
 
-        <CommandSeparator />
+            <CommandSeparator alwaysRender />
 
-        <CommandGroup heading="Trending">
-          {TRENDING_ITEMS.map((item, index) => (
-            <SuggestionItem
-              key={`trending-${index}`}
-              item={item}
-              onSelect={onSelectSuggestion}
-            />
-          ))}
-        </CommandGroup>
+            <CommandGroup heading="Trending">
+              {TRENDING_ITEMS.map((item, index) => (
+                <SuggestionItem
+                  key={`trending-${index}`}
+                  item={item}
+                  onSelect={onSelectSuggestion}
+                />
+              ))}
+            </CommandGroup>
+          </>
+        )}
       </CommandList>
     </div>
   );
@@ -225,7 +231,7 @@ const SearchSectionActivated = ({
 
 // Main Search component
 // Consider splitting this component into smaller parts: SearchInput, SuggestionDropdown, SuggestionItem.
-const Search = ({ onSearch }: { onSearch?: (query: string) => void }) => {
+const SearchBar = ({ onSearch }: { onSearch?: (query: string) => void }) => {
   const [inputValue, setInputValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isInputActive, setIsInputActive] = useState(false);
@@ -332,4 +338,4 @@ const Search = ({ onSearch }: { onSearch?: (query: string) => void }) => {
   );
 };
 
-export default Search;
+export default SearchBar;

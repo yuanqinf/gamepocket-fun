@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Search from '@/components/shared/search';
+import SearchBar from '@/components/shared/header-footer/search-bar';
 import ClerkAuth from '@/components/shared/clerk-auth';
 
 const Header = () => {
@@ -59,7 +59,7 @@ const Header = () => {
         </div>
       </Link>
       <div className="flex w-1/2 items-center justify-center gap-8">
-        <Search />
+        <SearchBar />
       </div>
       <div className="flex items-center justify-end gap-4">
         <ClerkAuth />

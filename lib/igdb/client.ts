@@ -30,7 +30,7 @@ class IgdbClient {
 
     if (!this.clientId || !this.clientSecret) {
       throw new Error(
-        'IGDB_CLIENT_ID and IGDB_CLIENT_SECRET must be set in environment variables.'
+        'IGDB_CLIENT_ID and IGDB_CLIENT_SECRET must be set in environment variables.',
       );
     }
   }
@@ -59,7 +59,7 @@ class IgdbClient {
         if (!res.ok) {
           const errorText = await res.text();
           throw new Error(
-            `Failed to get IGDB access token: ${res.status} ${res.statusText} - ${errorText}`
+            `Failed to get IGDB access token: ${res.status} ${res.statusText} - ${errorText}`,
           );
         }
 
@@ -94,23 +94,28 @@ class IgdbClient {
     });
 
     if (!res.ok) {
-        const errorText = await res.text();
-        throw new Error(`IGDB games search request failed: ${res.status} ${res.statusText} - ${errorText}`);
+      const errorText = await res.text();
+      throw new Error(
+        `IGDB games search request failed: ${res.status} ${res.statusText} - ${errorText}`,
+      );
     }
-    
+
     const games: IgdbGame[] = await res.json();
 
-    return games.map(game => {
-        if (game.cover?.url) {
-            return {
-                ...game,
-                cover: {
-                    ...game.cover,
-                    url: `https:${game.cover.url}`.replace('/t_thumb/', '/t_cover_big/'),
-                },
-            };
-        }
-        return game;
+    return games.map((game) => {
+      if (game.cover?.url) {
+        return {
+          ...game,
+          cover: {
+            ...game.cover,
+            url: `https:${game.cover.url}`.replace(
+              '/t_thumb/',
+              '/t_cover_big/',
+            ),
+          },
+        };
+      }
+      return game;
     });
   }
 }
