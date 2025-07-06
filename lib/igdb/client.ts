@@ -87,7 +87,7 @@ class IgdbClient {
       },
       body: `
         search "${query}";
-        fields id, name, slug, cover.url, rating, first_release_date;
+        fields id, name, slug;
         where first_release_date != null;
         limit 10;
       `,

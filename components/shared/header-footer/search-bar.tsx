@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
 import { RECENT_ITEMS, TRENDING_ITEMS } from '@/constants/mock-search-result';
-import type { SuggestionItem } from '@/constants/mock-search-result';
+import type { IgdbGame } from '@/lib/igdb/client';
 
 // Common types for search components
 type InputRef = React.RefObject<HTMLInputElement | null>;
@@ -108,7 +108,7 @@ const SuggestionItem = ({
   item,
   onSelect,
 }: {
-  item: SuggestionItem;
+  item: { text: string; tag?: string };
   onSelect: (value: string) => void;
 }) => {
   return (
@@ -130,9 +130,13 @@ const SuggestionItem = ({
 const SearchSuggestions = ({
   inputValue,
   onSelectSuggestion,
+  searchResults,
+  isLoading,
 }: {
   inputValue: string;
   onSelectSuggestion: (value: string) => void;
+  searchResults: IgdbGame[];
+  isLoading: boolean;
 }) => {
   const showDefaultSuggestions = !inputValue.trim();
 
@@ -140,7 +144,11 @@ const SearchSuggestions = ({
     <div className="search-dropdown">
       <CommandList>
         <CommandEmpty>
-          {inputValue.trim() ? 'No results found.' : 'Type to search...'}
+          {isLoading
+            ? 'Searching...'
+            : inputValue.trim()
+              ? 'No results found.'
+              : 'Type to search...'}
         </CommandEmpty>
 
         {showDefaultSuggestions && (
@@ -152,38 +160,44 @@ const SearchSuggestions = ({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      alert('Clear recent clicked');
-                    }}
                     className="h-auto px-2 py-1 text-xs"
                   >
-                    Clear all
+                    Clear
                   </Button>
                 </div>
               }
             >
-              {RECENT_ITEMS.map((item, index) => (
+              {RECENT_ITEMS.map((item) => (
                 <SuggestionItem
-                  key={`recent-${index}`}
+                  key={item.text}
                   item={item}
                   onSelect={onSelectSuggestion}
                 />
               ))}
             </CommandGroup>
-
-            <CommandSeparator alwaysRender />
-
+            <CommandSeparator />
             <CommandGroup heading="Trending">
-              {TRENDING_ITEMS.map((item, index) => (
+              {TRENDING_ITEMS.map((item) => (
                 <SuggestionItem
-                  key={`trending-${index}`}
+                  key={item.text}
                   item={item}
                   onSelect={onSelectSuggestion}
                 />
               ))}
             </CommandGroup>
           </>
+        )}
+
+        {!showDefaultSuggestions && searchResults.length > 0 && (
+          <CommandGroup heading="Games">
+            {searchResults.map((game) => (
+              <SuggestionItem
+                key={game.id}
+                item={{ text: game.name }}
+                onSelect={onSelectSuggestion}
+              />
+            ))}
+          </CommandGroup>
         )}
       </CommandList>
     </div>
@@ -198,13 +212,15 @@ const SearchSectionActivated = ({
   onFocus,
   onKeyDown,
   onClear,
-  onSearch, //TODO: implement search function
   showSuggestions,
   onSelectSuggestion,
+  searchResults,
+  isLoading,
 }: InputProps & {
-  onSearch: () => void;
   showSuggestions: boolean;
   onSelectSuggestion: (value: string) => void;
+  searchResults: IgdbGame[];
+  isLoading: boolean;
 }) => {
   return (
     <Command shouldFilter={false} className="overflow-visible">
@@ -223,6 +239,8 @@ const SearchSectionActivated = ({
         <SearchSuggestions
           inputValue={value}
           onSelectSuggestion={onSelectSuggestion}
+          searchResults={searchResults}
+          isLoading={isLoading}
         />
       )}
     </Command>
@@ -230,9 +248,10 @@ const SearchSectionActivated = ({
 };
 
 // Main Search component
-// Consider splitting this component into smaller parts: SearchInput, SuggestionDropdown, SuggestionItem.
-const SearchBar = ({ onSearch }: { onSearch?: (query: string) => void }) => {
+const SearchBar = () => {
   const [inputValue, setInputValue] = useState('');
+  const [searchResults, setSearchResults] = useState<IgdbGame[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isInputActive, setIsInputActive] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -264,24 +283,41 @@ const SearchBar = ({ onSearch }: { onSearch?: (query: string) => void }) => {
 
   // Debounced search
   useEffect(() => {
-    if (!onSearch || !inputValue.trim()) return;
+    if (!inputValue.trim()) {
+      setSearchResults([]);
+      setIsLoading(false);
+      return;
+    }
 
+    setIsLoading(true);
     clearTimeout(debounceTimeoutRef.current as NodeJS.Timeout);
 
-    debounceTimeoutRef.current = setTimeout(() => {
-      onSearch(inputValue.trim());
+    debounceTimeoutRef.current = setTimeout(async () => {
+      try {
+        const response = await fetch(`/api/search?query=${inputValue.trim()}`);
+        if (response.ok) {
+          const data: IgdbGame[] = await response.json();
+          setSearchResults(data);
+        } else {
+          setSearchResults([]);
+        }
+      } catch (error) {
+        console.error('Search failed:', error);
+        setSearchResults([]);
+      } finally {
+        setIsLoading(false);
+      }
     }, 300);
 
     return () => clearTimeout(debounceTimeoutRef.current as NodeJS.Timeout);
-  }, [inputValue, onSearch]);
+  }, [inputValue]);
 
-  // Handler for immediate search (no debounce)
   const handleImmediateSearch = (query: string) => {
     const trimmedQuery = query.trim();
     if (!trimmedQuery) return;
-
-    clearTimeout(debounceTimeoutRef.current as NodeJS.Timeout);
-    onSearch?.(trimmedQuery);
+    // This could be used to navigate to a search results page
+    // For now, selecting a suggestion handles the action.
+    console.log('Perform immediate search for:', trimmedQuery);
     setShowSuggestions(false);
   };
 
@@ -316,7 +352,10 @@ const SearchBar = ({ onSearch }: { onSearch?: (query: string) => void }) => {
           inputRef={inputRef}
           value={inputValue}
           onChange={setInputValue}
-          onFocus={() => setShowSuggestions(true)}
+          onFocus={() => {
+            setIsInputActive(true);
+            setShowSuggestions(true);
+          }}
           onKeyDown={handleInputKeyDown}
           onClear={handleClearInput}
           onActivate={() => setIsInputActive(true)}
@@ -329,9 +368,10 @@ const SearchBar = ({ onSearch }: { onSearch?: (query: string) => void }) => {
           onFocus={() => setShowSuggestions(true)}
           onKeyDown={handleInputKeyDown}
           onClear={handleClearInput}
-          onSearch={() => handleImmediateSearch(inputValue)}
           showSuggestions={showSuggestions}
           onSelectSuggestion={handleSelectSuggestion}
+          searchResults={searchResults}
+          isLoading={isLoading}
         />
       )}
     </div>
