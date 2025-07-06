@@ -21,7 +21,7 @@ const UserProfilePage = () => {
     if (isLoaded && !isSignedIn) {
       router.push('/');
     }
-  }, [isLoaded, isSignedIn]);
+  }, [isLoaded, isSignedIn, router]);
 
   if (!isLoaded || !isSignedIn) return null;
 
