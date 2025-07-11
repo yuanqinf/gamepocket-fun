@@ -13,6 +13,8 @@ export interface IgdbGame {
   cover?: {
     url: string;
   };
+  screenshots?: { url: string }[];
+  artworks?: { url: string }[];
   rating?: number;
   first_release_date?: number; // Unix timestamp
 }
@@ -117,6 +119,62 @@ class IgdbClient {
       }
       return game;
     });
+  }
+
+  public async getGameById(id: number): Promise<IgdbGame | null> {
+    const token = await this.getAccessToken();
+
+    const res = await fetch('https://api.igdb.com/v4/games', {
+      method: 'POST',
+      headers: {
+        'Client-ID': this.clientId,
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'text/plain',
+      },
+      body: `
+        fields id, name, storyline, summary, slug, first_release_date, updated_at, total_rating, total_rating_count,
+        
+        genres.name, platforms.name, involved_companies.company.name, game_engines.name, game_modes.name,
+
+        cover.url, screenshots.url, artworks.url, videos.video_id;
+
+        where id = ${id};
+        limit 10;
+      `,
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(
+        `IGDB game request failed: ${res.status} ${res.statusText} - ${errorText}`,
+      );
+    }
+
+    const data: IgdbGame[] = await res.json();
+    let game = data[0] ?? null;
+
+    if (game) {
+      if (game.cover?.url) {
+        game.cover.url = `https:${game.cover.url}`.replace(
+          '/t_thumb/',
+          '/t_1080p/',
+        );
+      }
+      if (game.screenshots) {
+        game.screenshots = game.screenshots.map((screenshot) => ({
+          ...screenshot,
+          url: `https:${screenshot.url}`.replace('/t_thumb/', '/t1080p/'),
+        }));
+      }
+      if (game.artworks) {
+        game.artworks = game.artworks.map((artwork) => ({
+          ...artwork,
+          url: `https:${artwork.url}`.replace('/t_thumb/', '/t_1080p/'),
+        }));
+      }
+    }
+
+    return game;
   }
 }
 
