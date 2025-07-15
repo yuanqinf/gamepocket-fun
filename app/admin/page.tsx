@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession, useUser } from '@clerk/nextjs';
+import { useSession } from '@clerk/nextjs';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -32,20 +32,20 @@ interface GameDbData {
   updated_at?: string;
 }
 
-function createClerkSupabaseClient(session: any) {
+type ClerkSession = ReturnType<typeof useSession>['session'];
+
+export function createClerkSupabaseClient(session: ClerkSession) {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       global: {
         fetch: async (url, options = {}) => {
+          // session will be typed, so you get autocomplete on getToken()
           const clerkToken = await session?.getToken({ template: 'supabase' });
           const headers = new Headers(options?.headers);
           headers.set('Authorization', `Bearer ${clerkToken}`);
-          return fetch(url, {
-            ...options,
-            headers,
-          });
+          return fetch(url, { ...options, headers });
         },
       },
     },
@@ -64,10 +64,6 @@ export default function AddGamePage() {
       router.replace('/');
     }
   }, [isLoaded, isSignedIn, router]);
-
-  if (isLoaded && !isSignedIn) {
-    return null;
-  }
 
   const supabase = useMemo(() => createClerkSupabaseClient(session), [session]);
 
@@ -90,6 +86,8 @@ export default function AddGamePage() {
         }
         const data = await res.json();
 
+        console.log(data);
+
         // Prepare data for Supabase
         const dbData: GameDbData = {
           igdb_id: data.id,
@@ -105,25 +103,33 @@ export default function AddGamePage() {
             : null,
           total_rating: data.total_rating,
           total_rating_count: data.total_rating_count,
-          genre: data.genres ? data.genres.map((g: any) => g.name) : null,
+          genre: data.genres
+            ? data.genres.map((g: { name: string }) => g.name)
+            : null,
           platforms: data.platforms
-            ? data.platforms.map((p: any) => p.name)
+            ? data.platforms.map((p: { name: string }) => p.name)
             : null,
           involved_companies: data.involved_companies
-            ? data.involved_companies.map((c: any) => c.company?.name || '')
+            ? data.involved_companies.map(
+                (c: { company: { name: string } }) => c.company?.name || '',
+              )
             : null,
           game_engines: data.game_engines
-            ? data.game_engines.map((e: any) => e.name)
+            ? data.game_engines.map((e: { name: string }) => e.name)
             : null,
           game_modes: data.game_modes
-            ? data.game_modes.map((m: any) => m.name)
+            ? data.game_modes.map((m: { name: string }) => m.name)
             : null,
           cover_url: data.cover?.url || null,
           screenshots: data.screenshots
-            ? data.screenshots.map((s: any) => s.url)
+            ? data.screenshots.map((s: { url: string }) => s.url)
             : null,
-          artworks: data.artworks ? data.artworks.map((a: any) => a.url) : null,
-          videos: data.videos ? data.videos.map((v: any) => v.video_id) : null,
+          artworks: data.artworks
+            ? data.artworks.map((a: { url: string }) => a.url)
+            : null,
+          videos: data.videos
+            ? data.videos.map((v: { video_id: string }) => v.video_id)
+            : null,
           updated_at: new Date().toISOString(),
         };
 
@@ -155,7 +161,7 @@ export default function AddGamePage() {
           throw new Error(dbRes.error.message || 'Supabase error');
         toast.success('Game data added/updated successfully!');
         setIgdbId('');
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(err);
         if (err instanceof Error) {
           toast.error(err.message || 'Operation failed');
@@ -170,6 +176,10 @@ export default function AddGamePage() {
     },
     [igdbId, supabase],
   );
+
+  if (isLoaded && !isSignedIn) {
+    return null;
+  }
 
   return (
     <div className="bg-card mx-auto mt-10 max-w-md rounded-lg p-6 shadow">

@@ -151,7 +151,7 @@ class IgdbClient {
     }
 
     const data: IgdbGame[] = await res.json();
-    let game = data[0] ?? null;
+    const game = data[0] ?? null;
 
     if (game) {
       if (game.cover?.url) {
