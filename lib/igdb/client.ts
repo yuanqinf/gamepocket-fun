@@ -134,7 +134,7 @@ class IgdbClient {
       body: `
         fields id, name, storyline, summary, slug, first_release_date, updated_at, total_rating, total_rating_count,
         
-        genres.name, platforms.name, involved_companies.company.name, game_engines.name, game_modes.name,
+        genres.name, platforms.name, involved_companies.developer, involved_companies.publisher, involved_companies.company.name, game_engines.name, game_modes.name,
 
         cover.url, screenshots.url, artworks.url, videos.video_id;
 

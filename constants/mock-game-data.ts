@@ -23,17 +23,17 @@ export interface GameData {
   storyline?: string;
   description: string;
   genre: string;
-  tags: string[];
-  keywords?: string[];
-  price: number | null;
   platforms: ('pc' | 'ps5' | 'xbox' | 'switch')[];
   developer: string;
+  publisher: string;
   game_engine: string;
+
   images: {
     banner: string;
     gameplay: string;
     thumbnail: string;
   };
+
   featured_comment_tags: string[];
   videos?: string[];
   isUpcoming?: boolean; //TODO: do not include this to main data table
@@ -57,10 +57,9 @@ export const mockMonthlyBestGamesData: GameData[] = [
     name: 'ELDEN RING',
     description: 'An Epic Drama Born from a Myth Created by George R.R. Martin',
     genre: 'Action RPG',
-    tags: ['Souls-like', 'Open World', 'Fantasy'],
-    price: 59.99,
     platforms: ['pc', 'ps5', 'xbox'],
     developer: 'FromSoftware',
+    publisher: 'Bandai Namco',
     images: {
       banner:
         'https://preview.redd.it/znxzjlws0i471.jpg?width=1920&format=pjpg&auto=webp&s=2514f6dd7c16a0ed3aa0c93cd80b134cd8853178',
@@ -94,10 +93,9 @@ export const mockMonthlyBestGamesData: GameData[] = [
     name: 'Black Myth: Wukong',
     description: 'An action RPG rooted in Chinese mythology',
     genre: 'Action RPG',
-    tags: ['Chinese Mythology', 'Souls-like', 'Open World'],
-    price: 59.99,
     platforms: ['pc', 'ps5', 'xbox'],
     developer: 'Game Science',
+    publisher: 'Game Science',
     images: {
       banner:
         'https://cdn1.epicgames.com/spt-assets/ca9ef1bcf2f54043baac351366aec677/black-myth-wukong-jz9yr.jpg',
@@ -133,10 +131,9 @@ export const mockMonthlyBestGamesData: GameData[] = [
     description:
       'A story-rich, party-based RPG set in the universe of Dungeons & Dragons,',
     genre: 'RPG',
-    tags: ['D&D', 'Turn-based', 'Story-Rich'],
-    price: 59.99,
     platforms: ['pc', 'ps5', 'xbox'],
     developer: 'Larian Studios',
+    publisher: 'Larian Studios',
     images: {
       banner:
         'https://cdn.wccftech.com/wp-content/uploads/2023/08/Baldurs-Gate-3-header-1920x1080.jpg',
@@ -171,10 +168,9 @@ export const mockMonthlyBestGamesData: GameData[] = [
     description:
       'A storydriven, open world RPG of the dark future from CD PROJEKT RED',
     genre: 'Action RPG',
-    tags: ['Sci-Fi', 'Open World', 'Narrative'],
-    price: 59.99,
     platforms: ['pc', 'ps5', 'xbox'],
     developer: 'CD Projekt Red',
+    publisher: 'CD Projekt Red',
     images: {
       banner:
         'https://wallpapercat.com/w/full/1/7/f/2618-1920x1080-desktop-1080p-cyberpunk-2077-background.jpg',
@@ -210,10 +206,9 @@ export const mockMonthlyBestGamesData: GameData[] = [
     description:
       'A 2017 action-adventure game developed and published by Nintendo',
     genre: 'Adventure',
-    tags: ['Open World', 'Exploration', 'Fantasy'],
-    price: 59.99,
     platforms: ['switch'],
     developer: 'Nintendo',
+    publisher: 'Nintendo',
     images: {
       banner:
         'https://zelda.nintendo.com/breath-of-the-wild/assets/media/wallpapers/desktop-1.jpg',
@@ -250,10 +245,9 @@ export const mockMonthlyWorstGamesData: GameData[] = [
     description:
       'A PvP sci-fi shooter with vibrant characters and team-based gameplay.',
     genre: 'Multiplayer Shooter',
-    tags: ['Sci-Fi', 'PvP', 'Team-Based'],
-    price: 59.99,
     platforms: ['pc', 'ps5'],
     developer: 'Firewalk Studios',
+    publisher: 'Firewalk Studios',
     images: {
       banner:
         'https://blog.playstation.com/tachyon/2024/05/b06a8cc47aebcaeaff8cf93d58435221e8b1b616.jpg',
@@ -288,10 +282,9 @@ export const mockMonthlyWorstGamesData: GameData[] = [
     description:
       'The next chapter in the Dragon Age franchise with new heroes and darker threats.',
     genre: 'Action RPG',
-    tags: ['Fantasy', 'Story Rich', 'Choices Matter'],
-    price: 69.99,
     platforms: ['pc', 'ps5', 'xbox'],
     developer: 'BioWare',
+    publisher: 'BioWare',
     images: {
       banner:
         'https://cdn1.epicgames.com/offer/4583306dbdc34076ac7ac2bf19bf7096/EGS_DragonAgeTheVeilguard_Bioware_S1_2560x1440-0c5844de6318595b22d3dece8fff0fb6_2560x1440-0c5844de6318595b22d3dece8fff0fb6',
@@ -328,10 +321,9 @@ export const mockMonthlyWorstGamesData: GameData[] = [
     description:
       'A free-to-play, team-based action game set in the optimistic future, where every match is the ultimate 5v5 battlefield brawl.',
     genre: 'FPS',
-    tags: ['Team-Based', 'Hero Shooter', 'Multiplayer'],
-    price: 0.0,
     platforms: ['pc', 'ps5', 'xbox', 'switch'],
     developer: 'Blizzard Entertainment',
+    publisher: 'Blizzard Entertainment',
     images: {
       banner: 'https://images7.alphacoders.com/124/1249649.png',
       gameplay:
@@ -371,10 +363,9 @@ export const mockUpcomingGamesData: GameData[] = [
     description:
       'The looter-shooter franchise returns with even more chaotic action, wild humor, and insane weapons.',
     genre: 'Action RPG',
-    tags: ['Looter Shooter', 'Co-op', 'Open World', 'Comedy', 'Action'],
-    price: null,
     platforms: ['pc', 'ps5', 'xbox'],
     developer: 'Gearbox Software',
+    publisher: 'Gearbox Software',
     images: {
       banner:
         'https://cdn1.epicgames.com/spt-assets/20d989fc07a447b2af3c59e4fd5f49c7/borderlands-4-14saz.jpg',
@@ -402,10 +393,9 @@ export const mockUpcomingGamesData: GameData[] = [
     description:
       'The legendary stealth-action classic returns fully rebuilt for a new generation.',
     genre: 'Stealth Action',
-    tags: ['Stealth', 'Action', 'Remake', 'Cinematic', 'Story-Rich'],
-    price: null,
     platforms: ['pc', 'ps5', 'xbox'],
     developer: 'Konami',
+    publisher: 'Konami',
     images: {
       banner:
         'https://cdn.wccftech.com/wp-content/uploads/2023/10/Metal-Gear-Solid-Delta-Snake-Eater.jpg',
@@ -435,16 +425,9 @@ export const mockUpcomingGamesData: GameData[] = [
     description:
       'The Kong family embarks on a new adventure filled with jungle platforming, bananas, and boss battles.',
     genre: 'Platformer',
-    tags: [
-      'Platformer',
-      'Family Friendly',
-      'Adventure',
-      'Nintendo',
-      'Colorful',
-    ],
-    price: 59.99,
     platforms: ['switch'],
     developer: 'Nintendo',
+    publisher: 'Nintendo',
     images: {
       banner:
         'https://cdn.wccftech.com/wp-content/uploads/2025/04/WCCFdonkeykongbananza1.jpg',
@@ -473,16 +456,9 @@ export const mockUpcomingGamesData: GameData[] = [
     description:
       'A dark soulslike action RPG set in ancient China filled with mystical creatures and deadly combat.',
     genre: 'Action RPG',
-    tags: [
-      'Soulslike',
-      'Dark Fantasy',
-      'Historical',
-      'Challenging',
-      'Chinese Mythology',
-    ],
-    price: 59.99,
     platforms: ['pc', 'ps5', 'xbox'],
     developer: 'Leenzee Games',
+    publisher: 'Leenzee Games',
     images: {
       banner:
         'https://cdn1.epicgames.com/spt-assets/61237a4bad9f482a9ad1a1ac74520bba/wuchang-fallen-feathers-199kj.jpg',
@@ -516,10 +492,9 @@ export const mockUpcomingGamesData: GameData[] = [
     description:
       'The deckbuilding roguelike returns with new cards, new classes, and deeper strategic gameplay.',
     genre: 'Roguelike Deckbuilder',
-    tags: ['Roguelike', 'Deckbuilder', 'Strategy', 'Indie', 'Turn-based'],
-    price: 29.99,
     platforms: ['pc', 'ps5', 'xbox', 'switch'],
     developer: 'MegaCrit',
+    publisher: 'MegaCrit',
     images: {
       banner: 'https://www.megacrit.com/images/sts2_key_art_16x9-scaled.jpg',
       gameplay:

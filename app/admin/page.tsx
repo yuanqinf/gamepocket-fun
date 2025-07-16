@@ -30,6 +30,8 @@ interface GameDbData {
   artworks?: string[] | null;
   videos?: string[] | null;
   updated_at?: string;
+  publishers?: string[] | null;
+  developers?: string[] | null;
 }
 
 type ClerkSession = ReturnType<typeof useSession>['session'];
@@ -109,11 +111,6 @@ export default function AddGamePage() {
           platforms: data.platforms
             ? data.platforms.map((p: { name: string }) => p.name)
             : null,
-          involved_companies: data.involved_companies
-            ? data.involved_companies.map(
-                (c: { company: { name: string } }) => c.company?.name || '',
-              )
-            : null,
           game_engines: data.game_engines
             ? data.game_engines.map((e: { name: string }) => e.name)
             : null,
@@ -131,6 +128,16 @@ export default function AddGamePage() {
             ? data.videos.map((v: { video_id: string }) => v.video_id)
             : null,
           updated_at: new Date().toISOString(),
+          publishers: data.involved_companies
+            ? data.involved_companies
+                .filter((c: any) => c.publisher)
+                .map((c: any) => c.company?.name || '')
+            : null,
+          developers: data.involved_companies
+            ? data.involved_companies
+                .filter((c: any) => c.developer)
+                .map((c: any) => c.company?.name || '')
+            : null,
         };
 
         // Check if the game already exists
